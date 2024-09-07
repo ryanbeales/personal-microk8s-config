@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: downloader-pvc
+  labels:
+    app: downloader
+  namespace: downloader
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: local-storage-zfs
+  volumeName: downloader-pv
+  resources:
+    requests:
+      storage: 256Mi

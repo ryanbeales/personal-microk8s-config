@@ -1,0 +1,13 @@
+apiVersion: route53.aws.crossplane.io/v1alpha1
+kind: ResourceRecordSet
+metadata:
+  name: aws-acm-validation
+  annotations:
+    crossplane.io/external-name: '_cae3a221719072bd735d3c87ea1d5ecc.www.ryanbeales.com'
+spec:
+  forProvider:
+    resourceRecords:
+      - value: _9af6d23bd985b070c59a5ed9935eed17.vhzmpjdqfx.acm-validations.aws.
+    type: CNAME
+    ttl: 3600
+    zoneId: Z2AOZQ8V4DDJEY

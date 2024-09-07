@@ -1,0 +1,7 @@
+namespace: zwavejs
+resources:
+- configmap.yaml
+- role.yaml
+- serviceaccount.yaml
+- rolebinding.yaml
+- cronjob.yaml

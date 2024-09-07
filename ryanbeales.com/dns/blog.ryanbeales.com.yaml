@@ -1,0 +1,11 @@
+apiVersion: route53.aws.crossplane.io/v1alpha1
+kind: ResourceRecordSet
+metadata:
+  name: blog.ryanbeales.com
+spec:
+  forProvider:
+    resourceRecords:
+      - value: ghs.google.com
+    type: CNAME
+    ttl: 300
+    zoneId: Z2AOZQ8V4DDJEY

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: downloader
+  creationTimestamp: null
+  labels:
+    io.kompose.service: sftp
+  name: sftp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: sftp
+  template:
+    metadata:
+      labels:
+        io.kompose.service: sftp
+        app: sftp
+    spec:
+      containers:
+      - name: sftp
+        image: docker.io/atmoz/sftp
+        env:
+        - name: SFTP_USERS
+          value: "user:pass:1000:1000"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: no-nonsense-webdav-storage
+          mountPath: /home/user/downloads
+          subPath: downloads
+        - name: no-nonsense-webdav-storage
+          mountPath: /home/user/tv
+          subPath: tv
+        ports:
+        - containerPort: 22
+          hostPort: 22222
+      volumes:
+      - name: no-nonsense-webdav-storage
+        persistentVolumeClaim:
+          claimName: downloader-pvc

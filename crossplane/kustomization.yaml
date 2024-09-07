@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: crossplane-system
+helmCharts:
+- name: crossplane
+  repo: 'https://charts.crossplane.io/stable'
+  version: 1.16.0 # November 2023 quarterly release
+  releaseName: crossplane
+  namespace: crossplane-system
+  valuesFile: values.yaml
+  includeCRDs: true
+resources:
+- ./namespace.yaml

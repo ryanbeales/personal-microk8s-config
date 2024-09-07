@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: zfs-snapshot-cleanup
+  namespace: crobasaurusrex-admin
+spec:
+  schedule: "@weekly"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 86400
+      template:
+        spec:
+          nodeName: crobasaurusrex
+          containers:
+          - name: zfs-snapshot-cleanup
+            image: w3aman/zfsutils:ci
+            imagePullPolicy: IfNotPresent
+            command:
+            - "/bin/sh -c /work/zfs-snapshot-cleanup-script.sh"
+            volumeMounts:
+            - name: zfs-snapshot-cleanup-script
+              mountPath: "/work/"
+              readOnly: true
+            - name: zfs-dev
+              mountPath: /dev/zfs
+            - name: zfs-mounts
+              mountPath: /proc/self/mounts
+          volumes:
+          - name: zfs-snapshot-cleanup-script
+            configMap:
+              name: zfs-snapshot-cleanup-script
+          - name: zfs-dev
+            hostPath:
+              path: /dev/zfs
+          - name: zfs-mounts
+            hostPath:
+              path: /proc/self/mounts
+          restartPolicy: Never

@@ -1,0 +1,8 @@
+namespace: esphome
+resources:
+- namespace.yaml
+- esphome-pv.yaml
+- esphome-pvc.yaml
+- ingress.yaml
+- service.yaml
+- deployment.yaml

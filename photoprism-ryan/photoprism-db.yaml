@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: photoprism-db
+  labels:
+    app: photoprism
+  namespace: photoprism-ryan
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      pod-label: photoprism-db-pod
+  template:
+    metadata:
+      labels:
+        pod-label: photoprism-db-pod
+    spec:
+      initContainers:
+      - name: password-reset
+        image: mariadb:11.0.3
+        command: ['/bin/sh','-c']
+        args: ["/var/lib/passwordreset/passwordreset.sh"]
+        env:
+        - name: MARIADB_AUTO_UPGRADE 
+          value: "true"
+        envFrom:
+        - secretRef:
+            name: photoprism-db-secrets
+        volumeMounts:
+        - name: db-storage
+          mountPath: /var/lib/mysql
+        - name: passwordresetscript
+          mountPath: /var/lib/passwordreset
+      containers:
+      - name: mariadb
+        image: mariadb:11.0.3
+        envFrom:
+        - secretRef:
+            name: photoprism-db-secrets
+        volumeMounts:
+        - name: db-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: db-storage
+        persistentVolumeClaim:
+          claimName: photoprism-db-pvc
+      - name: passwordresetscript
+        configMap:
+          defaultMode: 0555
+          name: password-reset-script
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: photoprism-db
+  labels:
+    app: photoprism
+  namespace: photoprism-ryan
+spec:
+  selector:
+    pod-label: photoprism-db-pod
+  ports:
+  - protocol: TCP
+    port: 3306

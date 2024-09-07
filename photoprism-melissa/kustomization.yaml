@@ -1,0 +1,12 @@
+namespace: photoprism-melissa
+resources:
+- password-reset.yaml
+- photoprism-db-pv.yaml
+- photoprism-db-pvc.yaml
+- photoprism-db.yaml
+- photoprism-ingress.yaml
+- photoprism-namespace.yaml
+- photoprism-pv.yaml
+- photoprism-pvc.yaml
+- photoprism-server.yaml
+- photoprism-service.yaml

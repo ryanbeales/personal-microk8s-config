@@ -1,0 +1,1 @@
+Duplicati does it's best. It's working as a backup solution, but it's not the best and I need to switch it out for something more lightweight that just copies to S3.

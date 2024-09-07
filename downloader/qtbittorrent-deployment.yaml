@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: downloader
+  labels:
+    io.kompose.service: qtbittorrent
+  name: qtbittorrent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: qtbittorrent
+  template:
+    metadata:
+      labels:
+        io.kompose.service: qtbittorrent
+        app: qtbittorrent
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: crobasaurusrex
+      containers:
+      - name: qtbittorent
+        env:
+        - name: PGID
+          value: "1000"
+        - name: PUID
+          value: "1000"
+        - name: TZ
+          value: America/Vancouver
+        image: ghcr.io/linuxserver/qbittorrent:4.6.5
+        volumeMounts:
+        - name: qtbittorrent-storage
+          mountPath: /config
+          subPath: qtbittorrent-config
+        - name: qtbittorrent-storage
+          mountPath: /tv
+          subPath: tv
+        - name: qtbittorrent-storage
+          mountPath: /downloads
+          subPath: downloads
+        ports:
+        - containerPort: 8080
+        resources: {}
+      volumes:
+      - name: qtbittorrent-storage
+        persistentVolumeClaim:
+          claimName: downloader-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qtbittorrent-service
+spec:
+  selector:
+    app: qtbittorrent
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

@@ -1,0 +1,167 @@
+# see https://artifacthub.io/packages/helm/blakeblackshear/frigate for hints...
+
+config: |
+  mqtt:
+    host: "mosquitto.mosquitto.svc.cluster.local"
+    port: 1883
+    user: admin
+    password: admin
+  birdseye:
+    enabled: True
+    mode: continuous
+  go2rtc:
+    streams:
+      back:
+        - http://10.0.0.153/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password={FRIGATE_REOCAM_PASSWORD}
+      back_sub:
+        - ffmpeg:http://10.0.0.153/flv?port=1935&app=bcs&stream=channel0_sub.bcs&user=admin&password={FRIGATE_REOCAM_PASSWORD}
+      front:
+        - rtsp://admin:{FRIGATE_ARMCREST_FRONT_PASSWORD}@10.0.0.67/cam/realmonitor?channel=1&subtype=0
+      front_sub:
+        - rtsp://admin:{FRIGATE_ARMCREST_FRONT_PASSWORD}@10.0.0.67/cam/realmonitor?channel=1&subtype=1
+  # Available hardware accellerated codecs:
+  #  V..... av1_cuvid            Nvidia CUVID AV1 decoder (codec av1)
+  #  V..... h264_cuvid           Nvidia CUVID H264 decoder (codec h264)
+  #  V..... hevc_cuvid           Nvidia CUVID HEVC decoder (codec hevc)
+  #  V..... mjpeg_cuvid          Nvidia CUVID MJPEG decoder (codec mjpeg)
+  #  V..... mpeg1_cuvid          Nvidia CUVID MPEG1VIDEO decoder (codec mpeg1video)
+  #  V..... mpeg2_cuvid          Nvidia CUVID MPEG2VIDEO decoder (codec mpeg2video)
+  #  V..... mpeg4_cuvid          Nvidia CUVID MPEG4 decoder (codec mpeg4)
+  #  V..... vc1_cuvid            Nvidia CUVID VC1 decoder (codec vc1)
+  #  V..... vp8_cuvid            Nvidia CUVID VP8 decoder (codec vp8)
+  #  V..... vp9_cuvid            Nvidia CUVID VP9 decoder (codec vp9)
+  cameras:
+    back:
+      ffmpeg:
+        inputs:
+          - path: rtsp://127.0.0.1:8554/back?video=copy&audio=aac
+            input_args: preset-rtsp-restream
+            roles:
+              - audio
+              - record
+          - path: rtsp://127.0.0.1:8554/back_sub?video=copy
+            input_args: preset-rtsp-restream
+            roles:
+              - detect
+        hwaccel_args: preset-nvidia-h264
+      record:
+        events:
+          required_zones:
+            - yard
+      snapshots:
+        enabled: true
+        required_zones:
+          - yard
+      motion:
+        mask:
+          - 429,375,479,320,514,291,798,222,939,222,1164,247,1280,309,1280,417,1177,451,1182,549,1154,571,1147,595,1077,602,1077,633,934,638,930,720,392,720,390,566,365,448
+      zones:
+        yard:
+          coordinates: 429,375,479,320,514,291,798,222,939,222,1164,247,1280,309,1280,417,1177,451,1182,549,1154,571,1147,595,1077,602,1077,633,934,638,930,720,392,720,390,566,365,448
+      birdseye:
+        order: 2
+    front:
+      ffmpeg:
+        inputs:
+          - path: rtsp://127.0.0.1:8554/front?video=copy&audio=aac
+            input_args: preset-rtsp-restream
+            roles:
+              - audio
+              - record
+          - path: rtsp://127.0.0.1:8554/front_sub?video=copy
+            input_args: preset-rtsp-restream
+            roles:
+              - detect
+        hwaccel_args: preset-nvidia-h264
+      record:
+        events:
+          required_zones:
+            - driveway
+      snapshots:
+        enabled: true
+        required_zones:
+          - driveway
+      motion:
+        mask:
+          - 145,218,239,165,272,186,376,221,429,172,704,218,704,480,299,480
+      zones:
+        driveway:
+          coordinates: 250,361,287,480,432,480,704,480,704,277,704,171,484,122,382,212,190,111,98,174,162,275,180,298,196,338,216,348
+      birdseye:
+        order: 1
+  detectors:
+    tensorrt:
+      type: tensorrt
+      device: 0
+  # https://docs.frigate.video/configuration/object_detectors/#generate-models
+  model:
+    path: /config/model_cache/tensorrt/yolov7-640.trt
+    input_tensor: nchw
+    input_pixel_format: rgb
+    width: 640
+    height: 640
+  record:
+    enabled: true
+    retain:
+      days: 7
+      mode: all
+    events:
+      retain:
+        default: 30
+        mode: motion
+  objects:
+    track:
+      - person
+      - cat
+      - dog
+      - bird
+      - bear
+      - bicycle
+      - horse
+      - sheep
+      - cow
+      - elephant
+      - shoe
+      - skis
+
+env:
+  TZ: America/Vancouver
+  YOLO_MODELS: yolov7-640
+
+
+envFromSecrets:
+  - reocam-password
+  - armcrest-front-password
+
+image:
+  tag: "0.13.2-tensorrt"
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencryptcertmanager
+  hosts:
+    - host: frigate.crobasaurusrex.ryanbeales.com
+      paths:
+        - "/"
+  tls:
+    - secretName: frigate-crobasaurusrex-ryanbeales-com-tls
+      hosts: 
+        - frigate.crobasaurusrex.ryanbeales.com
+
+gpu:
+  nvidia:
+    enabled: true
+    runtimeClassName: nvidia
+
+persistence:
+  config:
+    enabled: true
+    existingClaim: frigate-config-claim
+  media:
+    enabled: true
+    existingClaim: frigate-media-claim
+
+probes:
+  startup:
+    enabled: true

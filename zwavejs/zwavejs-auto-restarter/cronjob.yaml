@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: zwavejs-auto-restarter
+spec:
+  # Run every 5 minutes
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: zwavejs-auto-restarter
+          restartPolicy: OnFailure
+          containers:
+          - name: zwavejs-auto-restarter
+            image: portainer/kubectl-shell
+            imagePullPolicy: IfNotPresent
+            command:
+            - /home/shell/restart-script.sh
+            volumeMounts:
+            - name: restart-script
+              mountPath: "/home/shell/restart-script.sh"
+              subPath: "restart-script.sh"
+          volumes:
+          - name: restart-script
+            configMap:
+              name: restart-script
+              defaultMode: 0777

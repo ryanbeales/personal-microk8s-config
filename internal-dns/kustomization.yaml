@@ -1,0 +1,19 @@
+namespace: internal-dns
+resources:
+- namespace.yaml
+- refresher.yaml
+- internal-dns-pv.yaml
+- internal-dns-pvc.yaml
+- coredns-deployment.yaml
+configMapGenerator:
+- name: mac-names
+  files:
+  - mac-names.yaml
+- name: refresher
+  files:
+  - refresher.sh
+- name: coredns-config
+  files:
+  - Corefile
+generatorOptions:
+  disableNameSuffixHash: true

@@ -1,0 +1,38 @@
+image:
+  repository: linuxserver/duplicati
+  tag: 2.0.7
+  pullPolicy: IfNotPresent
+env:
+  TZ: America/Vancouver
+ingress:
+  main:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencryptcertmanager
+    hosts:
+      - host: duplicati.crobasaurusrex.ryanbeales.com
+        paths:
+          - path: /
+    tls:
+      - secretName: duplicati-crobasaurusrex-ryanbeales-com-tls
+        hosts: 
+          - duplicati.crobasaurusrex.ryanbeales.com
+persistence:
+  config:
+    enabled: true
+    type: pvc
+    existingClaim: duplicati-config-storage-claim
+    subPath: 
+      - path: config
+        mountPath: /config
+      - path: backups
+        mountPath: /backups
+      - path: tmp
+        mountPath: /tmp
+  source:
+    enabled: true
+    type: pvc
+    existingClaim: duplicati-storage-claim
+    mountPath: /source
+nodeSelector:
+  kubernetes.io/hostname: crobasaurusrex

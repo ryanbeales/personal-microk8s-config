@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: restart-script
+  namespace: zwavejs
+data:
+  restart-script.sh: |
+    #!/bin/bash
+    AVAILABLE=$(kubectl get deployment/zwavejs-zwavejs2mqtt -n zwavejs -o json | jq '.status.availableReplicas') 
+    
+    echo "Found ${AVAILABLE}" available zwavejs instances
+    # If there are no available pods, triggering a restart fixes the usb mount
+    if [[ "${AVAILABLE}" == "null" ]]; then
+      echo "Restarting zwavejs..."
+      kubectl restart deployment/zwavejs-zwavejs2mqtt -n zwavejs
+    fi

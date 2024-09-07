@@ -1,0 +1,3 @@
+argocd:
+  name: local-storage-zfs
+  namespace: default # Objects created do not have a namespace.

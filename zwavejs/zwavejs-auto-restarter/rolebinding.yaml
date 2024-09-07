@@ -1,0 +1,14 @@
+# Bind the role to the service account
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: zwavejs
+  name: zwavejs-auto-restarter-binding
+subjects:
+- kind: ServiceAccount  
+  name: zwavejs-auto-restarter
+  namespace: zwavejs
+roleRef:
+  kind: Role
+  name: zwavejs-auto-restarter
+  apiGroup: rbac.authorization.k8s.io

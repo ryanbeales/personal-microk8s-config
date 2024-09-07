@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: zwavejs
+  name: zwavejs-auto-restarter
+rules:
+# Permissions to do anything to the zwavejs deployment (not sure which of these is required for a restart ATM)
+- apiGroups: [""]
+  resources: ["deployments"]
+  resourceNames: ["zwavejs-zwavejs2mqtt"]
+  verbs: ["get", "list", "create", "update", "patch", "watch", "delete"]

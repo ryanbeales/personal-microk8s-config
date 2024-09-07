@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: octoprint-ingress
+  namespace: octoprint
+  annotations:
+    cert-manager.io/cluster-issuer: letsencryptcertmanager
+    nginx.ingress.kubernetes.io/proxy-body-size: 800m
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - octoprint.crobasaurusrex.ryanbeales.com
+    secretName: octoprint-crobasaurusrex-ryanbeales-com-tls
+  rules:
+  - host: octoprint.crobasaurusrex.ryanbeales.com 
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: octoprint-service
+            port:
+              name: http

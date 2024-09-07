@@ -1,0 +1,9 @@
+namespace: zwavejs
+resources:
+- namespace.yaml
+- zwavejs-pv.yaml
+- zwavejs-pvc.yaml
+- service.yaml
+- ingress.yaml
+- deployment.yaml
+- ./zwavejs-auto-restarter

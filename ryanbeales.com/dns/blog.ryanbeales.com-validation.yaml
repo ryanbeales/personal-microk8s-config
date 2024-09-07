@@ -1,0 +1,14 @@
+apiVersion: route53.aws.crossplane.io/v1alpha1
+kind: ResourceRecordSet
+metadata:
+  name: blog.ryanbeales.com-validation
+  annotations:
+    crossplane.io/external-name: 'ck6vbssj7jqx.ryanbeales.com'
+spec:
+  forProvider:
+    resourceRecords:
+      - value: gv-lvin6zt56t3o6l.dv.googlehosted.com.
+    type: CNAME
+    
+    ttl: 300
+    zoneId: Z2AOZQ8V4DDJEY

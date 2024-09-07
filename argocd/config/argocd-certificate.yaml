@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd-crobasaurusrex-ryanbeales-com
+  namespace: argocd
+spec:
+  secretName: argocd-crobasaurusrex-ryanbeales-com-tls
+  privateKey:
+    rotationPolicy: Always
+  dnsNames:
+    - argocd.crobasaurusrex.ryanbeales.com
+  issuerRef:
+    name: letsencryptcertmanager
+    kind: ClusterIssuer

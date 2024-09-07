@@ -1,0 +1,13 @@
+home.ryanbeales.com:53 {
+    file /coredns-config/home.db
+    log
+    errors
+}
+
+# Resolve only home.ryanbeales.com addresses, this is not a forwarding server.
+.:53 {
+    log
+    errors
+    cache
+    forward . /etc/resolv.conf
+}

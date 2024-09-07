@@ -1,0 +1,27 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencryptcertmanager
+  namespace: cert-manager
+spec:
+  acme:
+    # You must replace this email address with your own.
+    # Let's Encrypt will use this to contact you about expiring
+    # certificates, and issues related to your account.
+    email: certificates@ryanbeales.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      # Secret resource that will be used to store the account's private key.
+      name: crobasaurusrex-issuer-account-key
+    # Add a single challenge solver, HTTP01 using nginx
+    solvers:
+    - dns01:
+        route53:
+          region: us-west-2
+          hostedZoneID: Z2AOZQ8V4DDJEY
+          accessKeyIDSecretRef:
+            name: aws-route53-creds
+            key: access-key-id
+          secretAccessKeySecretRef:
+            name: aws-route53-creds
+            key: access-key-secret   

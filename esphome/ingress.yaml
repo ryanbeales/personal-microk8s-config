@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencryptcertmanager
+  labels:
+    app.kubernetes.io/instance: esphome
+    app.kubernetes.io/name: esphome
+    app.kubernetes.io/version: 1.18.0
+  name: exphome-esphome
+  namespace: esphome
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: esphome.crobasaurusrex.ryanbeales.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: exphome-esphome
+                port:
+                  number: 6052
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - esphome.crobasaurusrex.ryanbeales.com
+      secretName: esphome-crobasaurusrex-ryanbeales-com-tls

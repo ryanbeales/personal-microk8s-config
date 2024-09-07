@@ -1,0 +1,11 @@
+apiVersion: route53.aws.crossplane.io/v1alpha1
+kind: ResourceRecordSet
+metadata:
+  name: www.ryanbeales.com
+spec:
+  forProvider:
+    resourceRecords:
+      - value: dtt70w9zreon4.cloudfront.net.
+    type: CNAME
+    ttl: 300
+    zoneId: Z2AOZQ8V4DDJEY

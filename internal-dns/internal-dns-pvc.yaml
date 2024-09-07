@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: internal-dns-pvc
+  labels:
+    app: internal-dns
+  namespace: internal-dns
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: local-storage-zfs
+  volumeName: internal-dns-pv
+  resources:
+    requests:
+      storage: 1Gi

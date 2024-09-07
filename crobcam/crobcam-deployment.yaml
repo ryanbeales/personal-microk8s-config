@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: crobcam
+  name: crobcam
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crobcam
+  template:
+    metadata:
+      labels:
+        app: crobcam
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: crobcam
+      containers:
+      - name: mediamtx
+        image: bluenviron/mediamtx:latest-rpi
+        env:
+          - name: MTX_PATHS_CAM_SOURCE
+            value: rpiCamera
+        volumeMounts:
+        - name: udev
+          mountPath: /run/udev
+          readOnly: true
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 0
+      volumes:
+      - name: udev
+        hostPath:
+          path: /run/udev

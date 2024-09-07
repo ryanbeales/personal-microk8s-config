@@ -1,0 +1,9 @@
+resources:
+- namespace.yaml
+- zfs-snapshot-cleanup-cronjob.yaml
+configMapGenerator:
+- name: zfs-snapshot-cleanup-script
+  files:
+  - zfs-snapshot-cleanup-script.sh
+generatorOptions:
+  disableNameSuffixHash: true

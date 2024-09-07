@@ -1,0 +1,30 @@
+BC:F4:D4:40:6F:79:
+  name: crobceratops
+  # ip: 10.0.0.96
+5C:C3:36:4C:F8:EA:
+  name: reocam
+  # ip: 10.0.0.153
+18:C0:4D:04:55:FF:
+  name: crobasaurusrex
+  #ip: 10.0.0.59
+88:C9:B3:BF:7D:EB:
+  name: crobputer
+  #ip: 10.0.0.169
+3C:8C:F8:F9:C6:C7:
+  name: worktop
+  #ip: 10.0.0.37
+C8:C9:A3:66:97:BE:
+  name: wled-1
+  #ip : 10.0.0.201
+C8:C9:A3:66:93:86:
+  name: wled-2
+  # ip: 10.0.0.78
+C8:C9:A3:66:98:92:
+  name: wled-3
+  #ip: 10.0.0.232
+9C:8E:CD:3D:9B:BE:
+  name: frontcamera
+  #ip: 10.0.0.67
+34:9F:7B:A6:E4:0C:
+  name: crobprint
+  #ip: 10.0.0.240

@@ -1,0 +1,7 @@
+resources:
+- namespace.yaml
+- vaultwarden-pv.yaml
+- vaultwarden-pvc.yaml
+- deployment.yaml
+- service.yaml
+- ingress.yaml

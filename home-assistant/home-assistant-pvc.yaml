@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: home-assistant-storage-claim
+  labels:
+    app: home-assistant
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: local-storage-zfs
+  volumeName: home-assistant-pv
+  resources:
+    requests:
+      storage: 256Mi
