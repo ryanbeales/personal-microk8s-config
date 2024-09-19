@@ -134,7 +134,7 @@ envFromSecrets:
   - armcrest-front-password
 
 image:
-  tag: "0.13.2-tensorrt"
+  tag: "0.14.1-tensorrt"
 
 ingress:
   enabled: true
