@@ -44,10 +44,6 @@ config: |
             roles:
               - detect
         hwaccel_args: preset-nvidia-h264
-      record:
-        events:
-          required_zones:
-            - yard
       snapshots:
         enabled: true
         required_zones:
@@ -73,10 +69,6 @@ config: |
             roles:
               - detect
         hwaccel_args: preset-nvidia-h264
-      record:
-        events:
-          required_zones:
-            - driveway
       snapshots:
         enabled: true
         required_zones:
