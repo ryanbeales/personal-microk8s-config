@@ -27,7 +27,7 @@ spec:
           value: "1000"
         - name: TZ
           value: America/Vancouver
-        image: ghcr.io/linuxserver/qbittorrent:4.6.5
+        image: ghcr.io/linuxserver/qbittorrent:4.6.7
         volumeMounts:
         - name: qtbittorrent-storage
           mountPath: /config

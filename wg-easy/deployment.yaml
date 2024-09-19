@@ -29,7 +29,7 @@ spec:
             - name: WG_DEVICE
               value: eth0
           # Image
-          image: ghcr.io/wg-easy/wg-easy:13
+          image: ghcr.io/wg-easy/wg-easy:14
           imagePullPolicy: IfNotPresent
           # Ports
           ports:

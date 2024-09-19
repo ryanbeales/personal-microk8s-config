@@ -25,7 +25,7 @@ spec:
       priorityClassName: "system-node-critical"
       runtimeClassName: nvidia
       containers:
-      - image: nvcr.io/nvidia/k8s-device-plugin:v0.15.0
+      - image: nvcr.io/nvidia/k8s-device-plugin:v0.16.2
         name: nvidia-device-plugin-ctr
         env:
           - name: FAIL_ON_INIT_ERROR

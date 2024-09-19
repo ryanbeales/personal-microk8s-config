@@ -4,7 +4,7 @@ namespace: crossplane-system
 helmCharts:
 - name: crossplane
   repo: 'https://charts.crossplane.io/stable'
-  version: 1.16.0 # November 2023 quarterly release
+  version: 1.17.0
   releaseName: crossplane
   namespace: crossplane-system
   valuesFile: values.yaml

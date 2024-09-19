@@ -28,7 +28,7 @@ spec:
         - env:
             - name: TZ
               value: America/Vancouver
-          image: 'esphome/esphome:2024.6.0'
+          image: 'esphome/esphome:2024.9.0'
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
