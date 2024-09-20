@@ -1,2 +1,5 @@
 resources:
 - namespace.yaml
+- deployment.yaml
+- namespace.yaml
+- ingress.yaml
