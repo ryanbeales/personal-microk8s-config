@@ -5,8 +5,8 @@ metadata:
     cert-manager.io/cluster-issuer: letsencryptcertmanager
   labels:
     app.kubernetes.io/name: ollama
-  name: home-assistant
-  namespace: home-assistant
+  name: ollama
+  namespace: ollama
 spec:
   ingressClassName: nginx
   rules:
