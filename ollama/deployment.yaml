@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: ollama
+      app.kubernetes.io/name: ollama
   # Only run one at once, mostly because it's memory hungry. We can take an outage at home.
   replicas: 1
   revisionHistoryLimit: 3
@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       labels:
-        app: ollama
+        app.kubernetes.io/name: ollama
     spec:
       # Switch to the nvidia runtime class to get access to the GPU
       runtimeClassName: nvidia
