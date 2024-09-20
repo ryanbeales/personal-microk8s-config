@@ -1,0 +1,1 @@
+Run Ollama within K8s so I can use it against a GPU instance
