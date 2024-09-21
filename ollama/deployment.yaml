@@ -36,8 +36,8 @@ spec:
           containerPort: 11434
         volumeMounts:
         - name: storage
-          # Models are downloaded and stored in the home directory
-          mountPath: /home/ollama/models 
+          # Models are downloaded and stored in the root home directory
+          mountPath: /root/.ollama
       volumes:
       - name: storage
         hostPath:
