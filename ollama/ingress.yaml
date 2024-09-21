@@ -2,9 +2,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    # It's slow when pulling models, so prevent timeouts
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "360s"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "360s"
+    # It's slow when pulling models, so prevent timeout
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "360"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "360"
     cert-manager.io/cluster-issuer: letsencryptcertmanager
   labels:
     app.kubernetes.io/name: ollama
