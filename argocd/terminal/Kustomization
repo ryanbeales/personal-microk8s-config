@@ -2,7 +2,7 @@
 # https://argo-cd.readthedocs.io/en/stable/operator-manual/web_based_terminal/
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-patchesJson6902:
+patches:
   - target:
       version: v1
       kind: ConfigMap
