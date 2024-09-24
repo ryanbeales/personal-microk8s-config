@@ -11,3 +11,29 @@ patches:
     kind: ConfigMap
     metadata:
       name: argocd-cm
+# Enable web terminal
+- target:
+    version: v1
+    kind: ConfigMap
+    name: argocd-cm
+  patch: |-
+    - op: add
+      path: /data
+      value:
+        exec.enabled: 'true'
+# Enable rbac role for web terminal
+- target:
+    group: rbac.authorization.k8s.io
+    version: v1
+    kind: ClusterRole
+    name: argocd-server
+  patch: |-
+    - op: add
+      path: /rules/0
+      value:
+        apiGroups:
+          - ''
+        resources:
+          - pods/exec
+        verbs:
+          - create
