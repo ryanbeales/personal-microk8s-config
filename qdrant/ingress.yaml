@@ -17,7 +17,7 @@ spec:
               service:
                 name: qdrant
                 port:
-                  number: 5678
+                  number: 6333
             path: /
             pathType: Prefix
   tls:
