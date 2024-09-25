@@ -52,6 +52,7 @@ spec:
                   done
                   /bin/ollama pull llama3.1
                   /bin/ollama pull deepseek-coder-v2
+                  /bin/ollama pull nomic-embed-text
       volumes:
       - name: storage
         hostPath:
