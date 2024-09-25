@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qdrant
+  namespace: qdrant
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: qdrant
+  # Only run one, we're not concerned with availability here.
+  replicas: 1
+  revisionHistoryLimit: 3
+  # During deployments, don't start another before the first is terminated.
+  strategy:
+    type: Recreate 
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: qdrant
+    spec:
+      nodeName: crobasaurusrex # We have more storage available on this node but a slower GPU.
+      containers:
+      - name: qdrant
+        image: n8nio/n8n:1.61.0 # https://hub.docker.com/r/n8nio/n8n/tags
+        ports:
+        - name: qdrant
+          containerPort: 6333
+        volumeMounts:
+        - name: qdrant-storage
+          mountPath: /qdrant/storage
+      volumes:
+      - name: qdrant-storage
+        hostPath:
+          path: /stash/qdrant
+          type: DirectoryOrCreate # if the directory does not exist then create it
