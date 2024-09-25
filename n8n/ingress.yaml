@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencryptcertmanager
+  labels:
+    app.kubernetes.io/name: n8n
+  name: n8n
+  namespace: n8n
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: n8n.crobasaurusrex.ryanbeales.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: n8n
+                port:
+                  number: 5678
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - n8n.crobasaurusrex.ryanbeales.com
+      secretName: n8n-crobasaurusrex-ryanbeales-com-tls

@@ -1,0 +1,1 @@
+Run n8n as a simple interface for Ollama
