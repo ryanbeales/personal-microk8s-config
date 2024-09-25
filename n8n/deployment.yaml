@@ -31,6 +31,9 @@ spec:
           mountPath: /home/node/.n8n
         - name: n8n-shared
           mountPath: /data/shared
+      # N8n requires the volume be owned by uid 1000 (node)
+      securityContext:
+        fsGroup: 1000
       volumes:
       - name: n8n-storage
         hostPath:
