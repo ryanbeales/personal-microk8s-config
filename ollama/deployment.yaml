@@ -24,6 +24,17 @@ spec:
       # faster one by selecting the node with it in. I can't do this via auto generated
       # labels it seems - I could add the label, but this is less work)
       nodeName: crobceratops
+      # Use an initcontainer to download models
+      initContainers:
+      - name: ollama-model-downloader
+        image: ollama/ollama:0.3.11
+        command:
+          - sh
+          - "-C"
+          - "ollama pull llama3.1"
+        volumeMounts:
+        - name: storage
+          mountPath: /root/.ollama
       containers:
       - name: ollama
         image: ollama/ollama:0.3.11 # https://hub.docker.com/r/ollama/ollama/tags
