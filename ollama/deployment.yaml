@@ -24,17 +24,6 @@ spec:
       # faster one by selecting the node with it in. I can't do this via auto generated
       # labels it seems - I could add the label, but this is less work)
       nodeName: crobceratops
-      # Use an initcontainer to download models
-      initContainers:
-      - name: ollama-model-downloader
-        image: ollama/ollama:0.3.11
-        command:
-          - sh
-          - "-C"
-          - "ollama pull llama3.1"
-        volumeMounts:
-        - name: storage
-          mountPath: /root/.ollama
       containers:
       - name: ollama
         image: ollama/ollama:0.3.11 # https://hub.docker.com/r/ollama/ollama/tags
@@ -49,6 +38,20 @@ spec:
         - name: storage
           # Models are downloaded and stored in the root home directory
           mountPath: /root/.ollama
+        # Full inspiration from https://github.com/otwld/ollama-helm/blob/main/templates/deployment.yaml#L140-L150
+        # I just didn't want to run the helm chart...
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - | 
+                  while ! /bin/ollama ps > /dev/null 2>&1; do
+                    sleep 5
+                  done
+                  /bin/ollama pull llama3.1
+                  /bin/ollama pull deepseek-coder-v2
       volumes:
       - name: storage
         hostPath:
