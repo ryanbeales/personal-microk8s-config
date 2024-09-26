@@ -5,6 +5,10 @@ metadata:
     # It's slow when pulling models, so prevent timeout
     nginx.ingress.kubernetes.io/proxy-send-timeout: "360"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "360"
+    # Calls to /api/embed from n8n send the whole document at once
+    # We need to allow large client bodies for when we ingest large documents
+    nginx.ingress.kubernetes.io/client-body-buffer-size: "1M"
+    nginx.ingress.kubernetes.io/proxy-body-size: "256M"
     cert-manager.io/cluster-issuer: letsencryptcertmanager
   labels:
     app.kubernetes.io/name: ollama
