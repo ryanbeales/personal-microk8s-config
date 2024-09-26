@@ -53,6 +53,8 @@ spec:
                   /bin/ollama pull llama3.1
                   /bin/ollama pull deepseek-coder-v2
                   /bin/ollama pull nomic-embed-text
+                  /bin/ollama pull snowflake-arctic-embed
+                  /bin/ollama pull mxbai-embed-large
       volumes:
       - name: storage
         hostPath:
