@@ -13,7 +13,8 @@ spec:
     privateKeySecretRef:
       # Secret resource that will be used to store the account's private key.
       name: crobasaurusrex-issuer-account-key
-    # Add a single challenge solver, HTTP01 using nginx
+    # Add a single challenge solver, DNS01 since we are not issuing certificates
+    #  on a public endpoint
     solvers:
     - dns01:
         route53:
@@ -21,7 +22,7 @@ spec:
           hostedZoneID: Z2AOZQ8V4DDJEY
           accessKeyIDSecretRef:
             name: aws-route53-creds
-            key: access-key-id
+            key: aws-access-key-id
           secretAccessKeySecretRef:
             name: aws-route53-creds
             key: access-key-secret   
