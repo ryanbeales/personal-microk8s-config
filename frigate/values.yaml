@@ -44,6 +44,8 @@ config: |
             roles:
               - detect
         hwaccel_args: preset-nvidia-h264
+        output_args:
+          record: preset-record-generic-audio-aac
       snapshots:
         enabled: true
         required_zones:
@@ -69,6 +71,8 @@ config: |
             roles:
               - detect
         hwaccel_args: preset-nvidia-h264
+        output_args:
+          record: preset-record-generic-audio-aac
       snapshots:
         enabled: true
         required_zones:
