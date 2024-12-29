@@ -7,6 +7,9 @@ home.ryanbeales.com:53 {
 # Add mdns resolver
 local:53 {
     mdns local
+    log
+    errors
+    cache
 }
 
 # Resolve only home.ryanbeales.com addresses, this is not a forwarding server.
