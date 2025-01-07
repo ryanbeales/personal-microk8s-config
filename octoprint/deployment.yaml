@@ -24,7 +24,8 @@ spec:
         kubernetes.io/hostname: crobceratops
       containers:
       - name: octoprint
-        image: octoprint/octoprint:1.10.2
+        # https://hub.docker.com/r/octoprint/octoprint/tags
+        image: octoprint/octoprint:1.10.3
         env:
           - name: ENABLE_MJPG_STREAMER
             value: 'false'

@@ -27,7 +27,8 @@ spec:
           value: "1000"
         - name: TZ
           value: America/Vancouver
-        image: ghcr.io/linuxserver/qbittorrent:4.6.7
+        # Releases https://github.com/linuxserver/docker-qbittorrent/pkgs/container/qbittorrent
+        image: ghcr.io/linuxserver/qbittorrent:5.0.3
         volumeMounts:
         - name: qtbittorrent-storage
           mountPath: /config

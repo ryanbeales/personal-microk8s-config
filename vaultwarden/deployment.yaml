@@ -22,7 +22,7 @@ spec:
         kubernetes.io/hostname: crobasaurusrex
       containers:
       - name: vaultwarden
-        image: vaultwarden/server:1.32.0
+        image: vaultwarden/server:1.32.6
         imagePullPolicy: Always
         env:
           - name: DOMAIN

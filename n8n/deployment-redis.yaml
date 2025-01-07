@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: redis
-        image: redis:7.4.0 # https://hub.docker.com/_/redis/tags
+        image: redis:7.4.2 # https://hub.docker.com/_/redis/tags
         ports:
         - name: redis
           containerPort: 6379

@@ -28,7 +28,8 @@ spec:
         - env:
             - name: TZ
               value: America/Vancouver
-          image: 'homeassistant/home-assistant:2024.9.2'
+          # https://hub.docker.com/r/homeassistant/home-assistant
+          image: 'homeassistant/home-assistant:2025.1.1'
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
