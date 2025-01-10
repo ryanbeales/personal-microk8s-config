@@ -20,3 +20,7 @@ controller:
 
   nodeSelector:
     kubernetes.io/hostname: crobasaurusrex
+
+  config:
+    # Allow up to Critical risk level annotations as we control the ingress objects - eg: this isn't a shared platform.
+    annotations-risk-level: "Critical" # Fix for vaultwarden websocket config
