@@ -2,7 +2,7 @@
 
 config: |
   mqtt:
-    host: "mosquitto.mosquitto.svc.cluster.local"
+    host: mosquitto.mosquitto.svc.cluster.local
     port: 1883
     user: admin
     password: admin
