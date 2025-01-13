@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto
+  namespace: mosquitto
+data:
+  accounts.conf: >-
+    admin:$6$5w8gXq38OdhCaMy1$0RkpHDAEPAyNOwxU8Y6MdfxTCo7Sx6Hch35AEtUb6L42UrehC4JxEtQiRsaSKWsOZt/YtW98MOjrB3yhLcXrNw==
+  mosquitto.conf: |-
+    persistence false
+    persistence_location /mosquitto/data/
+    log_dest stdout
+    password_file /mosquitto/config/accounts.conf
+    listener 1883
