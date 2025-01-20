@@ -1,0 +1,1 @@
+Chatgpt like interface for ollama

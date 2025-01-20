@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-webui
+  namespace: open-webui
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: open-webui
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate 
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: open-webui
+    spec:
+      containers:
+      - name: open-webui
+        image: ghcr.io/open-webui/open-webui:main # https://github.com/orgs/open-webui/packages/container/package/open-webui
+        # Ensure we run on a node with GPU available
+        env:
+        - name: OLLAMA_BASE_URL
+          value: http://ollama.ollama.svc.cluster.local:11434
+        ports:
+        - name: open-webui
+          containerPort: 8080
+        volumeMounts:
+        - name: storage
+          # Models are downloaded and stored in the root home directory
+          mountPath: /app/backend/data 
+      volumes:
+      - name: storage
+        hostPath:
+          path: /stash/open-webui
+          type: DirectoryOrCreate # if the directory does not exist then create it
