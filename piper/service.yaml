@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: piper
+  name: piper
+  namespace: piper
+spec:
+  internalTrafficPolicy: Cluster
+  ports:
+    - name: piper
+      port: 10200
+      protocol: TCP
+      targetPort: piper
+  selector:
+    app.kubernetes.io/name: piper
+  sessionAffinity: None
+  type: ClusterIP
