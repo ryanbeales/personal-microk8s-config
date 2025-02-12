@@ -58,6 +58,9 @@ config: |
           coordinates: 0.075,0.651,0.379,0.584,0.383,0.483,0.418,0.386,0.57,0.346,0.67,0.324,0.779,0.321,0.925,0.363,1,0.372,1,0.515,1,0.644,1,0.869,1,0.94,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.072,1
       birdseye:
         order: 2
+      genai:
+        enabled: True
+        use_snapshot: True
     front:
       ffmpeg:
         inputs:
@@ -85,6 +88,9 @@ config: |
           coordinates: 0.339,0.816,0.408,1,0.614,1,1,1,1,0.577,1,0.356,0.688,0.254,0.543,0.442,0.39,0.363,0.367,0.279,0.246,0.161,0.004,0.403,0,0.487,0.004,0.675,0.137,0.525,0.193,0.616,0.214,0.665,0.278,0.704,0.307,0.725
       birdseye:
         order: 1
+      genai:
+        enabled: True
+        use_snapshot: True
   detectors:
     tensorrt:
       type: tensorrt
@@ -121,6 +127,15 @@ config: |
       - elephant
       - shoe
       - skis
+  semantic_search:
+    enabled: True
+    reindex: False
+    model_size: large
+  genai:
+    enabled: true
+    provider: ollama
+    base_url: http://ollama.ollama.svc.cluster.local:11434
+    model: llama3.2-vision
 
 env:
   TZ: America/Vancouver
