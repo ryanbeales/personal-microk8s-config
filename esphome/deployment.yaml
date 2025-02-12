@@ -28,7 +28,8 @@ spec:
         - env:
             - name: TZ
               value: America/Vancouver
-          image: 'esphome/esphome:2024.12.2'
+          # https://github.com/esphome/esphome/releases/
+          image: 'esphome/esphome:2024.12.4'
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

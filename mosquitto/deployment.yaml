@@ -26,6 +26,7 @@ spec:
         app.kubernetes.io/name: mosquitto
     spec:
       containers:
+        # https://hub.docker.com/_/eclipse-mosquitto/tags
         - image: eclipse-mosquitto:1.6.15
           imagePullPolicy: IfNotPresent
           livenessProbe:

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: open-webui
-        image: ghcr.io/open-webui/open-webui:git-e3ae30e # 5.5 release https://github.com/orgs/open-webui/packages/container/package/open-webui
+        image: ghcr.io/open-webui/open-webui:git-a0df6cc # 5.5 release https://github.com/orgs/open-webui/packages/container/package/open-webui
         # Ensure we run on a node with GPU available
         env:
         - name: OLLAMA_BASE_URL

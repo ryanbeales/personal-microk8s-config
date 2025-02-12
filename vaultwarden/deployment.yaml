@@ -22,7 +22,8 @@ spec:
         kubernetes.io/hostname: crobasaurusrex
       containers:
       - name: vaultwarden
-        image: vaultwarden/server:1.32.6
+        # https://hub.docker.com/r/vaultwarden/server/tags
+        image: vaultwarden/server:1.33.2
         imagePullPolicy: Always
         env:
           - name: DOMAIN

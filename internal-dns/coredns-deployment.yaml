@@ -23,7 +23,8 @@ spec:
       hostNetwork: true # We need to bind to port 53, otherwise we're limited to the nodeport range which is in the 30000's. And my clients don't like that.
       containers:
       - name: coredns
-        image: coredns/coredns:1.9.4
+        # https://hub.docker.com/r/coredns/coredns/tags
+        image: coredns/coredns:1.12.0
         imagePullPolicy: IfNotPresent
         resources:
           limits:

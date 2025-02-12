@@ -130,7 +130,8 @@ envFromSecrets:
   - armcrest-front-password
 
 image:
-  tag: "0.14.1-tensorrt"
+  # https://github.com/blakeblackshear/frigate/releases
+  tag: "0.15.0-tensorrt"
 
 ingress:
   enabled: true

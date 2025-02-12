@@ -21,7 +21,7 @@ spec:
       nodeName: crobasaurusrex # We have more storage available on this node but a slower GPU.
       containers:
       - name: qdrant
-        image: qdrant/qdrant:v1.11.5 # https://hub.docker.com/r/qdrant/qdrant/tags
+        image: qdrant/qdrant:v1.13.3 # https://hub.docker.com/r/qdrant/qdrant/tags
         ports:
         - name: qdrant
           containerPort: 6333

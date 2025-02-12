@@ -2,5 +2,5 @@ apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-aws
-spec:
-  package: xpkg.upbound.io/crossplane-contrib/provider-aws:v0.51.0
+spec: # https://github.com/crossplane-contrib/provider-aws/releases
+  package: xpkg.upbound.io/crossplane-contrib/provider-aws:v0.51.4
