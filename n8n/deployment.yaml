@@ -22,6 +22,19 @@ spec:
       containers:
       - name: n8n
         image: n8nio/n8n:1.77.3 # https://hub.docker.com/r/n8nio/n8n/tags
+        env:
+        - name: N8N_HOST
+          value: n8n.crobasaurusrex.ryanbeales.com
+        - name: N8N_PROTOCOL
+          value: https
+        - name: N8N_PORT
+          value: "443"
+        - name: NODE_ENV
+          value: production
+        - name: WEBHOOK_URL
+          value: https://n8n.crobasaurusrex.ryanbeales.com/
+        - name: GENERIC_TIMEZONE
+          value: America/Vancouver
         ports:
         - name: n8n
           containerPort: 5678
