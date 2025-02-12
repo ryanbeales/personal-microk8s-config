@@ -101,10 +101,12 @@ config: |
     retain:
       days: 7
       mode: all
-    events:
+    alerts:
       retain:
-        default: 30
-        mode: motion
+        days: 7
+    detections:
+      retain:
+        days: 30
   objects:
     track:
       - person
