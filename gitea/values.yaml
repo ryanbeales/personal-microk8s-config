@@ -10,6 +10,8 @@ ingress:
     cert-manager.io/cluster-issuer: letsencryptcertmanager
   hosts:
     - host: gitea.crobasaurusrex.ryanbeales.com
+      path: /
+      pathType: Prefix
   tls:
     - secretName: gitea-crobasaurusrex-ryanbeales-com-tls
       hosts:
