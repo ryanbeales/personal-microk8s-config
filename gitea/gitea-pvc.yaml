@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitea-pvc
+  namespace: gitea
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: local-storage-zfs
+  volumeName: gitea-pv
+  resources:
+    requests:
+      storage: 256Mi

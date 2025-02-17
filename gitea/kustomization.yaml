@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: gitea
+helmCharts:
+- name: gitea
+  repo: 'oci://registry-1.docker.io/giteacharts/gitea'
+  version: 10.6.0 # https://gitea.com/gitea/helm-chart/releases
+  releaseName: gitea
+  namespace: gitea
+  valuesFile: values.yaml
+  includeCRDs: true
+resources:
+- gitea-pvc.yaml
+- gitea-pv.yaml
