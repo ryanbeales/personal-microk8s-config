@@ -41,12 +41,15 @@ actions:
           level: debug
         cache:
           enabled: false
-        priviledge: true # for docker in docker
         runner:
+          envs:
+            DOCKER_HOST: "unix:///var/run/user/1000/docker.sock"
           labels:
             - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
             - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
             - "ubuntu-20.04:docker://gitea/runner-images:ubuntu-20.04"
+        container:
+          docker_host: "unix:///var/run/user/1000/docker.sock"
     dind:
       tag: 25.0.2-dind-rootless
 
