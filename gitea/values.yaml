@@ -42,8 +42,6 @@ actions:
         cache:
           enabled: false
         runner:
-          envs:
-            DOCKER_HOST: "unix:///var/run/user/1000/docker.sock"
           labels:
             - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
             - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
