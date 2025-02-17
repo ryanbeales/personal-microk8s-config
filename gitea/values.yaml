@@ -31,6 +31,18 @@ actions:
   enabled: true
   provisioning:
     enabled: true
+  statefulset:
+    actRunner:
+      config: |
+        log:
+          level: debug
+        cache:
+          enabled: false
+        runner:
+          labels:
+            - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
+            - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
+            - "ubuntu-20.04:docker://gitea/runner-images:ubuntu-20.04"
 
 
 # Single pod configuration, disable HA options for Redis and Postgres
