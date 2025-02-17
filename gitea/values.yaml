@@ -33,6 +33,7 @@ actions:
     enabled: true
   statefulset:
     actRunner:
+      tag: 0.2.11-dind-rootless
       # By default, the helm chart does not populate the labels section of the runner config.
       # This means all jobs start in a bare image without the necessary tools.
       config: |
@@ -46,8 +47,6 @@ actions:
             - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
             - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
             - "ubuntu-20.04:docker://gitea/runner-images:ubuntu-20.04"
-    dind:
-      tag: 0.2.11-dind-rootless
 
 
 # Single pod configuration, disable HA options for Redis and Postgres
