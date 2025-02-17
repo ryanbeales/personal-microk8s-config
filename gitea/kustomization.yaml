@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: gitea
 helmCharts:
 - name: gitea
-  repo: 'oci://registry-1.docker.io/giteacharts/gitea'
+  repo: 'oci://registry-1.docker.io/giteacharts/'
   version: 10.6.0 # https://gitea.com/gitea/helm-chart/releases
   releaseName: gitea
   namespace: gitea
