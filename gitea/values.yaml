@@ -47,7 +47,8 @@ actions:
             - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
             - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
             - "ubuntu-20.04:docker://gitea/runner-images:ubuntu-20.04"
-
+    dind:
+      tag: 25.0.2-dind-rootless
 
 # Single pod configuration, disable HA options for Redis and Postgres
 redis-cluster:
