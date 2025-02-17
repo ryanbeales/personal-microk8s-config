@@ -31,9 +31,16 @@ actions:
   enabled: true
   provisioning:
     enabled: true
+  extraVolumes:
+    # Create an empty volume to share the docker socker between the act-runner and the dind container
+    - name: docker-socket
+      emptyDir: {}
   statefulset:
     actRunner:
       tag: 0.2.11-dind-rootless
+      extraVolumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/user/1000/
       # By default, the helm chart does not populate the labels section of the runner config.
       # This means all jobs start in a bare image without the necessary tools.
       config: |
@@ -47,9 +54,13 @@ actions:
             - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
             - "ubuntu-20.04:docker://gitea/runner-images:ubuntu-20.04"
         container:
-          options: "--add-host=gitea.crobasaurusrex.ryanbeales.com:10.0.0.59 -v /var/run/user/1000/docker.sock:/var/run/docker.sock"
+          options: "--add-host=gitea.crobasaurusrex.ryanbeales.com:10.0.0.59"
+          docker_host: "unix:///var/run/user/1000/docker.sock" # Sets the DOCKER_HOST for both act_runner and containers it launches with dind
     dind:
       tag: 25.0.2-dind-rootless
+      extraVolumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/user/1000/
 
 # Single pod configuration, disable HA options for Redis and Postgres
 redis-cluster:
