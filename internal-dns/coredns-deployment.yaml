@@ -12,12 +12,10 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      k8s-app: kube-dns
       app.kubernetes.io/name: coredns-internal-dns
   template:
     metadata:
       labels:
-        k8s-app: kube-dns
         app.kubernetes.io/name: coredns-internal-dns
     spec:
       hostNetwork: true # We need to bind to port 53, otherwise we're limited to the nodeport range which is in the 30000's. And my clients don't like that.
