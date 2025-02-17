@@ -42,14 +42,10 @@ actions:
           enabled: false
         priviledge: true # for docker in docker
         runner:
-          envs:
-            DOCKER_HOST: "tcp://localhost:2375/"
           labels:
             - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
             - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
             - "ubuntu-20.04:docker://gitea/runner-images:ubuntu-20.04"
-    dind:
-      extraEnvs:
 
 
 
