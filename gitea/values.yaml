@@ -33,11 +33,16 @@ actions:
     enabled: true
   statefulset:
     actRunner:
+      # By default, the helm chart does not populate the labels section of the runner config.
+      # This means all jobs start in a bare image without the necessary tools.
       config: |
         log:
           level: debug
         cache:
           enabled: false
+        priviledge: true # for docker in docker
+        container:
+          docker_host: "tcp://127.0.0.1:2376"
         runner:
           labels:
             - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
