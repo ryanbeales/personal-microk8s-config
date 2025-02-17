@@ -31,11 +31,11 @@ actions:
   enabled: true
   provisioning:
     enabled: true
-  extraVolumes:
-    # Create an empty volume to share the docker socker between the act-runner and the dind container
-    - name: docker-socket
-      emptyDir: {}
   statefulset:
+    extraVolumes:
+      # Create an empty volume to share the docker socker between the act-runner and the dind container
+      - name: docker-socket
+        emptyDir: {}
     actRunner:
       tag: 0.2.11-dind-rootless
       extraVolumeMounts:
