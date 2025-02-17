@@ -31,10 +31,6 @@ actions:
   enabled: true
   provisioning:
     enabled: true
-  statefulset:
-    actRunner:
-      repository: gitea/runner-images # default image is gitea/act_runner which is a very bare alpine image
-      tag: ubuntu-24.04
 
 
 # Single pod configuration, disable HA options for Redis and Postgres
