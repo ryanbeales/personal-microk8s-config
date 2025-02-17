@@ -47,7 +47,7 @@ actions:
             - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
             - "ubuntu-20.04:docker://gitea/runner-images:ubuntu-20.04"
         container:
-          options: "--add-host=gitea.crobasaurusrex.ryanbeales.com:10.0.0.59 -v /var/run/user/1000/docker.sock:/dockersock/docker.sock -e DOCKER_HOST=unix:///dockersock/docker.sock"
+          options: "--add-host=gitea.crobasaurusrex.ryanbeales.com:10.0.0.59 -v /var/run/user/1000/:/dockersock/ -e DOCKER_HOST=unix:///dockersock/docker.sock"
     dind:
       tag: 25.0.2-dind-rootless
 
