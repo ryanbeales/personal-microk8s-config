@@ -41,13 +41,16 @@ actions:
         cache:
           enabled: false
         priviledge: true # for docker in docker
-        container:
-          docker_host: "tcp://127.0.0.1:2376"
         runner:
+          envs:
+            DOCKER_HOST: "tcp://localhost:2375/"
           labels:
             - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
             - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
             - "ubuntu-20.04:docker://gitea/runner-images:ubuntu-20.04"
+    dind:
+      extraEnvs:
+
 
 
 # Single pod configuration, disable HA options for Redis and Postgres
