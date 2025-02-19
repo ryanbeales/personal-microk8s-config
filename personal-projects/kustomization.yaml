@@ -4,3 +4,6 @@ namespace: personal-projects
 resources:
 - namespace.yaml
 - deployment.yaml
+images:
+- name: gitea.crobasaurusrex.ryanbeales.com/ryanbeales/build-test
+  newTag: latest
