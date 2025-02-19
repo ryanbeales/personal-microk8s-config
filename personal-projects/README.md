@@ -1,0 +1,1 @@
+Personal projects deployed from build pipelines within the gitea deployment with gitea-actions in the same cluster.
