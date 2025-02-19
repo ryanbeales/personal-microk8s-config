@@ -6,4 +6,4 @@ resources:
 - deployment.yaml
 images:
 - name: gitea.crobasaurusrex.ryanbeales.com/ryanbeales/build-test
-  newTag: bfa8758-gha
+  newTag: 5a503c2
