@@ -6,4 +6,4 @@ resources:
 - deployment.yaml
 images:
 - name: gitea.crobasaurusrex.ryanbeales.com/ryanbeales/build-test
-  newTag: 5a503c2
+  newTag: 8badb0a
