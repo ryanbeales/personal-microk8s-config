@@ -33,8 +33,8 @@ spec:
             - --disable-csrf-token-checks
             - --insecure
             - --address=0.0.0.0:51515
-            - --server-username=${SERVER_USERNAME}
-            - --server-password=${SERVER_PASSWORD}
+            - "--server-username=$(SERVER_USERNAME)"
+            - "--server-password=$(SERVER_PASSWORD)"
           livenessProbe:
             failureThreshold: 3
             periodSeconds: 10
