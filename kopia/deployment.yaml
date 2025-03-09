@@ -27,7 +27,7 @@ spec:
           envFrom:
             - secretRef:
                 name: kopia-server-secret
-          command:
+          args:
             - server
             - start 
             - --disable-csrf-token-checks
