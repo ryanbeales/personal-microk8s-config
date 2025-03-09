@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencryptcertmanager
-    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
   labels:
     app.kubernetes.io/name: kopia
   name: kopia
