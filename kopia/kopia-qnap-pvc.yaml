@@ -5,7 +5,7 @@ metadata:
   namespace: kopia
 spec:
   accessModes:
-  - ReadOnly
+  - ReadOnlyMany
   storageClassName: ""
   volumeName: kopia-qnap-pv
   resources:
