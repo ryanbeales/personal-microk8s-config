@@ -90,7 +90,7 @@ spec:
             claimName: kopia-config-storage-claim
         - name: stash-backups
           persistentVolumeClaim:
-            claimName: kopia-stash-pvc
+            claimName: kopia-stash-claim
         - name: qnap-backups
           persistentVolumeClaim:
-            claimName: kopia-qnap-pvc
+            claimName: kopia-qnap-claim
