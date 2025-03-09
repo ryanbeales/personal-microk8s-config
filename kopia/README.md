@@ -7,6 +7,11 @@ Create a username and password for the UI:
 sudo k3s kubectl create secret generic kopia-server-secret --from-literal=SERVER_USERNAME=admin --from-literal=SERVER_PASSWORD=$(openssl rand -base64 12) -n kopia
 ```
 
+Save the repository password in a secret:
+```
+sudo k3s kubectl create secret generic kopia-repository-secret --from-literal=KOPIA_PASSWORD={secret} -n kopia
+```
+
 Then login after deploy to use the server UI.
 
 

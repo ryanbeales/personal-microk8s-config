@@ -27,6 +27,8 @@ spec:
           envFrom:
             - secretRef:
                 name: kopia-server-secret
+            - secretRef:
+                name: kopia-repository-secret
           args:
             - server
             - start 
