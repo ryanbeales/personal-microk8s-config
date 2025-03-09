@@ -1,2 +1,11 @@
 resources:
 - namespace.yaml
+- deployment.yaml
+- service.yaml
+- ingress.yaml 
+- kopia-stash-pvc.yaml
+- kopia-stash-pv.yaml
+- kopia-config-pvc.yaml
+- kopia-config-pv.yaml
+- kopia-qnap-pvc.yaml
+- kopia-qnap-pv.yaml

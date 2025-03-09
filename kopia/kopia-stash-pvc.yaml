@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kopia-stash-claim
+  labels:
+    app: duplicati
+  namespace: duplicati
+spec:
+  accessModes:
+  - ReadOnly
+  storageClassName: local-storage-zfs
+  volumeName: kopia-stash-pv
+  resources:
+    requests:
+      storage: 256Mi

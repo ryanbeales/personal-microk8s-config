@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: kopia
+  name: kopia
+  namespace: kopia
+spec:
+  internalTrafficPolicy: Cluster
+  ports:
+    - name: http
+      port: 51515
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: kopia
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: kopia-stash-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadOnly
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage-zfs
+  local:
+    path: /stash/
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - crobasaurusrex

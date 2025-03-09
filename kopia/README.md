@@ -8,3 +8,9 @@ Create and access key manually, and save as a k8s secret:
 ```
 sudo k3s kubectl create secret generic eazybackup-access-key --from-literal=access-key-id={secret} --from-literal=access-key-secret={secret} -n kopia
 ```
+
+Create a username and password for the UI:
+```
+sudo k3s kubectl create secret generic kopia-server-secret --from-literal=SERVER_USERNAME=admin --from-literal=SERVER_PASSWORD=$(openssl rand -base64 12) -n kopia
+```
+

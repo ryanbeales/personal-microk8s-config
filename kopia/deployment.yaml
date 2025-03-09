@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: kopia
+    app.kubernetes.io/name: kopia
+  name: kopia
+  namespace: kopia
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: kopia
+      app.kubernetes.io/name: kopia
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: kopia
+        app.kubernetes.io/name: kopia
+    spec:
+      containers:
+        # https://hub.docker.com/r/kopia/kopia/tags
+        - image: kopia:0.19.0
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: kopia-server-secret
+          command:
+            - server
+            - start 
+            - --disable-csrf-token-checks
+            - --insecure
+            - --address=0.0.0.0:51515
+            - --server-username=${SERVER_USERNAME}
+            - --server-password=${SERVER_PASSWORD}
+          livenessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 51515
+            timeoutSeconds: 1
+          name: kopia
+          ports:
+            - containerPort: 51515
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 51515
+            timeoutSeconds: 1
+          volumeMounts:
+            # Kopia config mounts
+            - mountPath: /app/config
+              name: kopia-config
+              subPath: config
+            - mountPath: /app/cache
+              name: kopia-config
+              subPath: cache
+            - mountPath: /app/logs
+              name: kopia-config
+              subPath: logs
+            - mountPath: /repository
+              name: kopia-config
+              subPath: repository
+            - mountPath: /tmp
+              name: kopia-config
+              subPath: tmp
+            # Data backup sources
+            - mountPath: /data/stash
+              name: stash-backups
+            - mountPath: /data/qnap
+              name: qnap-backups
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+      restartPolicy: Always
+      volumes:
+        - name: kopia-config
+          persistentVolumeClaim:
+            claimName: kopia-config-pvc
+        - name: stash-backups
+          persistentVolumeClaim:
+            claimName: kopia-stash-pvc
+        - name: qnap-backups
+          persistentVolumeClaim:
+            claimName: kopia-qnap-pvc
