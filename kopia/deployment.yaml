@@ -87,7 +87,7 @@ spec:
       volumes:
         - name: kopia-config
           persistentVolumeClaim:
-            claimName: kopia-config-pvc
+            claimName: kopia-config-storage-claim
         - name: stash-backups
           persistentVolumeClaim:
             claimName: kopia-stash-pvc
