@@ -78,13 +78,6 @@ spec:
               name: stash-backups
             - mountPath: /data/qnap
               name: qnap-backups
-          resources:
-            limits:
-              cpu: 100m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 512Mi
       restartPolicy: Always
       volumes:
         - name: kopia-config
