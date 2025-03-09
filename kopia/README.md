@@ -12,10 +12,15 @@ Save the repository password in a secret:
 sudo k3s kubectl create secret generic kopia-repository-secret --from-literal=KOPIA_PASSWORD={secret} -n kopia
 ```
 
-Then login after deploy to use the server UI.
-
-
-To configure the eazybackup respository:
+To configure the eazybackup respository you need to configure this via the pod (`sudo k3s kubectl exec -it `...)
 Service URL is s3.ca-central-1.eazybackup.com
-Create and access key manually, you'll use this to configure the Kopia UI
-This needs a repository password - mine is saved in vaultwarden for this repository.
+Create and access key manually, you'll use this in the command below
+Throttling is set at 100Mbit upload, and 400Mbit download (connection is 2Gbit/200Mbit up/down)
+
+The commands are:
+```
+kopia repository create s3 --bucket=kopia-crobasaurusrex-backups --access-key={SECRET} --secret-access-key={SECRET} --endpoint=s3.ca-central-1.eazybackup.com --override-hostname=kopia-k3s-crobasaurusrex
+kopia repository throttle set --download-bytes-per-second=50000000 --upload-bytes-per-second=12500000 --concurrent-reads=8 --concurrent-writes=8
+```
+
+Then login after a restart to use the server UI and configure the backups
