@@ -1,3 +1,7 @@
+image:
+  repository: tensorchord/pgvecto-rs # https://hub.docker.com/r/tensorchord/pgvecto-rs/tags
+  tag: pg16-v0.2.0
+
 auth:
   existingSecret: immich-postgres-secrets
   username: immich
