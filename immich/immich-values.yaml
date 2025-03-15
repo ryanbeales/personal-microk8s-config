@@ -3,7 +3,7 @@ image:
 
 env:
   TZ: America/Vancouver
-  DB_HOSTNAME: postgres.immich.svc.cluster.local
+  DB_HOSTNAME: postgresql.immich.svc.cluster.local
   DB_DATABASE_NAME: immich
   DB_USERNAME: immich
   DB_PASSWORD:
