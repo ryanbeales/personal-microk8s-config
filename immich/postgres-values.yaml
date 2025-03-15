@@ -4,7 +4,7 @@ global:
 
 image:
   repository: tensorchord/pgvecto-rs # https://hub.docker.com/r/tensorchord/pgvecto-rs/tags
-  tag: pg16.5-v0.3.0
+  tag: pg16-v0.3.0
 
 auth:
   existingSecret: immich-postgres-secrets
