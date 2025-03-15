@@ -17,8 +17,6 @@ helmCharts:
   valuesFile: immich-postgres-values.yaml
 resources:
 - namespace.yaml
-- immich-pvc.yaml
-- immich-pv.yaml
 - immich-library-pv.yaml
 - immich-library-pvc.yaml
 - immich-mlcache-pv.yaml
