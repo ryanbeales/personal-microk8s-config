@@ -1,5 +1,5 @@
 auth:
-  existingSecret: immich-postgres-secret
+  existingSecret: immich-postgres-secrets
   username: immich
   database: immich
 
