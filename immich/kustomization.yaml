@@ -9,12 +9,12 @@ helmCharts:
   namespace: immich
   valuesFile: immich-values.yaml
   includeCRDs: true
-- name: postgres
+- name: postgresql
   repo: 'oci://registry-1.docker.io/bitnamicharts/postgresql'
-  version: 17.4.0
-  releaseName: postgres
+  version: 16.5.0
+  releaseName: postgresql
   namespace: immich
-  valuesFile: immich-postgres-values.yaml
+  valuesFile: postgres-values.yaml
 resources:
 - namespace.yaml
 - immich-library-pv.yaml

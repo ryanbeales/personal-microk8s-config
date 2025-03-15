@@ -27,7 +27,7 @@ server:
       hosts:
         - host: immich.crobasaurusrex.ryanbeales.com
           paths:
-            - /
+            - path: "/"
       tls:
         - secretName: immich-crobasaursrex-ryanbeales-com-tls
           hosts:
