@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: immich
+helmCharts:
+- name: immich
+  repo: 'https://immich-app.github.io/immich-charts'
+  version: 10.6.0 # https://gitea.com/gitea/helm-chart/releases
+  releaseName: immich
+  namespace: immich
+  valuesFile: immich-values.yaml
+  includeCRDs: true
+- name: postgres
+  repo: 'oci://registry-1.docker.io/bitnamicharts/postgresql'
+  version: 17.4.0
+  releaseName: postgres
+  namespace: immich
+  valuesFile: immich-postgres-values.yaml
+resources:
+- namespace.yaml
+- immich-pvc.yaml
+- immich-pv.yaml
+- immich-library-pv.yaml
+- immich-library-pvc.yaml
+- immich-mlcache-pv.yaml
+- immich-mlcache-pvc.yaml
+- immich-postgres-pv.yaml
+- immich-postgres-pvc.yaml

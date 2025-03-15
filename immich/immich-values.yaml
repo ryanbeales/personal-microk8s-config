@@ -1,0 +1,42 @@
+image:
+  tag: v1.129.0
+
+env:
+  TZ: America/Vancouver
+  DB_HOSTNAME: immich-postgres
+  DB_DATABASE_NAME: immich
+  DB_USERNAME: immich
+  DB_PASSWORD:
+    valueFrom:
+      secretKeyRef:
+        name: immich-postgres-secrets
+        key: password
+
+immich:
+  persistence:
+    library:
+      existingClaim: immich-library-pvc
+
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencryptcertmanager
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    hosts:
+      - host: immich.crobasaurusrex.ryanbeales.com
+        paths:
+          - /
+    tls:
+      - secretName: immich-crobasaursrex-ryanbeales-com-tls
+        hosts:
+          - immich.crobasaurusrex.ryanbeales.com
+
+machine-learning:
+  persistence:
+    mlcache:
+      existingClaim: immich-mlcache-pvc
+
+
+redis:
+  enabled: true

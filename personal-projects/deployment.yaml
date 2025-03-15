@@ -24,3 +24,7 @@ spec:
         - image: gitea.crobasaurusrex.ryanbeales.com/ryanbeales/build-test:latest
           imagePullPolicy: IfNotPresent
           name: python
+          ports:
+          - containerPort: 80
+            name: http
+            protocol: TCP

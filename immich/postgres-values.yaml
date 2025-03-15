@@ -1,0 +1,11 @@
+auth:
+  existingSecret: immich-postgres-secret
+  username: immich
+  database: immich
+
+primary:
+  networkPolicy:
+    enabled: false
+  # No node affinity or nodeselector since the PVC is doing that for us.
+  persistence:
+    existingClaim: immich-postgres-pvc

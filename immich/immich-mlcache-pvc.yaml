@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-mlcache-pvc
+  namespace: gitea
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: local-storage-zfs
+  volumeName: immich-mlcache-pv
+  resources:
+    requests:
+      storage: 256Mi
