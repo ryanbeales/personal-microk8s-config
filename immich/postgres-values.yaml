@@ -9,3 +9,9 @@ primary:
   # No node affinity or nodeselector since the PVC is doing that for us.
   persistence:
     existingClaim: immich-postgres-pvc
+  initdb:
+    scripts:
+      create-extensions.sql: |
+        CREATE EXTENSION cube;
+        CREATE EXTENSION earthdistance;
+        CREATE EXTENSION vectors;
