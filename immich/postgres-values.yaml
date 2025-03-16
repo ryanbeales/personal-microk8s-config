@@ -33,3 +33,6 @@ primary:
     periodSeconds: 30
     timeoutSeconds: 30
     failureThreshold: 10
+  resources:
+    limits:
+      cpu: 1
