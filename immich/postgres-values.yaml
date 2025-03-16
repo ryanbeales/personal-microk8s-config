@@ -17,6 +17,9 @@ primary:
   # No node affinity or nodeselector since the PVC is doing that for us.
   persistence:
     existingClaim: immich-postgres-pvc
+  # For pgvector-rs
+  containerSecurityContext:
+    readOnlyRootFilesystem: false
   initdb:
     scripts:
       create-extensions.sql: |
