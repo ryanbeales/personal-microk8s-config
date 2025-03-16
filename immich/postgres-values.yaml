@@ -1,7 +1,4 @@
-global:
-  security:
-     allowInsecureImages: true # This is so we can use the pgvecto-rs image below without the giant security warning from the chart.
-
+# Use an alternative image in the postgres chart for now. I'll migrate out once it's all generated and up.
 image:
   repository: tensorchord/pgvecto-rs # https://hub.docker.com/r/tensorchord/pgvecto-rs/tags
   tag: pg16-v0.3.0
