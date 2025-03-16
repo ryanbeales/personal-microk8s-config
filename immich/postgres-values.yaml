@@ -23,3 +23,13 @@ primary:
         CREATE EXTENSION cube;
         CREATE EXTENSION earthdistance;
         CREATE EXTENSION vectors;
+  livenessProbe:
+    initialDelaySeconds: 300
+    periodSeconds: 30
+    timeoutSeconds: 30
+    failureThreshold: 10
+  readinessProbe:
+    initialDelaySeconds: 300
+    periodSeconds: 30
+    timeoutSeconds: 30
+    failureThreshold: 10
