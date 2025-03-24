@@ -22,6 +22,8 @@ ingress:
 deployment:
   nodeSelector: crobasaurusrex # Deploy on crobasaurusrex as it has more disk space.
 
+# There is a typo in this (persistEnce) so k3s autoprovisioned storage on the host disk. We'll need to fix that sometime.
+# note that postgres storage in gitea is also provisioned this way.
 persistance:
   enabled: true
   claimName: gitea-pvc
