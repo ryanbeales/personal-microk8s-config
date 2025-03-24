@@ -1,5 +1,8 @@
 # Use an alternative image in the postgres chart for now. I'll migrate out once it's all generated and up.
+# Immich instructions are here https://immich.app/docs/administration/postgres-standalone/
+
 image:
+  # Use pgvector-rs image which has the vectors.so library loaded already
   repository: tensorchord/pgvecto-rs # https://hub.docker.com/r/tensorchord/pgvecto-rs/tags
   tag: pg16-v0.3.0
 
@@ -7,6 +10,9 @@ auth:
   existingSecret: immich-postgres-secrets
   username: immich
   database: immich
+
+# Helm chart will override the list of shared libraries so vectors needs to be added back in here
+postgresqlSharedPreloadLibraries: "vectors.so,pgaudit"
 
 primary:
   networkPolicy:
@@ -20,19 +26,9 @@ primary:
   initdb:
     scripts:
       create-extensions.sql: |
-        CREATE EXTENSION cube;
-        CREATE EXTENSION earthdistance;
-        CREATE EXTENSION vectors;
-  livenessProbe:
-    initialDelaySeconds: 300
-    periodSeconds: 30
-    timeoutSeconds: 30
-    failureThreshold: 10
-  readinessProbe:
-    initialDelaySeconds: 300
-    periodSeconds: 30
-    timeoutSeconds: 30
-    failureThreshold: 10
+        CREATE EXTENSION IF NOT EXISTS cube;
+        CREATE EXTENSION IF NOT EXISTS earthdistance;
+        CREATE EXTENSION IF NOT EXISTS vectors;
   resources:
     limits:
       cpu: 1
