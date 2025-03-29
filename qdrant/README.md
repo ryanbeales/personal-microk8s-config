@@ -1,1 +1,0 @@
-Run Qdrant as Vector storage for n8n/ollama
