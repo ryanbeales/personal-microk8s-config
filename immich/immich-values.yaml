@@ -1,5 +1,5 @@
 image:
-  tag: v1.129.0
+  tag: v1.130.3 # https://github.com/immich-app/immich/releases
 
 env:
   TZ: America/Vancouver
@@ -32,14 +32,8 @@ server:
         - secretName: immich-crobasaursrex-ryanbeales-com-tls
           hosts:
             - immich.crobasaurusrex.ryanbeales.com
-  resources:
-    limits:
-      cpu: 1
 
 machine-learning:
-  resources:
-    limits:
-      cpu: 1
   persistence:
     mlcache:
       existingClaim: immich-mlcache-pvc

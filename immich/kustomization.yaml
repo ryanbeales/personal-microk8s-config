@@ -4,6 +4,7 @@ namespace: immich
 helmCharts:
 - name: immich
   repo: 'https://immich-app.github.io/immich-charts'
+  # Don't update this, it may break things. They are going to remove the postgres chart but we don't use it by default.
   version: 0.9.1 # https://immich-app.github.io/immich-charts/index.yaml / https://github.com/immich-app/immich-charts/releases
   releaseName: immich
   namespace: immich
@@ -11,7 +12,7 @@ helmCharts:
   includeCRDs: true
 - name: postgresql
   repo: 'oci://registry-1.docker.io/bitnamicharts/'
-  version: 16.0.0
+  version: 16.0.0 # Don't update this, it breaks the pgvector install.
   releaseName: postgresql
   namespace: immich
   valuesFile: postgres-values.yaml

@@ -36,7 +36,7 @@ actions:
     enabled: true
   statefulset:
     actRunner:
-      tag: 0.2.11-dind-rootless
+      tag: 0.2.11-dind-rootless # https://hub.docker.com/r/gitea/act_runner/tags
       # By default, the helm chart does not populate the labels section of the runner config.
       # This means all jobs start in a bare image without the necessary tools.
       config: |
@@ -59,7 +59,7 @@ actions:
           valid_volumes:
             - '**'
     dind:
-      tag: 25.0.2-dind-rootless
+      tag: 28.0.4-dind-rootless # https://hub.docker.com/_/docker/tags?name=dind-rootless
 
 # Single pod configuration, disable HA options for Redis and Postgres
 redis-cluster:

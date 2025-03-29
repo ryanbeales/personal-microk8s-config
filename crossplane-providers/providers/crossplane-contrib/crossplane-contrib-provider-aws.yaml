@@ -3,4 +3,4 @@ kind: Provider
 metadata:
   name: provider-aws
 spec: # https://github.com/crossplane-contrib/provider-aws/releases
-  package: xpkg.upbound.io/crossplane-contrib/provider-aws:v0.51.4
+  package: xpkg.upbound.io/crossplane-contrib/provider-aws:v0.52.1
