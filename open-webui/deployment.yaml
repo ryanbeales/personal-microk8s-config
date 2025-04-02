@@ -19,7 +19,7 @@ spec:
       containers:
       - name: open-webui
         # Get the commit tag for the image from here https://github.com/open-webui/open-webui/releases
-        image: ghcr.io/open-webui/open-webui:git-3b70cd6 # 5.20 release https://github.com/orgs/open-webui/packages/container/package/open-webui
+        image: ghcr.io/open-webui/open-webui:git-04799f1 # 0.6.0 release https://github.com/orgs/open-webui/packages/container/package/open-webui
         # Ensure we run on a node with GPU available
         env:
         - name: OLLAMA_BASE_URL
