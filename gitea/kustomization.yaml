@@ -4,7 +4,9 @@ namespace: gitea
 helmCharts:
 - name: gitea
   repo: 'oci://registry-1.docker.io/giteacharts/'
-  version: 11.0.1 # https://gitea.com/gitea/helm-chart/releases
+  # Note that version 11 includes the postgres 17 chart which requires an upgrade.
+  # Leave on this version until I migrate to a postgres operator instead.
+  version: 10.6.0 # https://gitea.com/gitea/helm-chart/releases
   releaseName: gitea
   namespace: gitea
   valuesFile: values.yaml
