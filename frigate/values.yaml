@@ -135,7 +135,7 @@ config: |
     enabled: true
     provider: ollama
     base_url: http://ollama.ollama.svc.cluster.local:11434
-    model: llama3.2-vision
+    model: gemma3:4b-it-qat
 
 env:
   TZ: America/Vancouver
