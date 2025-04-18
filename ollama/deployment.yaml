@@ -26,7 +26,7 @@ spec:
       nodeName: crobceratops
       containers:
       - name: ollama
-        image: ollama/ollama:0.6.3 # https://hub.docker.com/r/ollama/ollama/tags
+        image: ollama/ollama:0.6.6 # https://hub.docker.com/r/ollama/ollama/tags
         # Ensure we run on a node with GPU available
         resources:
           limits:
