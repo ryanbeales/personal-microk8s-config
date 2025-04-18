@@ -55,6 +55,7 @@ spec:
                   /bin/ollama pull deepseek-coder-v2
                   /bin/ollama pull deepseek-r1:8b
                   /bin/ollama pull minicpm-v:8b
+                  /bin/ollama pull gemma3:4b-it-qat
       volumes:
       - name: storage
         hostPath:
