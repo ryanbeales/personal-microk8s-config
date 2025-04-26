@@ -24,7 +24,7 @@ spec:
       nodeName: crobceratops # Node with the 3060 GPU
 
       containers:
-        - image: gitea.crobasaurusrex.ryanbeales.com/ryanbeales/dia:latest
+        - image: gitea.crobasaurusrex.ryanbeales.com/ryanbeales/dia:sha-2dc0ac2
           imagePullPolicy: IfNotPresent
           name: dia
           ports:

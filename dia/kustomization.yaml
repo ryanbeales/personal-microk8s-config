@@ -3,9 +3,9 @@ kind: Kustomization
 namespace: dia
 resources:
 - namespace.yaml
-#- deployment.yaml
+- deployment.yaml
 - service.yaml
 - ingress.yaml
 images:
 - name: gitea.crobasaurusrex.ryanbeales.com/ryanbeales/dia
-  newTag: latest
+  newTag: sha-2dc0ac2
