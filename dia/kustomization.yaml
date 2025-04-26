@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: dia
 resources:
 - namespace.yaml
-- deployment.yaml
+#- deployment.yaml
 - service.yaml
 - ingress.yaml
 images:
