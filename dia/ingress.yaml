@@ -4,7 +4,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencryptcertmanager
   labels:
-    app.kubernetes.io/name:dia
+    app.kubernetes.io/name: dia
   name: dia
   namespace: dia
 spec:
