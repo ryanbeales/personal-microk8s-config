@@ -18,10 +18,11 @@ spec:
     spec:
       # Switch to the nvidia runtime class to get access to the GPU
       runtimeClassName: nvidia
-      # Since we have both a 1060 and a 3060 in the cluster, ensure we run on the 
-      # faster one by selecting the node with it in. I can't do this via auto generated
-      # labels it seems - I could add the label, but this is less work)
-      nodeName: crobceratops
+      
+      # This process is tiny, we have a 1050Ti-4GB, 1060-6GB, and 3060-12GB in the cluster. We won't restrict this to a specific node.
+      nodeSelector:
+        nvidia.com/gpu.present: "true"
+
       containers:
       - name: piper
         image: lscr.io/linuxserver/piper:1.4.0-gpu # https://hub.docker.com/r/linuxserver/piper/tags
