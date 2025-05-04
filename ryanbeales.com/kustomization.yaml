@@ -1,4 +1,6 @@
 resources:
+- dns/croblodocus-direct.yaml
+- dns/croblodocus-wildcard.yaml
 - dns/croblociraptor-direct.yaml
 - dns/croblociraptor-wildcard.yaml
 - dns/crobasaurusrex-direct.yaml
