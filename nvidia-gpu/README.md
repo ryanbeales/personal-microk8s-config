@@ -3,9 +3,22 @@ https://github.com/NVIDIA/k8s-device-plugin
 https://github.com/NVIDIA/gpu-feature-discovery
 
 
+Install nvidia package repo:
+```
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+```
+
+Update apt:
+```
+sudo apt-get update
+```
+
 Install drivers:
 ```
-apt install nvidia-headless-550-server nvidia-container-toolkit cuda-drivers-fabricmanager-550 nvidia-cuda-toolkit nvidia-utils-550-server libnvidia-decode-525-server
+apt install nvidia-headless-550-server nvidia-container-toolkit cuda-drivers-fabricmanager-550 nvidia-cuda-toolkit nvidia-utils-550-server libnvidia-decode-550-server
 ```
 
 *** During the install it will build the nvidia kernel module. If you have secure boot enabled it will ask for a password to build the module which you must confirm on boot or else the kernel will load without this module, you cannot do this remotely. https://wiki.ubuntu.com/UEFI/SecureBoot/DKMS - Days lost here: 3 (I grew up in the days of insecure boot, this is new to me...)
