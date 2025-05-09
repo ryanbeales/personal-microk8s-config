@@ -50,6 +50,10 @@ config: |
         enabled: true
         required_zones:
           - yard
+      record:
+        enabled: true
+        required_zones:
+          - yard
       motion:
         mask:
           - 0.998,0.671,0.999,0.998,0,0.998,0.003,0.467,0.174,0.421,0.251,0.341,0.267,0.22,0.61,0.229,0.673,0.384,0.676,0.217,0.71,0.218
@@ -77,6 +81,10 @@ config: |
         output_args:
           record: preset-record-generic-audio-aac
       snapshots:
+        enabled: true
+        required_zones:
+          - driveway
+      record:
         enabled: true
         required_zones:
           - driveway
@@ -127,6 +135,8 @@ config: |
       - elephant
       - shoe
       - skis
+  detect:
+
   semantic_search:
     enabled: True
     reindex: False
