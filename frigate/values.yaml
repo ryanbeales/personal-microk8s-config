@@ -129,8 +129,6 @@ config: |
       - elephant
       - shoe
       - skis
-  detect:
-
   semantic_search:
     enabled: True
     reindex: False
