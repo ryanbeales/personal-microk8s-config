@@ -110,11 +110,11 @@ config: |
     alerts:
       retain:
         days: 7
-        mode: active_only
+        mode: active_objects
     detections:
       retain:
         days: 30
-        mode: active_only
+        mode: active_objects
   objects:
     track:
       - person
