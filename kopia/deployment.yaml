@@ -21,8 +21,9 @@ spec:
         app.kubernetes.io/name: kopia
     spec:
       containers:
+        # https://github.com/kopia/kopia/releases for notes
         # https://hub.docker.com/r/kopia/kopia/tags
-        - image: kopia/kopia:0.19.0
+        - image: kopia/kopia:0.20.0
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:

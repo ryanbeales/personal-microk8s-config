@@ -21,7 +21,7 @@ spec:
       nodeName: crobasaurusrex # We have more storage available on this node but a slower GPU.
       containers:
       - name: n8n
-        image: n8nio/n8n:1.84.3 # https://hub.docker.com/r/n8nio/n8n/tags
+        image: n8nio/n8n:1.94.0 # https://hub.docker.com/r/n8nio/n8n/tags
         env:
         - name: N8N_HOST
           value: n8n.crobasaurusrex.ryanbeales.com

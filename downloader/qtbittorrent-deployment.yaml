@@ -28,7 +28,7 @@ spec:
         - name: TZ
           value: America/Vancouver
         # Releases https://github.com/linuxserver/docker-qbittorrent/pkgs/container/qbittorrent
-        image: ghcr.io/linuxserver/qbittorrent:5.0.4
+        image: ghcr.io/linuxserver/qbittorrent:5.1.0
         volumeMounts:
         - name: qtbittorrent-storage
           mountPath: /config

@@ -29,7 +29,7 @@ spec:
             - name: TZ
               value: America/Vancouver
           # https://github.com/esphome/esphome/releases/
-          image: 'esphome/esphome:2025.3.2'
+          image: 'esphome/esphome:2025.5.0'
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
