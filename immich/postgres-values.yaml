@@ -3,7 +3,8 @@
 
 image:
   # Use pgvector-rs image which has the vectors.so library loaded already
-  repository: ghcr.io/immich-app/postgres # https://github.com/immich-app/base-images/pkgs/container/postgres
+  registry: ghcr.io
+  repository: immich-app/postgres # https://github.com/immich-app/base-images/pkgs/container/postgres
   tag: 16-vectorchord0.3.0-pgvectors0.2.0
 
 auth:
