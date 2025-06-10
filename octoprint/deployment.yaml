@@ -25,7 +25,7 @@ spec:
       containers:
       - name: octoprint
         # https://hub.docker.com/r/octoprint/octoprint/tags
-        image: octoprint/octoprint:1.11.1
+        image: octoprint/octoprint:1.11.2
         env:
           - name: ENABLE_MJPG_STREAMER
             value: 'false'
