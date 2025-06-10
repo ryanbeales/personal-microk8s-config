@@ -60,10 +60,10 @@ spec:
           # Resources
           resources: 
             requests:
-              cpu: "100m"
-              memory: "64Mi"
+              cpu: "200m"
+              memory: "128Mi"
             limits:
-              memory: "64Mi"
+              memory: "128Mi"
           # Security context
           securityContext:
             capabilities:
