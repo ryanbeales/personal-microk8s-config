@@ -14,7 +14,7 @@ config: |
       back:
         - http://10.0.0.153/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password={FRIGATE_REOCAM_PASSWORD}
       back_sub:
-        - ffmpeg:http://10.0.0.153/flv?port=1935&app=bcs&stream=channel0_sub.bcs&user=admin&password={FRIGATE_REOCAM_PASSWORD}
+        - http://10.0.0.153/flv?port=1935&app=bcs&stream=channel0_sub.bcs&user=admin&password={FRIGATE_REOCAM_PASSWORD}
       front:
         - rtsp://admin:{FRIGATE_ARMCREST_FRONT_PASSWORD}@10.0.0.67/cam/realmonitor?channel=1&subtype=0
       front_sub:
@@ -37,12 +37,12 @@ config: |
           - path: rtsp://127.0.0.1:8554/back?video=copy&audio=aac
             input_args: preset-rtsp-restream
             roles:
-              - audio
               - record
-          - path: rtsp://127.0.0.1:8554/back_sub?video=copy
+          - path: rtsp://127.0.0.1:8554/back_sub?video=copy&audio=aac
             input_args: preset-rtsp-restream
             roles:
               - detect
+              - audio
         hwaccel_args: preset-nvidia-h264
         output_args:
           record: preset-record-generic-audio-aac
@@ -67,12 +67,12 @@ config: |
           - path: rtsp://127.0.0.1:8554/front?video=copy&audio=aac
             input_args: preset-rtsp-restream
             roles:
-              - audio
               - record
-          - path: rtsp://127.0.0.1:8554/front_sub?video=copy
+          - path: rtsp://127.0.0.1:8554/front_sub?video=copy&audio=aac
             input_args: preset-rtsp-restream
             roles:
               - detect
+              - audio
         hwaccel_args: preset-nvidia-h264
         output_args:
           record: preset-record-generic-audio-aac
