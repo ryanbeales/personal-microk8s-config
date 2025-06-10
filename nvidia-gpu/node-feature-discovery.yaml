@@ -64,7 +64,7 @@ spec:
               fieldRef:
                 fieldPath: spec.nodeName
           # https://github.com/kubernetes-sigs/node-feature-discovery/releases
-          image: registry.k8s.io/nfd/node-feature-discovery:v0.17.3
+          image: registry.k8s.io/nfd/node-feature-discovery:v0.6.0
           name: nfd-master
           command:
             - "nfd-master"
@@ -75,7 +75,7 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
-          image: registry.k8s.io/nfd/node-feature-discovery:v0.17.3
+          image: registry.k8s.io/nfd/node-feature-discovery:v0.6.0
           name: nfd-worker
           command:
             - "nfd-worker"
