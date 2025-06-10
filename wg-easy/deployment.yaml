@@ -21,16 +21,11 @@ spec:
         - name: wg-easy
           # Environment
           env:
-            - name: WG_HOST
-              value: wg.ryanbeales.com
-            - name: WG_PORT
-              value: "31313"
-            # Every pod gets a device named eth0
-            - name: WG_DEVICE
-              value: eth0
+            - name: INSECURE
+              value: "true"  # To connect to the UI via http, SSL is handled by ingress
           # Image
           # https://github.com/wg-easy/wg-easy/pkgs/container/wg-easy
-          image: ghcr.io/wg-easy/wg-easy:14
+          image: ghcr.io/wg-easy/wg-easy:15
           imagePullPolicy: IfNotPresent
           # Ports
           ports:
