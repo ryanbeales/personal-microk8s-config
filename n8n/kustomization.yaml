@@ -1,7 +1,0 @@
-resources:
-- namespace.yaml
-- deployment.yaml
-- service.yaml
-- ingress.yaml
-- service-redis.yaml
-- deployment-redis.yaml
