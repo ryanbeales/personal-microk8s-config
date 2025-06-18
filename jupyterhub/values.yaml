@@ -11,9 +11,16 @@ ingress:
 
 hub:
   config:
+    Authenticator:
+      admin_users:
+        - ryanbeales
+      allowed_users:
+        - ryanbeales
     KubeSpawner:
       extra_pod_config:
         runtimeClassName: nvidia
+    JupyterHub:
+      admin_access: true
 
 singleuser:
   networkPolicy:
