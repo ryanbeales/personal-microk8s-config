@@ -1,0 +1,9 @@
+# New local stroage provisioer, uses the ranger local-path provisioner to create directories on the host node automagically.
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: auto-local-storage-zfs
+provisioner: rancher.io/local-path
+parameters:
+  nodePath: /stash
+volumeBindingMode: WaitForFirstConsumer
