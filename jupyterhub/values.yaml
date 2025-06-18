@@ -1,0 +1,17 @@
+hub:
+  config:
+    KubeSpawner:
+      extra_pod_config:
+        runtimeClassName: nvidia
+
+singleUser:
+  profileList:
+    - display_name: "GPU Server"
+      description: "Spawns a notebook server with access to a GPU"
+      kubespawner_override:
+        extra_resource_limits:
+          nvidia.com/gpu: "1"
+  storage:
+    dynamic:
+      storageClass: local-path # store on k3s node for now.
+    capacity: 2Gi

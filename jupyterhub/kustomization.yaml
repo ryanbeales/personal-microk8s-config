@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: jupyterhub
+helmCharts:
+- name: jupyterhub
+  repo: 'https://hub.jupyter.org/helm-chart/'
+  version: jupyterhub-4.2.0 # https://hub.jupyter.org/helm-chart/
+  releaseName: jupyterhub
+  namespace: jupyterhub
+  valuesFile: values.yaml
+  includeCRDs: true
+resources:
+- namespace.yaml
