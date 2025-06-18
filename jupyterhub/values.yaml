@@ -1,10 +1,23 @@
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencryptcertmanager
+  hosts:
+    - jupyter.crobasaurusrex.ryanbeales.com
+  tls:
+    - secretName: jupyter-crobasaurusrex-ryanbeales-com-tls
+      hosts:
+        - jupyter.crobasaurusrex.ryanbeales.com
+
 hub:
   config:
     KubeSpawner:
       extra_pod_config:
         runtimeClassName: nvidia
 
-singleUser:
+singleuser:
+  networkPolicy:
+    enabled: false # disable network policy
   profileList:
     - display_name: "GPU Server"
       description: "Spawns a notebook server with access to a GPU"
