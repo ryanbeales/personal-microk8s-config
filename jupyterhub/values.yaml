@@ -47,7 +47,7 @@ singleuser:
         environment:
           GRANT_SUDO: "yes" # allow sudo in this image
         uid: 0 # run the start script as root to grant sudo to the user in the image
-        image: jupyter/base-notebook:lab-4.4.3
+        image: quay.io/jupyter/base-notebook:lab-4.4.3
         extra_resource_limits:
           nvidia.com/gpu: "1"
         node_selector: 
