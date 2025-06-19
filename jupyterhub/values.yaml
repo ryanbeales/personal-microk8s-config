@@ -12,6 +12,14 @@ ingress:
       hosts:
         - jupyter.crobasaurusrex.ryanbeales.com
 
+# Disable prepuller (I have exactly 3 nodes, and I can wait and not waste disk space)
+prepuller:
+  hook:
+    enabled: false
+  continuous:
+    enabled: false
+
+# Enabled me as an admin user, but passwordless access to every account.
 hub:
   config:
     Authenticator:
@@ -19,9 +27,6 @@ hub:
         - ryanbeales
       allowed_users:
         - ryanbeales
-    KubeSpawner:
-      extra_pod_config:
-        runtimeClassName: nvidia
     JupyterHub:
       admin_access: true
 
@@ -33,13 +38,8 @@ singleuser:
   # Options for KubeSpawner (which is what launches these profiles) is here:
   # https://jupyterhub-kubespawner.readthedocs.io/en/latest/spawner.html
   profileList:
-    - display_name: "GPU Server - default image (no sudo)"
-      description: "Spawns a notebook server with access to a GPU"
-      kubespawner_override:
-        extra_resource_limits:
-          nvidia.com/gpu: "1"
-        node_selector: 
-          kubernetes.io/hostname: crobceratops
+    - display_name: "CPU only server - default image (no sudo)"
+      description: "Spawns a notebook server"
     - display_name: "GPU Server - jupyter base image - sudo enabled"
       description: "Spawns a notebook server with access to a GPU and based on the jupyter base image"
       kubespawner_override:
@@ -51,7 +51,10 @@ singleuser:
         extra_resource_limits:
           nvidia.com/gpu: "1"
         node_selector: 
+          # This one has a 3060 in it, everything else is a 10xx series.
           kubernetes.io/hostname: crobceratops
+        extra_pod_config:
+          runtimeClassName: nvidia  
   storage:
     dynamic:
       storageClass: auto-local-storage-zfs # store on k3s node for now.
