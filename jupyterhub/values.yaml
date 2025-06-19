@@ -6,6 +6,7 @@ ingress:
   enabled: true
   annotations:
     cert-manager.io/cluster-issuer: letsencryptcertmanager
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
   hosts:
     - jupyter.crobasaurusrex.ryanbeales.com
   tls:
