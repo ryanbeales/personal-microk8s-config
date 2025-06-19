@@ -44,7 +44,7 @@ singleuser:
     - display_name: "GPU Server - jupyter base image - sudo enabled"
       description: "Spawns a notebook server with access to a GPU and based on the jupyter base image"
       kubespawner_override:
-        allowPrivilegeEscalation: true # allow privilege escalation to run sudo
+        allow_privilege_escalation: true # Note the form of this name does not match the kubernetes config name.
         environment:
           GRANT_SUDO: "yes" # allow sudo in this image
         uid: 0 # run the start script as root to grant sudo to the user in the image
