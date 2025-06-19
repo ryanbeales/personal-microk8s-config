@@ -28,6 +28,10 @@ hub:
 singleuser:
   networkPolicy:
     enabled: false # disable network policy
+  # List of available prebuilt images is here:
+  # https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html
+  # Options for KubeSpawner (which is what launches these profiles) is here:
+  # https://jupyterhub-kubespawner.readthedocs.io/en/latest/spawner.html
   profileList:
     - display_name: "GPU Server - default image (no sudo)"
       description: "Spawns a notebook server with access to a GPU"
@@ -36,8 +40,11 @@ singleuser:
           nvidia.com/gpu: "1"
         node_selector: 
           kubernetes.io/hostname: crobceratops
-    - display_name: "GPU Server - jupyter base image"
+    - display_name: "GPU Server - jupyter base image - sudo enabled"
       image: jupyter/base-notebook:lab-4.4.3
+      environment:
+        GRANT_SUDO: "yes" # allow sudo in this image
+      uid: 0 # run the start script as root to grant sudo to the user in the image
       description: "Spawns a notebook server with access to a GPU and based on the jupyter base image"
       kubespawner_override:
         extra_resource_limits:
