@@ -1,5 +1,6 @@
 # Configuration reference
 # https://z2jh.jupyter.org/en/stable/resources/reference.html#helm-chart-configuration-reference
+# https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/main/jupyterhub/values.yaml
 
 ingress:
   enabled: true
@@ -13,7 +14,7 @@ ingress:
         - jupyter.crobasaurusrex.ryanbeales.com
 
 # Disable prepuller (I have exactly 3 nodes, and I can wait and not waste disk space)
-prepuller:
+prePuller:
   hook:
     enabled: false
   continuous:
