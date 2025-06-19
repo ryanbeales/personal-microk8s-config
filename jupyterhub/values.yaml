@@ -1,3 +1,6 @@
+# Configuration reference
+# https://z2jh.jupyter.org/en/stable/resources/reference.html#helm-chart-configuration-reference
+
 ingress:
   enabled: true
   annotations:
@@ -26,8 +29,16 @@ singleuser:
   networkPolicy:
     enabled: false # disable network policy
   profileList:
-    - display_name: "GPU Server"
+    - display_name: "GPU Server - default image (no sudo)"
       description: "Spawns a notebook server with access to a GPU"
+      kubespawner_override:
+        extra_resource_limits:
+          nvidia.com/gpu: "1"
+        node_selector: 
+          kubernetes.io/hostname: crobceratops
+    - display_name: "GPU Server - jupyter base image"
+      image: jupyter/base-notebook:lab-4.4.3
+      description: "Spawns a notebook server with access to a GPU and based on the jupyter base image"
       kubespawner_override:
         extra_resource_limits:
           nvidia.com/gpu: "1"
