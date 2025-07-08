@@ -58,7 +58,7 @@ singleuser:
         extra_pod_config:
           runtimeClassName: nvidia  
     - display_name: "GPU Server - jupyter base image - sudo enabled - crobputer"
-      description: "Spawns a notebook server with access to a GPU and based on the jupyter base image"
+      description: "Spawns a notebook server with access to a GPU and based on the jupyter base image and a 4090"
       kubespawner_override:
         allow_privilege_escalation: true # Note the form of this name does not match the kubernetes config name.
         environment:
@@ -68,7 +68,7 @@ singleuser:
         extra_resource_limits:
           nvidia.com/gpu: "1"
         node_selector: 
-          # This one has a 3060 in it, everything else is a 10xx series.
+          # This one has a 4090 in it
           kubernetes.io/hostname: crobputer
         extra_pod_config:
           runtimeClassName: nvidia  
