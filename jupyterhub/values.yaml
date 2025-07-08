@@ -29,6 +29,7 @@ hub:
         - ryanbeales
       allowed_users:
         - ryanbeales
+        - ryanbeales2
     JupyterHub:
       admin_access: true
 
