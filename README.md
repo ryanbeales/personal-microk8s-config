@@ -49,3 +49,32 @@ All the rest of these steps are on the on master node
 Notes:
 - The crossplane provider config `crossplane-providers/aws-provider-config.yaml` will not apply until other objects have applied first. You may have to remove this and add in the next sync. I'm not a fan of how this all works but we'll leave it in place for now.
 - There may be some missing steps. Usually the README in each directory will explain what to do if the project goes wrong.
+
+## Adding windows nodes
+I have a gaming PC with a hefty nvidia card in it. I can install K3s via WSL on this PC to make it available to the cluster when I'm not gaming (often, these days).
+
+On the windows PC (these may or may not be in order or complete)
+1. Create a .wslconfig in your user directory:
+```
+[wsl2]
+networkingMode=bridged
+vmSwitch=WSL Switch
+dnsTunneling = false
+firewall = false
+
+[network]
+generateResolvConf = false
+```
+1. Install wsl2 `wsl --install` or reinstall (https://gist.github.com/4wk-/889b26043f519259ab60386ca13ba91b), hyper-v and hyper-v manager
+1. Create a new External switch in hyper-v manager named `WSL-Switch`, connect it to your network interface
+1. Install and Start the Ubuntu instance `wsl --install Ubuntu`
+1. Install k3s node as above in the Bootstrap section
+1. Install cuda on wsl2 https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+1. Restart the k3s agent `sudo systemctl restart k3s-agent`
+1. Verify that the nvidia runtime has been found by k3s: `sudo grep nvidia /var/lib/rancher/k3s/agent/etc/containerd/config.toml`
+
+You may need to do this, I lost bout 8 hours of my life just trying to get this to work (is is worth it to get access to a 4090 in my k8s cluster? Maybe...)
+```
+Set-NetFirewallHyperVVMSetting -Name '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -DefaultInboundAction Allow
+New-NetFirewallHyperVRule -Name VXLAN -DisplayName "VXLAN Fix" -Direction Inbound -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol UDP -LocalPorts 8472
+```
