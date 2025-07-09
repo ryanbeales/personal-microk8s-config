@@ -23,7 +23,6 @@ prePuller:
 
 # Enabled me as an admin user, but passwordless access to every account.
 hub:
-  baseUrl: https://jupyter.crobasaurusrex.ryanbeales.com/ # Fix XSRF issues
   config:
     Authenticator:
       admin_users:
