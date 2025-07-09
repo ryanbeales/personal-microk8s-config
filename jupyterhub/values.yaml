@@ -44,7 +44,7 @@ singleuser:
     - display_name: "CPU only server - default image (no sudo)"
       description: "Spawns a notebook server"
     - display_name: "GPU Server - jupyter base image - sudo enabled"
-      description: "Spawns a notebook server with access to a GPU and based on the jupyter base image"
+      description: "Spawns a notebook server with access to a GPU and based on the jupyter base image - crobceratops"
       kubespawner_override:
         allow_privilege_escalation: true # Note the form of this name does not match the kubernetes config name.
         environment:
@@ -55,7 +55,22 @@ singleuser:
           nvidia.com/gpu: "1"
         node_selector: 
           # This one has a 3060 in it, everything else is a 10xx series.
-          kubernetes.io/hostname: crobputer
+          kubernetes.io/hostname: crobceratops
+        extra_pod_config:
+          runtimeClassName: nvidia 
+    - display_name: "GPU Server - jupyter base image - sudo enabled - crobputer"
+      description: "Spawns a notebook server with access to a GPU and based on the jupyter base image"
+      kubespawner_override:
+        allow_privilege_escalation: true # Note the form of this name does not match the kubernetes config name.
+        environment:
+          GRANT_SUDO: "yes" # allow sudo in this image
+        uid: 0 # run the start script as root to grant sudo to the user in the image
+        image: quay.io/jupyter/base-notebook:lab-4.4.3
+        extra_resource_limits:
+          nvidia.com/gpu: "1"
+        node_selector: 
+          # This one has a 4090 in it, everything else is a 10xx series.
+          kubernetes.io/hostname: crobceratops
         extra_pod_config:
           runtimeClassName: nvidia 
   storage:
