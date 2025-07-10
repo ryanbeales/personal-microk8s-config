@@ -19,6 +19,8 @@ spec:
       labels:
         app.kubernetes.io/name: chromaimagegen
     spec:
+      # Switch to the nvidia runtime class to get access to the GPU
+      runtimeClassName: nvidia
       automountServiceAccountToken: false
       containers:
         - env:
@@ -59,7 +61,6 @@ spec:
           resources:
             limits:
               nvidia.com/gpu: '1'
-          runtimeClassName: nvidia # Use the NVIDIA runtime.
           volumeMounts:
             - mountPath: /model_cache
               name: model-cache
