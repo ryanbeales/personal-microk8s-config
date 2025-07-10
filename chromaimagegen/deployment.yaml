@@ -35,6 +35,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
+              port: 8000
             failureThreshold: 3
             periodSeconds: 30
             successThreshold: 1
@@ -42,6 +43,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /
+              port: 8000
             failureThreshold: 3
             periodSeconds: 30
             successThreshold: 1
@@ -49,8 +51,9 @@ spec:
           startupProbe:
             httpGet:
               path: /
-            failureThreshold: 3
-            periodSeconds: 30
+              port: 8000
+            failureThreshold: 10 
+            periodSeconds: 60
             successThreshold: 1
             timeoutSeconds: 10
           resources: 
