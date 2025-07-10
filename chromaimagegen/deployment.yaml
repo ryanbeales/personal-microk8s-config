@@ -59,7 +59,7 @@ spec:
           resources:
             limits:
               nvidia.com/gpu: '1'
-            runtimeClassName: nvidia # Use the NVIDIA runtime.
+          runtimeClassName: nvidia # Use the NVIDIA runtime.
           volumeMounts:
             - mountPath: /model_cache
               name: model-cache
