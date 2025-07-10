@@ -27,7 +27,7 @@ spec:
             - name: TZ
               value: America/Vancouver
           # https://github.com/ryanbeales/chromaimagegen/pkgs/container/chromaimagegen
-          image: 'ghcr.io/ryanbeales/chromaimagegen:sha-e08be49'
+          image: 'ghcr.io/ryanbeales/chromaimagegen:sha-833c7a9'
           imagePullPolicy: IfNotPresent
           name: chromaimagegen
           ports:
