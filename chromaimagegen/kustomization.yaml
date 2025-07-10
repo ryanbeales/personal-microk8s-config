@@ -1,0 +1,8 @@
+namespace: esphome
+resources:
+- namespace.yaml
+- ingress.yaml
+- service.yaml
+- deployment.yaml
+- image-dir-pvc.yaml
+- model-cache-pvc.yaml

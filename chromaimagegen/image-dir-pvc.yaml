@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: image-dir-pvc
+  labels:
+    app: chromaimagegen
+  namespace: chromaimagegen
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: auto-local-storage-zfs
+  resources:
+    requests:
+      storage: 256Mi # Ignorded.
