@@ -27,7 +27,7 @@ spec:
             - name: TZ
               value: America/Vancouver
           # https://github.com/ryanbeales/chromaimagegen/pkgs/container/chromaimagegen
-          image: 'ghcr.io/ryanbeales/chromaimagegen:sha-24c4d82'
+          image: 'ghcr.io/ryanbeales/chromaimagegen:sha-aa8c04c'
           imagePullPolicy: IfNotPresent
           name: chromaimagegen
           ports:
@@ -36,7 +36,7 @@ spec:
               protocol: TCP
           readinessProbe:
             httpGet:
-              path: /
+              path: /health
               port: 8000
             failureThreshold: 3
             periodSeconds: 30
@@ -44,7 +44,7 @@ spec:
             timeoutSeconds: 10
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: 8000
             failureThreshold: 3
             periodSeconds: 30
@@ -52,7 +52,7 @@ spec:
             timeoutSeconds: 10
           startupProbe:
             httpGet:
-              path: /
+              path: /health
               port: 8000
             failureThreshold: 10 
             periodSeconds: 60
