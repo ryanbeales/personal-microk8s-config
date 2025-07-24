@@ -165,7 +165,7 @@ envFromSecrets:
 
 image:
   # https://github.com/blakeblackshear/frigate/releases
-  tag: "0.15.1-tensorrt"
+  tag: "0.15.2-tensorrt"
 
 ingress:
   enabled: true

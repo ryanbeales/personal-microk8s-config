@@ -1,6 +1,6 @@
 resources:
 # https://github.com/argoproj/argo-cd/releases
-- https://raw.githubusercontent.com/argoproj/argo-cd/v3.0.6/manifests/install.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v3.0.11/manifests/install.yaml
 # Delete included argocd-cm so we can provide our own.
 patches:
 - target:

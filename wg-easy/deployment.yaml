@@ -30,6 +30,7 @@ spec:
               value: eth0
           # Image
           # https://github.com/wg-easy/wg-easy/pkgs/container/wg-easy
+          # Lots of problems with 15 last time we tried. This isn't a simple upgrade from 14
           image: ghcr.io/wg-easy/wg-easy:14
           imagePullPolicy: IfNotPresent
           # Ports
