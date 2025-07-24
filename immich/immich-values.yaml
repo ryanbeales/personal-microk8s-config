@@ -32,7 +32,18 @@ server:
         - secretName: immich-crobasaursrex-ryanbeales-com-tls
           hosts:
             - immich.crobasaurusrex.ryanbeales.com
-
+  probes:
+    startup:
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /api/server/ping
+          port: http
+        initialDelaySeconds: 300
+        periodSeconds: 30
+        timeoutSeconds: 1
+        failureThreshold: 30
 machine-learning:
   persistence:
     mlcache:
