@@ -27,7 +27,6 @@ spec:
           value: "1000"
         - name: TZ
           value: America/Vancouver
-        - name: 
         # Releases https://github.com/linuxserver/docker-qbittorrent/pkgs/container/qbittorrent
         image: ghcr.io/linuxserver/qbittorrent:5.1.2
         volumeMounts:
