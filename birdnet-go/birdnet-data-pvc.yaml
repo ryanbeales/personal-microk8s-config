@@ -5,8 +5,8 @@ metadata:
   namespace: birdnet
 spec:
   accessModes:
-  - ReadWriteOnce
-  storageClassName: auto-local-storage-zfs
+  - ReadWriteMany
+  storageClassName: local-storage-zfs
   volumeName: birdnet-data-pv
   resources:
     requests:
