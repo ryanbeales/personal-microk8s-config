@@ -34,24 +34,24 @@ spec:
               protocol: TCP
           readinessProbe:
             httpGet:
-              path: /health
-              port: 8000
+              path: /api/v2/health
+              port: 8080
             failureThreshold: 3
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 10
           livenessProbe:
             httpGet:
-              path: /health
-              port: 8000
+              path: /api/v2/health
+              port: 8080
             failureThreshold: 3
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 10
           startupProbe:
             httpGet:
-              path: /health
-              port: 8000
+              path: /api/v2/health
+              port: 8080
             failureThreshold: 10 
             periodSeconds: 60
             successThreshold: 1
