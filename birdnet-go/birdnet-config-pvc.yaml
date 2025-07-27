@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: birdnet-config-pvc
+  namespace: birdnet
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: auto-local-storage-zfs
+  volumeName: birdnet-data-pv
+  resources:
+    requests:
+      storage: 256Mi # Ignored.

@@ -1,0 +1,7 @@
+resources:
+- namespace.yaml
+- ingress.yaml
+- service.yaml
+- deployment.yaml
+- birdnet-config-pvc.yaml
+- birdnet-data-pvc.yaml
