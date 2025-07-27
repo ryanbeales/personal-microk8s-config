@@ -1,3 +1,4 @@
 resources:
+  - ./namespace.yaml # Argocd app namespace, some resources created in this namespace, otherwise it's nfs-server and kube-system for the projects below
   - ./nfs-server
   - ./csi-driver-nfs
