@@ -64,6 +64,8 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
+      nodeSelector:
+        kubernetes.io/hostname: croblodocus
       volumes:
         - name: birdnet-config
           persistentVolumeClaim:
