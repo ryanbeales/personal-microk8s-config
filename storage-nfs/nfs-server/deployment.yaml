@@ -2,7 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: nfs-server
-  namespace: default
+  namespace: nfs-server
 spec:
   replicas: 1
   selector:
