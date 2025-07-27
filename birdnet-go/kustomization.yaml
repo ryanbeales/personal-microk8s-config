@@ -3,5 +3,7 @@ resources:
 - ingress.yaml
 - service.yaml
 - deployment.yaml
+- birdnet-config-pv.yaml
 - birdnet-config-pvc.yaml
+- birdnet-data-pv.yaml
 - birdnet-data-pvc.yaml
