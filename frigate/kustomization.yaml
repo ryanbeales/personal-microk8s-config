@@ -4,7 +4,6 @@ namespace: frigate
 helmCharts:
 - name: frigate
   repo: 'https://blakeblackshear.github.io/blakeshome-charts/'
-  # Later chart versions are failing to generate. Need to check why that is.
   version: 7.8.0 # https://github.com/blakeblackshear/blakeshome-charts/releases
   releaseName: frigate
   namespace: frigate
@@ -12,10 +11,6 @@ helmCharts:
   includeCRDs: true
 resources:
 - ./namespace.yaml
-- ./frigate-config-pv.yaml
-- ./frigate-config-pvc.yaml
-- ./frigate-media-pv.yaml
-- ./frigate-media-pvc.yaml
 - ./frigate-config-nfs-pvc.yaml
 - ./frigate-media-nfs-pvc.yaml
 
