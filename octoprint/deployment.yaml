@@ -31,7 +31,7 @@ spec:
           - |
             if [ ! -f /newdata/.migrated ]; then
               echo "Migrating frigate media..."
-              cp -r /oldata/* /newdata/
+              cp -r /olddata/* /newdata/
               touch /newdata/.migrated
             else
               echo "Data migration already completed."
