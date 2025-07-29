@@ -33,6 +33,5 @@ spec:
           mountPath: /app/backend/data 
       volumes:
       - name: storage
-        hostPath:
-          path: /stash/open-webui
-          type: DirectoryOrCreate # if the directory does not exist then create it
+        persistentVolumeClaim:
+          claimName: open-webui-nfs-pvc
