@@ -214,9 +214,9 @@ extraInitContainers:
         echo "Migrating frigate config..."
         cp -r /oldconfig/* /config/
     volumeMounts:
-      - name: frigate-config-claim
+      - name: oldconfig
         mountPath: /oldconfig
-      - name: frigate-config-nfs-claim
+      - name: config
         mountPath: /config
 
   - name: frigate-media-migration
@@ -232,14 +232,16 @@ extraInitContainers:
         echo "Migrating frigate media..."
         cp -r /oldmedia/* /media/
     volumeMounts:
-      - name: frigate-media-claim
+      - name: oldmedia
         mountPath: /oldmedia/frigate
-      - name: frigate-media-nfs-claim
+      - name: media
         mountPath: /media
 
 
 extraVolumes:
-  - name: frigate-config-claim
-    mountPath: /oldconfig
-  - name: frigate-media-claim
-    mountPath: /oldmedia/frigate
+  - name: oldconfig
+    persistentVolumeClaim:
+      claimName: frigate-config-claim
+  - name: oldmedia
+    persistentVolumeClaim:
+      claimName: frigate-media-claim
