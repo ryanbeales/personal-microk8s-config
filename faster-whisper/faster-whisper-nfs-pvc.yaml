@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: faster-whisper-nfs-pvc
+  labels:
+    app: faster-whisper
+  namespace: faster-whisper
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: crobasaurusrex-nfs
+  resources:
+    requests:
+      storage: 256Mi

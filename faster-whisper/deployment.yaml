@@ -49,6 +49,5 @@ spec:
           mountPath: /config
       volumes:
       - name: storage
-        hostPath:
-          path: /stash/faster-whisper
-          type: DirectoryOrCreate # if the directory does not exist then create it
+        persistentVolumeClaim:
+          claimName: faster-whisper-nfs-pvc
