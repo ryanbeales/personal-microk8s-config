@@ -175,7 +175,7 @@ ingress:
   hosts:
     - host: frigate.crobasaurusrex.ryanbeales.com
       paths:
-        - "/"
+        - path: "/"
   tls:
     - secretName: frigate-crobasaurusrex-ryanbeales-com-tls
       hosts: 
