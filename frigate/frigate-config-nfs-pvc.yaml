@@ -11,4 +11,4 @@ spec:
   storageClassName: crobasaurusrex-nfs
   resources:
     requests:
-      storage: 256Mi
+      storage: 1024Mi
