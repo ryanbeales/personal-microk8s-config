@@ -23,24 +23,6 @@ spec:
       nodeSelector:
         # Biqu B1 is on crobceratops - this isn't appearing in node-feature-discovery to be portable
         kubernetes.io/hostname: crobceratops
-      initContainers:
-      - name: migrate-data
-        image: busybox:1.35.0
-        command: ["/bin/sh", "-c"]
-        args:
-          - |
-            if [ ! -f /newdata/.migrated ]; then
-              echo "Migrating frigate media..."
-              cp -r /olddata/* /newdata/
-              touch /newdata/.migrated
-            else
-              echo "Data migration already completed."
-            fi
-        volumeMounts:
-          - mountPath: /olddata
-            name: octoprint-old
-          - mountPath: /newdata
-            name: octoprint-nfs
       containers:
       - name: octoprint
         # https://hub.docker.com/r/octoprint/octoprint/tags
@@ -67,9 +49,6 @@ spec:
           - mountPath: /octoprint/config/printerProfiles/_default.profile
             name: printerprofiles
       volumes:
-      - name: octoprint-old
-        persistentVolumeClaim:
-          claimName: octoprint-pvc
       - name: octoprint-nfs
         persistentVolumeClaim:
           claimName: octoprint-nfs-pvc
