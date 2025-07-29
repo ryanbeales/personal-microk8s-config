@@ -55,6 +55,5 @@ spec:
                   /bin/ollama pull gemma3:4b-it-qat
       volumes:
       - name: storage
-        hostPath:
-          path: /stash/ollama
-          type: DirectoryOrCreate # if the directory does not exist then create it
+        persistentVolumeClaim:
+          claimName: ollama-nfs-pvc
