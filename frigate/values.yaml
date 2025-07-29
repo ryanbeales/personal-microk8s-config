@@ -236,7 +236,7 @@ extraInitContainers:
         mountPath: /media
 
 
-extraVolumeMounts:
+extraVolumes:
   - name: frigate-config-claim
     mountPath: /oldconfig
   - name: frigate-media-claim
