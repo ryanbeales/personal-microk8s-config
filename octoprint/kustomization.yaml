@@ -1,0 +1,9 @@
+resources:
+- ./namespace.yaml
+- ./octoprint-nfs-pvc.yaml  
+- ./octoprint-pv.yaml
+- ./octoprint-nfs-pvc.yaml
+- ./service.yaml
+- ./ingress.yaml
+- ./deployment.yaml
+- ./biqu-b1-printerprofile.yaml

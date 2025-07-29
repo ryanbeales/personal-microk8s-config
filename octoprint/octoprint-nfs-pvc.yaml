@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: octoprint-nfs-pvc
+  labels:
+    app: octoprint
+  namespace: octoprint
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: crobasaurusrex-nfs
+  resources:
+    requests:
+      storage: 1Gi
