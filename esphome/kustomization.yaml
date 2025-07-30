@@ -1,6 +1,7 @@
 namespace: esphome
 resources:
 - namespace.yaml
+- esphome-nfs-pvc.yaml
 - esphome-pv.yaml
 - esphome-pvc.yaml
 - ingress.yaml

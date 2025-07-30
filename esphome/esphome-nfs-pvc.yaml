@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: esphome-nfs-pvc
+  labels:
+    app: esphome
+  namespace: esphome
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: crobasaurusrex-nfs
+  resources:
+    requests:
+      storage: 5Gi

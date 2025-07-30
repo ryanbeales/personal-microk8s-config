@@ -24,6 +24,24 @@ spec:
         app.kubernetes.io/name: esphome
     spec:
       automountServiceAccountToken: true
+      initContainers:
+        - name: migrate
+          image: busybox:1.35.0
+          imagePullPolicy: IfNotPresent 
+          command:
+            - sh
+            - -c
+            - |
+              if [ ! -f /config/.migrated ]; then
+                echo "Migrating old config to new location";
+                cp -r /oldconfig/* /config/;
+                touch /config/.migrated;
+              fi;
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /oldconfig
+              name: oldconfig
       containers:
         - env:
             - name: TZ
@@ -75,5 +93,8 @@ spec:
       terminationGracePeriodSeconds: 30
       volumes:
         - name: config
+          persistentVolumeClaim:
+            claimName: esphome-nfs-pvc
+        - name: oldconfig
           persistentVolumeClaim:
             claimName: esphome-storage-claim
