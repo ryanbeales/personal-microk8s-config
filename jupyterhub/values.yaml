@@ -75,5 +75,5 @@ singleuser:
           runtimeClassName: nvidia 
   storage:
     dynamic:
-      storageClass: auto-local-storage-zfs # store on k3s node for now.
+      storageClass: crobasaurusrex-nfs
     capacity: 2Gi
