@@ -7,7 +7,7 @@ config: |
     user: admin
     password: admin
   birdseye:
-    enabled: True
+    enabled: true
     mode: continuous
   go2rtc:
     streams:
@@ -55,12 +55,13 @@ config: |
           - 0.998,0.671,0.999,0.998,0,0.998,0.003,0.467,0.174,0.421,0.251,0.341,0.267,0.22,0.61,0.229,0.673,0.384,0.676,0.217,0.71,0.218
       zones:
         yard:
-          coordinates: 0.998,0.671,0.999,0.998,0,0.998,0.003,0.467,0.174,0.421,0.251,0.341,0.267,0.22,0.61,0.229,0.673,0.384,0.676,0.217,0.71,0.218
+          coordinates: 
+            0.998,0.671,0.999,0.998,0,0.998,0.003,0.467,0.174,0.421,0.251,0.341,0.267,0.22,0.61,0.229,0.673,0.384,0.676,0.217,0.71,0.218
       birdseye:
         order: 2
       genai:
-        enabled: True
-        use_snapshot: True
+        enabled: true
+        use_snapshot: true
     front:
       ffmpeg:
         inputs:
@@ -85,7 +86,8 @@ config: |
           - 0.339,0.816,0.408,1,0.614,1,1,1,1,0.577,1,0.356,0.696,0.269,0.53,0.473,0.393,0.392,0.367,0.279,0.246,0.161,0.004,0.403,0,0.487,0.004,0.675,0.137,0.525,0.193,0.616,0.214,0.665,0.278,0.704,0.307,0.725
       zones:
         driveway:
-          coordinates: 0.339,0.816,0.408,1,0.614,1,1,1,1,0.577,1,0.356,0.696,0.269,0.53,0.473,0.393,0.392,0.367,0.279,0.246,0.161,0.004,0.403,0,0.487,0.004,0.675,0.137,0.525,0.193,0.616,0.214,0.665,0.278,0.704,0.307,0.725
+          coordinates: 
+            0.339,0.816,0.408,1,0.614,1,1,1,1,0.577,1,0.356,0.696,0.269,0.53,0.473,0.393,0.392,0.367,0.279,0.246,0.161,0.004,0.403,0,0.487,0.004,0.675,0.137,0.525,0.193,0.616,0.214,0.665,0.278,0.704,0.307,0.725
       # Stop detecting people that arent in the masked area, like the statue which keeps triggering detections...
       review:
         alerts:
@@ -97,8 +99,8 @@ config: |
       birdseye:
         order: 1
       genai:
-        enabled: True
-        use_snapshot: True
+        enabled: true
+        use_snapshot: true
   detectors:
     tensorrt:
       type: tensorrt
@@ -113,15 +115,15 @@ config: |
   record:
     enabled: true
     retain:
-      days: 3
+      days: 7
       mode: all
     alerts:
       retain:
-        days: 14
+        days: 30
         mode: active_objects
     detections:
       retain:
-        days: 14
+        days: 30
         mode: active_objects
   objects:
     track:
@@ -145,8 +147,8 @@ config: |
       - scream
       - yell
   semantic_search:
-    enabled: True
-    reindex: False
+    enabled: true
+    reindex: false
     model_size: large
   genai:
     enabled: true
