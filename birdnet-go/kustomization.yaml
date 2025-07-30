@@ -7,3 +7,5 @@ resources:
 - birdnet-config-pvc.yaml
 - birdnet-data-pv.yaml
 - birdnet-data-pvc.yaml
+- birdnet-data-nfs-pvc.yaml
+- birdnet-config-nfs-pvc.yaml
