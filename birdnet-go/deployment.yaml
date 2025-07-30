@@ -20,29 +20,6 @@ spec:
         app.kubernetes.io/name: birdnet
     spec:
       automountServiceAccountToken: false
-      initContainers:
-        - name: init-birdnet
-          image: busybox:1.35
-          imagePullPolicy: IfNotPresent
-          command:
-            - sh
-            - -c
-            - |
-              if [ ! -f /config/.migrated ]; then
-                echo "Migrating old data to new location";
-                cp -r /oldconfig/* /config/;
-                cp -r /olddata/* /data/;
-                touch /config/.migrated;
-              fi;
-          volumeMounts:
-            - mountPath: /config
-              name: birdnet-nfs-config
-            - mountPath: /data
-              name: birdnet-nfs-data
-            - mountPath: /oldconfig
-              name: birdnet-config 
-            - mountPath: /olddata
-              name: birdnet-data 
       containers:
         - env:
             - name: TZ
@@ -90,12 +67,6 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: croblodocus
       volumes:
-        - name: birdnet-config
-          persistentVolumeClaim:
-            claimName: birdnet-config-pvc
-        - name: birdnet-data
-          persistentVolumeClaim:
-            claimName: birdnet-data-pvc
         - name: birdnet-nfs-config
           persistentVolumeClaim:
             claimName: birdnet-config-nfs-pvc
