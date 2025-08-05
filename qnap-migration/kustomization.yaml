@@ -1,6 +1,6 @@
 resources:
 - namespace.yaml
-- deployment.yaml
+- cronjob.yaml
 - stash-pvc.yaml
 - stash-pv.yaml
 - qnap-pvc.yaml
