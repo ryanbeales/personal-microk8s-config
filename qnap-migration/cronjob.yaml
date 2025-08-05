@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: qnap-migration
+  namespace: qnap-migration
+spec:
+  schedule: "@weekly"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          nodeName: crobasaurusrex
+          containers:
+          - name: qnap-migration
+            image: eeacms/rsync:2.7
+            imagePullPolicy: IfNotPresent
+            command:
+            - rsync
+            - "--archive"
+            - "--verbose"
+            - "--numeric-ids"
+            - "--append-verify"
+            - "--partial"
+            - "--progress"
+            - "/qnap"
+            - "/stash"
+            volumeMounts:
+            - name: stash
+              mountPath: /stash
+            - name: qnap
+              mountPath: /qnap
+          volumes:
+            - name: stash-backups
+              persistentVolumeClaim:
+                claimName: stash-claim
+            - name: qnap-backups
+              persistentVolumeClaim:
+                claimName: qnap-claim
+          restartPolicy: Never

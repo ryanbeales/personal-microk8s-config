@@ -1,0 +1,7 @@
+resources:
+- namespace.yaml
+- deployment.yaml
+- stash-pvc.yaml
+- stash-pv.yaml
+- qnap-pvc.yaml
+- qnap-pv.yaml
