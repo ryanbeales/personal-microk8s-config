@@ -33,10 +33,10 @@ spec:
             - name: qnap
               mountPath: /qnap
           volumes:
-            - name: stash-backups
+            - name: stash
               persistentVolumeClaim:
                 claimName: stash-claim
-            - name: qnap-backups
+            - name: qnap
               persistentVolumeClaim:
                 claimName: qnap-claim
           restartPolicy: Never
