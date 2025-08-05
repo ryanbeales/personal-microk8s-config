@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: stash-claim
-  namespace: kopia
+  namespace: qnap-migration
 spec:
   accessModes:
   - ReadOnlyMany
