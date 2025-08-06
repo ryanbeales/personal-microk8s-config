@@ -69,8 +69,8 @@ spec:
               name: stash
           securityContext:
             privileged: true
-          # Allow samba to bind to the hosts network.
-          hostNetwork: true
+      # Allow samba to bind to the hosts network.
+      hostNetwork: true
       volumes:
         - name: stash
           hostPath:
