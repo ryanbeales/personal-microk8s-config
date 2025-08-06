@@ -43,6 +43,9 @@ spec:
             - name: SAMBA_GLOBAL_CONFIG_netbios_SPACE_name
               value: "crobnas"
 
+            - name: SAMBA_CONF_LOG_LEVEL
+              value: 3
+
             - name: SAMBA_VOLUME_CONFIG_timemachine
               value: | 
                 [TimeMachine]
