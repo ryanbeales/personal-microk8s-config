@@ -7,5 +7,3 @@ resources:
 - kopia-stash-pv.yaml
 - kopia-config-pvc.yaml
 - kopia-config-pv.yaml
-- kopia-qnap-pvc.yaml
-- kopia-qnap-pv.yaml
