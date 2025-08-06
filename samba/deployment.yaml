@@ -1,0 +1,79 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: samba
+  namespace: samba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: samba
+  template:
+    metadata:
+      name: samba
+      labels:
+        app: samba
+    spec:
+      nodeSelector:
+        # Only run on crobasaurusrex, which has the disk storage.
+        kubernetes.io/hostname: crobasaurusrex
+      containers:
+        - name: samba
+          image: ghcr.io/servercontainers/samba:latest
+          env:
+            - name: TZ
+              value: "America/Vancouver"              
+
+            - name: ACCOUNT_ryan
+              value: "samba"
+            - name: UID_ryan
+              value: "1000"
+            - name: GROUPS_ryan
+              value: "dime"
+
+            - name: ACCOUNT_melissa
+              value: "samba"
+            - name: UID_melissa
+              value: "1001"
+            - name: GROUPS_melissa
+              value: "dime"
+            
+            - name: AVAHI_NAME
+              value: "crobnas"
+            - name: SAMBA_GLOBAL_CONFIG_netbios_SPACE_name
+              value: "crobnas"
+
+            - name: SAMBA_VOLUME_CONFIG_timemachine
+              value: | 
+                [TimeMachine]
+                path=/shares/timemachine/%U
+                valid users = melissa
+                guest ok = no
+                read only = no
+                browseable = yes
+                fruit:time machine = yes
+                fruit:time machine max size = 1024G
+
+            - name: SAMBA_VOLUME_CONFIG_stash
+              value: |
+                [stash]
+                path = /shares/stash
+                read only = no
+                browsable = yes
+                guest ok = no
+                valid users = ryan, melissa
+                create mask = 0660
+                directory mask = 0770
+          volumeMounts:
+            - mountPath: /shares/stash
+              name: stash
+          securityContext:
+            privileged: true
+          # Allow samba to bind to the hosts network.
+          hostNetwork: true
+      volumes:
+        - name: stash
+          hostPath:
+            # Copied from QNAP migration.
+            path: /stash/network-storage/qnap
+            type: DirectoryOrCreate
