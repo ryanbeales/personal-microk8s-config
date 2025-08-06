@@ -27,14 +27,14 @@ spec:
               value: "America/Vancouver"              
 
             - name: ACCOUNT_ryan
-              value: "samba"
+              value: "samba123412341234"
             - name: UID_ryan
               value: "1000"
             - name: GROUPS_ryan
               value: "dime"
 
             - name: ACCOUNT_melissa
-              value: "samba"
+              value: "samba123412341234"
             - name: UID_melissa
               value: "1001"
             - name: GROUPS_melissa
