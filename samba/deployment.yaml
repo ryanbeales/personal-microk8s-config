@@ -44,7 +44,7 @@ spec:
               value: "crobnas"
 
             - name: SAMBA_CONF_LOG_LEVEL
-              value: 3
+              value: "3"
 
             - name: SAMBA_VOLUME_CONFIG_timemachine
               value: | 
