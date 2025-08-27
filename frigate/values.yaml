@@ -93,11 +93,10 @@ config: |
   detectors:
     onnx:
       type: onnx
-      device: 0
   # https://docs.frigate.video/configuration/object_detectors/#generate-models
   # Download models from https://github.com/Megvii-BaseDetection/YOLOX/tree/main/demo/ONNXRuntime
   model:
-    model_type: yolonas
+    model_type: yolox
     width: 640
     height: 640
     path: /config/models/yolox_x.onnx
