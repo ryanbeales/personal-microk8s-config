@@ -96,7 +96,7 @@ config: |
     width: 640
     height: 640
     input_tensor: nchw
-    input_dtype: float
+    input_dtype: float_denorm
     path: /config/models/yolox_l.onnx
     labelmap_path: /labelmap/coco-80.txt
   record:
