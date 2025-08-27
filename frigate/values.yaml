@@ -90,6 +90,8 @@ config: |
       genai:
         enabled: true
         use_snapshot: true
+  detect:
+    enabled: true
   detectors:
     onnx:
       type: onnx
@@ -149,8 +151,6 @@ config: |
 
 env:
   TZ: America/Vancouver
-  YOLO_MODELS: yolov7-640
-
 
 envFromSecrets:
   - reocam-password
@@ -158,7 +158,7 @@ envFromSecrets:
 
 image:
   # https://github.com/blakeblackshear/frigate/releases
-  tag: "0.15.2-tensorrt"
+  tag: "0.16.0-tensorrt"
 
 ingress:
   enabled: true
