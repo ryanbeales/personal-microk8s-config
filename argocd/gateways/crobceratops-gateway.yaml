@@ -1,0 +1,27 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: crobceratops-gateway
+  namespace: gateways
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  gatewayClassName: kgateway
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      hostname: "*.crobceratops.ryanbeales.com"
+    - name: https
+      protocol: HTTPS
+      port: 443
+      hostname: "*.crobceratops.ryanbeales.com"
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: crobceratops-ryanbeales-com-tls
+            kind: Secret
+            group: core
