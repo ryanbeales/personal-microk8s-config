@@ -3,13 +3,13 @@ kind: Kustomization
 namespace: kgateway-system
 helmCharts:
 - name: kgateway-crds
-  repo: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway-crds
+  repo: oci://cr.kgateway.dev/kgateway-dev/charts/
   version: v2.0.4
   releaseName: kgateway-crds
   namespace: kgateway-system
   includeCRDs: true
 - name: kgateway
-  repo: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway
+  repo: oci://cr.kgateway.dev/kgateway-dev/charts/
   version: v2.0.4
   releaseName: kgateway
   namespace: kgateway-system
