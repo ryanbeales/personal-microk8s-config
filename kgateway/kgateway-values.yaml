@@ -1,0 +1,3 @@
+# Test running on crobceratops before moving to crobasaurusrex
+nodeSelector:
+    kubernetes.io/hostname: crobceratops
