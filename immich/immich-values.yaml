@@ -1,5 +1,5 @@
 image:
-  tag: v1.136.0 # https://github.com/immich-app/immich/releases
+  tag: v1.139.4 # https://github.com/immich-app/immich/releases
 
 env:
   TZ: America/Vancouver

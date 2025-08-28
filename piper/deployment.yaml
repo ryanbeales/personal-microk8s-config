@@ -25,7 +25,7 @@ spec:
 
       containers:
       - name: piper
-        image: lscr.io/linuxserver/piper:1.5.3-gpu # https://hub.docker.com/r/linuxserver/piper/tags
+        image: lscr.io/linuxserver/piper:1.6.3-gpu # https://hub.docker.com/r/linuxserver/piper/tags
         env:
         - name: PUID
           value: "1000"
