@@ -9,6 +9,8 @@ config: |
   birdseye:
     enabled: true
     mode: continuous
+  ffmpeg:
+    hwaccel_args: preset-nvidia-h264
   go2rtc:
     streams:
       back:
