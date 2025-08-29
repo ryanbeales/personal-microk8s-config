@@ -6,7 +6,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
-  gatewayClassName: kgateway
+  gatewayClassName: envoy-gateway
   listeners:
     - name: https
       protocol: HTTPS
