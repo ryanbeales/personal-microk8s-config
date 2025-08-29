@@ -7,18 +7,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   gatewayClassName: kgateway
-
-  infrastructure:
-    parametersRef:
-      name: crobceratops-gateway-properties
-      kind: GatewayParameters
-      group: gateway.kgateway.dev
-
   listeners:
-    - name: http
-      protocol: HTTP
-      port: 80
-      hostname: "*.crobceratops.ryanbeales.com"
     - name: https
       protocol: HTTPS
       port: 443

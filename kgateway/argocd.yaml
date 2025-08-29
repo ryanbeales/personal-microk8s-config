@@ -1,3 +1,0 @@
-argocd:
-  name: kgateway
-  namespace: kgateway-system
