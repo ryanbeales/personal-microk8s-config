@@ -1,3 +1,4 @@
 resources:
 - namespace.yaml
 - crobceratops-gateway.yaml
+- crobceratops-gateway-properties.yaml

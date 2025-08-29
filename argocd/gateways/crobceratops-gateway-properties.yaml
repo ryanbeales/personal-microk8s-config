@@ -1,0 +1,9 @@
+apiVersion: gateway.kgateway.dev/v1alpha1
+kind: GatewayProperties
+metadata:
+  name: crobceratops-gateway-properties
+  namespace: gateways
+spec:
+  kube:
+    service:
+      externalTrafficPolicy: Local
