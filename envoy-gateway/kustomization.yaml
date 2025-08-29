@@ -11,3 +11,14 @@ helmCharts:
   includeCRDs: true
 resources:
 - ./namespace.yaml
+patches:
+# Server side apply this one since it's very large.
+- target:
+     kind: CustomResourceDefinition
+     name: envoyproxies.gateway.envoyproxy.io
+  patch: |
+    - op: add
+      path: /metadata/annotations
+      value:
+        argocd.argoproj.io/sync-options: ServerSideApply=true
+        
