@@ -17,6 +17,8 @@ controller:
 
   service:
     enableHttp: false
+    # Only allow binding of service to node with a replica running on it
+    externalTrafficPolicy: Local
 
   nodeSelector:
     kubernetes.io/hostname: crobasaurusrex
