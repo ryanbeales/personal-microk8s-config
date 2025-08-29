@@ -1,0 +1,11 @@
+    apiVersion: gateway.envoyproxy.io/v1alpha1
+    kind: EnvoyProxy
+    metadata:
+      name: envoyproxy-config
+      namespace: kgateway-system
+    spec:
+      provider:
+        type: Kubernetes
+        kubernetes:
+          envoyService:
+            externalTrafficPolicy: Local # Set to Local or Cluster

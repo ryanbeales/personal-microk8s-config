@@ -10,7 +10,9 @@ helmCharts:
   valuesFile: values.yaml
   includeCRDs: true
 resources:
-- ./namespace.yaml
+- namespace.yaml
+- envoyproxy-config.yaml
+- gatewayclass.yaml
 patches:
 # Server side apply this one since it's very large.
 - target:
