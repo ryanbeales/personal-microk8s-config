@@ -20,4 +20,3 @@ spec:
         certificateRefs:
           - name: crobceratops-ryanbeales-com-tls
             kind: Secret
-            group: core
