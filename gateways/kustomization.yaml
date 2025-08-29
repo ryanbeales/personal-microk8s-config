@@ -1,0 +1,4 @@
+resources:
+- namespace.yaml
+- crobceratops-gateway.yaml
+- crobceratops-backendtrafficpolicy.yaml

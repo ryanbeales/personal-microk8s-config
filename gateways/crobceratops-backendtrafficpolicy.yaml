@@ -1,0 +1,11 @@
+    apiVersion: gateway.envoyproxy.io/v1alpha1
+    kind: BackendTrafficPolicy
+    metadata:
+      name: crobceratops-backendtrafficpolicy
+      namespace: gateways
+    spec:
+      targetRef:
+        group: gateway.networking.k8s.io
+        kind: Gateway
+        name: crobceratops-gateway
+      externalTrafficPolicy: Local
