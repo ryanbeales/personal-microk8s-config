@@ -11,7 +11,7 @@ spec:
   infrastructure:
     parametersRef:
       name: crobceratops-gateway-properties
-      kind: GatewayProperties
+      kind: GatewayParameters
       group: gateway.kgateway.dev
 
   listeners:

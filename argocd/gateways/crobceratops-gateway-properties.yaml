@@ -1,5 +1,5 @@
 apiVersion: gateway.kgateway.dev/v1alpha1
-kind: GatewayProperties
+kind: GatewayParameters
 metadata:
   name: crobceratops-gateway-properties
   namespace: gateways
