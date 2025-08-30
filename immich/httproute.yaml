@@ -10,8 +10,8 @@ spec:
     - name: crobasaurusrex-gateway
       namespace: gateways
   hostnames:
-    - home.crobceratops.ryanbeales.com
-    - home.crobasaurusrex.ryanbeales.com
+    - immich.crobceratops.ryanbeales.com
+    - immich.crobasaurusrex.ryanbeales.com
   rules:
     - matches:
       - path:
