@@ -10,7 +10,7 @@ spec:
   listeners:
     - name: https
       protocol: HTTPS
-      port: 443
+      port: 444
       hostname: "*.crobceratops.ryanbeales.com"
       allowedRoutes:
         namespaces:
