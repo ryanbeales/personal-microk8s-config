@@ -4,7 +4,7 @@ metadata:
   name: crobceratops-gateway
   namespace: gateways
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: letsencryptcertmanager
 spec:
   gatewayClassName: envoy-gateway
   listeners:
