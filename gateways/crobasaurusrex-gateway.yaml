@@ -10,7 +10,7 @@ spec:
   listeners:
     - name: https
       protocol: HTTPS
-      port: 444
+      port: 443
       hostname: "*.crobasaurusrex.ryanbeales.com"
       allowedRoutes:
         namespaces:
