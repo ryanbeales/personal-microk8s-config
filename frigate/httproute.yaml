@@ -18,5 +18,5 @@ spec:
           type: PathPrefix
           value: /
       backendRefs:
-        - name: frigate-service
+        - name: frigate
           port: 5000
