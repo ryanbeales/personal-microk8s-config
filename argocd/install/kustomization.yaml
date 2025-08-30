@@ -12,6 +12,16 @@ patches:
     kind: ConfigMap
     metadata:
       name: argocd-cm
+- target:
+    kind: ConfigMap
+    name: argocd-cmd-params-cm
+  patch: | 
+    $patch: delete
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: argocd-cmd-params-cm
+
 # Delete ingress so we can provide our own
 - target:
     kind: Ingress
