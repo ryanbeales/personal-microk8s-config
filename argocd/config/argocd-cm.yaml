@@ -10,3 +10,5 @@ metadata:
 data:
   kustomize.buildOptions: --enable-alpha-plugins --enable-helm --load-restrictor LoadRestrictionsNone
   exec.enabled: "true"
+  # TLS is terminated at the gateway
+  server.insecure: "true"
