@@ -5,3 +5,4 @@ resources:
 - deployment.yaml
 - image-dir-pvc.yaml
 - model-cache-pvc.yaml
+- httproute.yaml

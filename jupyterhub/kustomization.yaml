@@ -11,3 +11,4 @@ helmCharts:
   includeCRDs: true
 resources:
 - namespace.yaml
+- httproute.yaml

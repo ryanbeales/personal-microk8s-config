@@ -4,3 +4,4 @@ resources:
 - service.yaml
 - ingress.yaml
 - ollama-nfs-pvc.yaml
+- httproute.yaml

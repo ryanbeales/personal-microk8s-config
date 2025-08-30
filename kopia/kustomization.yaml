@@ -7,3 +7,4 @@ resources:
 - kopia-stash-pv.yaml
 - kopia-config-pvc.yaml
 - kopia-config-pv.yaml
+- httproute.yaml

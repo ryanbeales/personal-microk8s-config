@@ -5,3 +5,4 @@ resources:
 - deployment.yaml
 - birdnet-data-nfs-pvc.yaml
 - birdnet-config-nfs-pvc.yaml
+- httproute.yaml

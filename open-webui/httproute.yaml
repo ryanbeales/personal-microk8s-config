@@ -1,8 +1,8 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: esphome-route
-  namespace: esphome
+  name: open-webui-route
+  namespace: open-webui   
 spec:
   parentRefs:
     - name: crobceratops-gateway
@@ -10,13 +10,13 @@ spec:
     - name: crobasaurusrex-gateway
       namespace: gateways
   hostnames:
-    - esphome.crobceratops.ryanbeales.com
-    - esphome.crobasaurusrex.ryanbeales.com
+    - open-webui.crobceratops.ryanbeales.com
+    - open-webui.crobasaurusrex.ryanbeales.com
   rules:
     - matches:
       - path:
           type: PathPrefix
           value: /
       backendRefs:
-        - name: exphome-esphome
-          port: 6052
+        - name: open-webui
+          port: 8080
