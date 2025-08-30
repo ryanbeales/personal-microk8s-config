@@ -7,3 +7,4 @@ resources:
 - config/argocd-cm.yaml
 - config/argocd-ingress.yaml
 - applicationset/application-set.yaml
+- httproute.yaml

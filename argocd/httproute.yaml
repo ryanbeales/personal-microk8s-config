@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: argocd-route
+  namespace: argocd
+spec:
+  parentRefs:
+    - name: crobceratops-gateway
+      namespace: gateways
+    - name: crobasaurusrex-gateway
+      namespace: gateways
+  hostnames:
+    - argocd.crobceratops.ryanbeales.com
+    - argocd.crobasaurusrex.ryanbeales.com
+  rules:
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /
+      backendRefs:
+        - name: argocd-server
+          port: 80
