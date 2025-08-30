@@ -3,5 +3,6 @@ resources:
 - namespace.yaml
 - esphome-nfs-pvc.yaml
 - ingress.yaml
+- httproute.yaml
 - service.yaml
 - deployment.yaml

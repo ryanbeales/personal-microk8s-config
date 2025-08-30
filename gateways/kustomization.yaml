@@ -1,3 +1,4 @@
 resources:
 - namespace.yaml
+- crobasaurusrex-gateway.yaml
 - crobceratops-gateway.yaml

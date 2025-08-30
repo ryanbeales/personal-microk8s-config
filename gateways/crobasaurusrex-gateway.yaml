@@ -1,7 +1,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: crobceratops-gateway
+  name: crobasaurusrex-gateway
   namespace: gateways
   annotations:
     cert-manager.io/cluster-issuer: letsencryptcertmanager
@@ -10,13 +10,13 @@ spec:
   listeners:
     - name: https
       protocol: HTTPS
-      port: 445
-      hostname: "*.crobceratops.ryanbeales.com"
+      port: 444
+      hostname: "*.crobasaurusrex.ryanbeales.com"
       allowedRoutes:
         namespaces:
           from: All
       tls:
         mode: Terminate
         certificateRefs:
-          - name: crobceratops-ryanbeales-com-tls
+          - name: crobasaurusrex-ryanbeales-com-tls
             kind: Secret
