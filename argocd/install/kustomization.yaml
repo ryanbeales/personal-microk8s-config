@@ -12,16 +12,16 @@ patches:
     kind: ConfigMap
     metadata:
       name: argocd-cm
-# # Delete ingress so we can provide our own
-# - target:
-#     kind: Ingress
-#     name: argocd-server
-#   patch: | 
-#     $patch: delete
-#     apiVersion: networking.k8s.io/v1
-#     kind: Ingress
-#     metadata:
-#       name: argocd-server
+# Delete ingress so we can provide our own
+- target:
+    kind: Ingress
+    name: argocd-server
+  patch: | 
+    $patch: delete
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: argocd-server
 # Enable rbac role for web terminal
 - target:
     group: rbac.authorization.k8s.io
