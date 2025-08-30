@@ -8,4 +8,4 @@ spec:
     group: gateway.envoyproxy.io
     kind: EnvoyProxy
     name: envoyproxy-config
-    namespace: kgateway-system
+    namespace: envoy-gateway-system

@@ -2,7 +2,7 @@
     kind: EnvoyProxy
     metadata:
       name: envoyproxy-config
-      namespace: kgateway-system
+      namespace: envoy-gateway-system
     spec:
       provider:
         type: Kubernetes
