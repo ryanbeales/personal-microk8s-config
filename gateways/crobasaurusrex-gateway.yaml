@@ -7,10 +7,11 @@ metadata:
     cert-manager.io/cluster-issuer: letsencryptcertmanager
 spec:
   gatewayClassName: envoy-gateway
-  parametersRef:
-    group: gateway.envoyproxy.io
-    kind: EnvoyProxy
-    name: envoy-proxy-config-crobasaurusrex
+  infrastructure:
+    parametersRef:
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: envoy-proxy-config-crobasaurusrex
   listeners:
     - name: https
       protocol: HTTPS
