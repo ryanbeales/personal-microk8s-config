@@ -7,6 +7,10 @@ metadata:
     cert-manager.io/cluster-issuer: letsencryptcertmanager
 spec:
   gatewayClassName: envoy-gateway
+  parametersRef:
+    group: gateway.envoyproxy.io
+    kind: EnvoyProxy
+    name: envoy-proxy-config-crobceratops
   listeners:
     - name: https
       protocol: HTTPS
