@@ -39,8 +39,6 @@ config: |
           record: preset-record-generic-audio-aac
       snapshots:
         enabled: true
-        required_zones:
-          - yard
       zones:
         yard:
           coordinates: 
@@ -75,13 +73,6 @@ config: |
         driveway:
           coordinates: 
             0,1,0.408,0.997,0.614,0.997,1,0.997,1,0.574,1,0.353,0.976,0.111,0.7,0.106,0.692,0.253,0.597,0.355,0.505,0.259,0.506,0.261,0.443,0.191,0.367,0.019,0.163,0.129,0,0.274,0,0.484,0,0.643,0,0.68,0,0.695,0,0.716,0,0.765,0,0.821
-      review:
-        alerts:
-          required_zones:
-            - driveway
-        detections:
-          required_zones:
-            - driveway
       birdseye:
         order: 1
       genai:
@@ -120,6 +111,14 @@ config: |
       retain:
         days: 30
         mode: active_objects
+  review:
+    alerts:
+      enabled: True
+      labels:
+        - person
+        - bear
+    detections:
+      enabled: True
   objects:
     track:
       - person
