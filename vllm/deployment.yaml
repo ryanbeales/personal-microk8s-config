@@ -28,7 +28,7 @@ spec:
       - name: vllm
         image: vllm/vllm-openai:v0.10.1.1 # https://hub.docker.com/r/vllm/vllm-openai/tags
         command: ["/bin/sh", "-c"]
-        args:: [
+        args: [
           "vllm serve google/gemma-3-4b-it --trust-remote-code --enable-chunked-prefill --max-num-batched-tokens 1024"
         ]
         env:
