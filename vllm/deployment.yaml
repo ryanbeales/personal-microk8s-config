@@ -53,17 +53,22 @@ spec:
           mountPath: /root/.cache/huggingface
         - name: shm
           mountPath: /dev/shm
+        # Allow startup to take 5 minutes
+        startupProbe:
+          httpGet:
+            path : /health
+            port: 8000
+          failureThreshold: 30
+          periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /health
             port: 8000
-          initialDelaySeconds: 120
           periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /health
             port: 8000
-          initialDelaySeconds: 120
           periodSeconds: 5
       volumes:
       - name: cache-volume
