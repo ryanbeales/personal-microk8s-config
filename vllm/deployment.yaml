@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+  namespace: vllm
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: vllm
+  # Only run one at once, mostly because it's memory hungry. We can take an outage at home.
+  replicas: 1
+  revisionHistoryLimit: 3
+  # During deployments, don't start another before the first is terminated.
+  strategy:
+    type: Recreate 
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: vllm
+    spec:
+      # Switch to the nvidia runtime class to get access to the GPU
+      runtimeClassName: nvidia
+      # Since we have both a 1060 and a 3060 in the cluster, ensure we run on the 
+      # faster one by selecting the node with it in. I can't do this via auto generated
+      # labels it seems - I could add the label, but this is less work)
+      nodeName: crobceratops
+      containers:
+      - name: vllm
+        image: vllm/vllm-openaia:0.10.1.1 # https://hub.docker.com/r/vllm/vllm-openai/tags
+        command: ["/bin/sh", "-c"]
+        args:: [
+          "vllm serve mistralai/Mistral-7B-Instruct-v0.3 --trust-remote-code --enable-chunked-prefill --max-num-batched-tokens 1024"
+        ]
+        env:
+        - name: HUGGING_FACE_HUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hf-token-secret
+              key: token
+        # Ensure we run on a node with GPU available (but we know that crobceratops does)
+        resources:
+          limits:
+            nvidia.com/gpu: '1'
+          requests:
+            nvidia.com/gpu: '1'
+        ports:
+        - name: ollama
+          containerPort: 8000
+        volumeMounts:
+        - name: cache-volume
+          # Models are downloaded and stored in the root home directory
+          mountPath: /root/.cache/huggingface
+        - name: shm
+          mountPath: /dev/shm
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 120
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 120
+          periodSeconds: 5
+      volumes:
+      - name: cache-volume
+        persistentVolumeClaim:
+          claimName: vllm-nfs-pvc
+      - name: shm
+        emptyDir:
+          medium: Memory
+          sizeLimit: 2Gi
