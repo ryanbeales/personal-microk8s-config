@@ -11,4 +11,4 @@ spec:
       targetPort: wg
   selector:
     app.kubernetes.io/name: wg-easy
-  type: ClusterIP
+  type: LoadBalancer

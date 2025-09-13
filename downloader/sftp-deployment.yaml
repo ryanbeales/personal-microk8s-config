@@ -50,4 +50,4 @@ spec:
     - protocol: TCP
       port: 22222
       targetPort: 22
-  type: ClusterIP
+  type: LoadBalancer
