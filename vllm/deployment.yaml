@@ -29,8 +29,9 @@ spec:
         image: vllm/vllm-openai:v0.10.1.1 # https://hub.docker.com/r/vllm/vllm-openai/tags
         command: ["/bin/sh", "-c"]
         args: [
-          # We have a 12GB GPU but allow vllm to consume 60% of the total memory (frigate and some others use this GPU too)
-          "vllm serve google/gemma-3-4b-it --trust-remote-code --enable-chunked-prefill --max-num-batched-tokens 1024 --gpu-memory-utilization 0.8"
+          # We have a 12GB GPU but allow vllm to consume 80% of the total memory (frigate and some others use this GPU too)
+          # Add 10GB of CPU offload memory to help with starting.
+          "vllm serve google/gemma-3-4b-it --trust-remote-code --enable-chunked-prefill --max-num-batched-tokens 1024 --gpu-memory-utilization 0.8 --cpu-offload-gb 10"
         ]
         env:
         - name: HUGGING_FACE_HUB_TOKEN
