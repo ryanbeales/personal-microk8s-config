@@ -29,7 +29,7 @@ spec:
         image: vllm/vllm-openaia:0.10.1.1 # https://hub.docker.com/r/vllm/vllm-openai/tags
         command: ["/bin/sh", "-c"]
         args:: [
-          "vllm serve mistralai/Mistral-7B-Instruct-v0.3 --trust-remote-code --enable-chunked-prefill --max-num-batched-tokens 1024"
+          "vllm serve google/gemma-3-4b-it --trust-remote-code --enable-chunked-prefill --max-num-batched-tokens 1024"
         ]
         env:
         - name: HUGGING_FACE_HUB_TOKEN
