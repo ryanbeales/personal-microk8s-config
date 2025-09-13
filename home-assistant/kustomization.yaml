@@ -3,7 +3,6 @@ resources:
 - namespace.yaml
 - home-assistant-pv.yaml
 - home-assistant-pvc.yaml
-- ingress.yaml
 - service.yaml
 - deployment.yaml
 - httproute.yaml

@@ -1,6 +1,5 @@
 resources:
 - namespace.yaml
-- ingress.yaml
 - service.yaml
 - deployment.yaml
 - birdnet-data-nfs-pvc.yaml

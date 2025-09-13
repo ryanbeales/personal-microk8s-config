@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: zwavejs-route
+  namespace: zwavejs
+spec:
+  parentRefs:
+    - name: crobceratops-gateway
+      namespace: gateways
+    - name: crobasaurusrex-gateway
+      namespace: gateways
+  hostnames:
+    - zwavejs.crobceratops.ryanbeales.com
+    - zwavejs.crobasaurusrex.ryanbeales.com
+  rules:
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /
+      backendRefs:
+        - name: zwavejs-zwavejs2mqtt
+          port: 8091

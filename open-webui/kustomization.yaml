@@ -2,6 +2,5 @@ resources:
 - namespace.yaml
 - deployment.yaml
 - service.yaml
-- ingress.yaml
 - open-webui-nfs-pvc.yaml
 - httproute.yaml

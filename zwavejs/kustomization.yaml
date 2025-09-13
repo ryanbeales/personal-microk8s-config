@@ -4,6 +4,6 @@ resources:
 - zwavejs-pv.yaml
 - zwavejs-pvc.yaml
 - service.yaml
-- ingress.yaml
 - deployment.yaml
 - ./zwavejs-auto-restarter
+- httproute.yaml

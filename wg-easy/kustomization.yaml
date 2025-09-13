@@ -5,4 +5,4 @@ resources:
 - deployment.yaml
 - service-wg.yaml
 - service-http.yaml
-- ingress.yaml
+- httproute.yaml

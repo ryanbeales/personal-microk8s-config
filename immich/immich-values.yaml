@@ -20,18 +20,7 @@ immich:
 server:
   ingress:
     main:
-      enabled: true
-      annotations:
-        cert-manager.io/cluster-issuer: letsencryptcertmanager
-        nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      hosts:
-        - host: immich.crobasaurusrex.ryanbeales.com
-          paths:
-            - path: "/"
-      tls:
-        - secretName: immich-crobasaursrex-ryanbeales-com-tls
-          hosts:
-            - immich.crobasaurusrex.ryanbeales.com
+      enabled: false
   probes:
     startup:
       enabled: true

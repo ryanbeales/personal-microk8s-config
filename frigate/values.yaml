@@ -167,19 +167,7 @@ image:
   tag: "0.16.0-tensorrt"
 
 ingress:
-  enabled: true
-  ingressClassName: nginx
-  annotations:
-    cert-manager.io/cluster-issuer: letsencryptcertmanager
-  hosts:
-    - host: frigate.crobasaurusrex.ryanbeales.com
-      paths:
-        - path: "/"
-          portName: http
-  tls:
-    - secretName: frigate-crobasaurusrex-ryanbeales-com-tls
-      hosts: 
-        - frigate.crobasaurusrex.ryanbeales.com
+  enabled: false
 
 gpu:
   nvidia:

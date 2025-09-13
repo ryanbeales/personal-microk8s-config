@@ -3,16 +3,7 @@
 # https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/main/jupyterhub/values.yaml
 
 ingress:
-  enabled: true
-  annotations:
-    cert-manager.io/cluster-issuer: letsencryptcertmanager
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-  hosts:
-    - jupyter.crobasaurusrex.ryanbeales.com
-  tls:
-    - secretName: jupyter-crobasaurusrex-ryanbeales-com-tls
-      hosts:
-        - jupyter.crobasaurusrex.ryanbeales.com
+  enabled: false
 
 # Disable prepuller (I have exactly 3 nodes, and I can wait and not waste disk space)
 prePuller:
