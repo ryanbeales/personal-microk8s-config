@@ -33,8 +33,21 @@ spec:
           subPath: tv
         ports:
         - containerPort: 22
-          hostPort: 22222
       volumes:
       - name: no-nonsense-webdav-storage
         persistentVolumeClaim:
           claimName: downloader-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sftp-service
+  namespace: downloader
+spec:
+  selector:
+    app: sftp
+  ports:
+    - protocol: TCP
+      port: 22222
+      targetPort: 22
+  type: ClusterIP
