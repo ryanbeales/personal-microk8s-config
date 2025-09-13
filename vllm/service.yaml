@@ -3,16 +3,16 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/name: vllm
-  name: vllm
+  name: vllm-gemma3
   namespace: vllm
 spec:
   internalTrafficPolicy: Cluster
   ports:
-    - name: vllm
+    - name: vllm-gemma3
       port: 8000
       protocol: TCP
-      targetPort: vllm
+      targetPort: vllm-gemma3
   selector:
-    app.kubernetes.io/name: vllm
+    app.kubernetes.io/name: vllm-gemma3
   sessionAffinity: None
   type: ClusterIP

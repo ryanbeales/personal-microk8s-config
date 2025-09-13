@@ -18,5 +18,5 @@ spec:
           type: PathPrefix
           value: /
       backendRefs:
-        - name: vllm
+        - name: vllm-gemma3
           port: 8000
