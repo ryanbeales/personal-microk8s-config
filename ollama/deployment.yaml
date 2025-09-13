@@ -20,8 +20,8 @@ spec:
     spec:
       # Switch to the nvidia runtime class to get access to the GPU
       runtimeClassName: nvidia
-      # Run on 1050 Ti Max Q node
-      nodeName: croblodocus
+      # Run on 3060 GPU node
+      nodeName: crobceratops
       containers:
       - name: ollama
         image: ollama/ollama:0.11.7 # https://hub.docker.com/r/ollama/ollama/tags
@@ -49,7 +49,6 @@ spec:
                     sleep 5
                   done
                   /bin/ollama pull llama3.1
-                  /bin/ollama pull llama3.2-vision
                   /bin/ollama pull gemma3:4b-it-qat
       volumes:
       - name: storage
