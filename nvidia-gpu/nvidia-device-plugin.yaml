@@ -26,7 +26,7 @@ spec:
       runtimeClassName: nvidia
       containers:
       # https://github.com/NVIDIA/k8s-device-plugin/releases
-      - image: nvcr.io/nvidia/k8s-device-plugin:v0.17.2
+      - image: nvcr.io/nvidia/k8s-device-plugin:v0.17.4
         name: nvidia-device-plugin-ctr
         env:
           - name: FAIL_ON_INIT_ERROR
