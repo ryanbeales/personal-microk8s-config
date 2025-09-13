@@ -133,6 +133,11 @@ config: |
       - elephant
       - shoe
       - skis
+      - car
+      - motorcycle
+      - bus
+      - zebra
+      - giraffe
   audio:
     enabled: true
     listen:
