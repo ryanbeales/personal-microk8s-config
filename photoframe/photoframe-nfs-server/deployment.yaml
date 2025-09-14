@@ -1,0 +1,44 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: photoframe-nfs-server
+  namespace: photoframe-nfs-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: photoframe-nfs-server
+  template:
+    metadata:
+      name: photoframe-nfs-server
+      labels:
+        app: photoframe-nfs-server
+    spec:
+      nodeSelector:
+        # Only run on crobasaurusrex, which has the disk storage.
+        kubernetes.io/hostname: crobasaurusrex
+      containers:
+        - name: photoframe-nfs-server
+          image: itsthenetwork/nfs-server-alpine:latest
+          env:
+            - name: SHARED_DIRECTORY
+              value: "/photos"
+          volumeMounts:
+            - mountPath: /photos
+              name: nfs-vol
+          securityContext:
+            privileged: true
+          ports:
+            - name: tcp-2049
+              containerPort: 2049
+              protocol: TCP
+            - name: udp-111
+              containerPort: 111
+              protocol: UDP
+      volumes:
+        - name: nfs-vol
+          hostPath:
+            # Store NFS data in the /stash directory on the host, a mirrored ZFS volume
+            # This will be backed up by Kopia.
+            path: /stash/network-storage/qnap/Photos/PiFrame/Photos
+            type: DirectoryOrCreate

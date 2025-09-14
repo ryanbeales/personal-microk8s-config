@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: photoframe-nfs-server
+  namespace: photoframe-nfs-server
+  labels:
+    app: photoframe-nfs-server
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    app: photoframe-nfs-server
+  ports:
+    - name: tcp-2049
+      port: 2049
+      protocol: TCP
+    - name: udp-111
+      port: 111
+      protocol: UDP
