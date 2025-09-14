@@ -25,7 +25,7 @@ spec:
             - name: TZ
               value: America/Vancouver
           # https://github.com/tphakala/birdnet-go/releases
-          image: ghcr.io/tphakala/birdnet-go:nightly-20250826
+          image: ghcr.io/tphakala/birdnet-go:nightly-20250904
           imagePullPolicy: IfNotPresent
           name: birdnet
           ports:
