@@ -16,7 +16,19 @@ Restart=no
 ExecStartPre=/usr/bin/sleep 30
 ExecStart=/usr/bin/feh -Z -F -Y --on-last-slide resume --randomize --recursive --reload 86400 --slideshow-delay 20.0 -- /PiFrame/Photos
 ```
+With this mount:
+```
+[Unit]
+Description=Photos mount
 
+[Mount]
+What=crobasaurusrex.ryanbeales.com:/
+Where=/photos
+Type=nfs4
+
+[Install]
+WantedBy=multi-user.target
+```
 
 There are also these additional systemd units to help with the slideshow:
 Turn screen on
