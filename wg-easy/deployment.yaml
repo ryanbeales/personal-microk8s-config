@@ -21,17 +21,29 @@ spec:
         - name: wg-easy
           # Environment
           env:
-            - name: WG_HOST
-              value: wg.ryanbeales.com
-            - name: WG_PORT
+            - name: TZ
+              value: America/Vancouver
+            # TLS termination is handled by envoy-gateway
+            - name: INSECURE
+              value: "true"
+            # These are used once on startup to generate the config
+            - name: INIT_ENABLED
+              value: "true"
+            - name: INIT_USERNAME
+              value: admin
+            - name: INIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wg-easy-secrets
+                  key: wg-easy-admin-password
+            - name: INIT_PORT
               value: "31313"
-            # Every pod gets a device named eth0
-            - name: WG_DEVICE
-              value: eth0
+            - name: INIT_HOST
+              value: wg.ryanbeales.com
           # Image
           # https://github.com/wg-easy/wg-easy/pkgs/container/wg-easy
           # Lots of problems with 15 last time we tried. This isn't a simple upgrade from 14
-          image: ghcr.io/wg-easy/wg-easy:14
+          image: ghcr.io/wg-easy/wg-easy:15
           imagePullPolicy: IfNotPresent
           # Ports
           ports:
