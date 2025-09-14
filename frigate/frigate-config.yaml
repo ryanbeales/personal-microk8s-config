@@ -1,0 +1,154 @@
+version: 0.16-0
+mqtt:
+  host: mosquitto.mosquitto.svc.cluster.local
+  port: 1883
+  user: admin
+  password: admin
+birdseye:
+  enabled: true
+  mode: continuous
+ffmpeg:
+  hwaccel_args: preset-nvidia-h264
+go2rtc:
+  streams:
+    back:
+      - rtsp://admin:{FRIGATE_REOCAM_PASSWORD}@10.0.0.153:554/h264Preview_01_main
+    back_sub:
+      - rtsp://admin:{FRIGATE_REOCAM_PASSWORD}@10.0.0.153:554/h264Preview_01_sub
+    front:
+      - rtsp://admin:{FRIGATE_ARMCREST_FRONT_PASSWORD}@10.0.0.67/cam/realmonitor?channel=1&subtype=0
+    front_sub:
+      - rtsp://admin:{FRIGATE_ARMCREST_FRONT_PASSWORD}@10.0.0.67/cam/realmonitor?channel=1&subtype=1
+cameras:
+  back:
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/back?video=copy&audio=aac
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://127.0.0.1:8554/back_sub?video=copy&audio=aac
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - audio
+      hwaccel_args: preset-nvidia-h264
+      output_args:
+        record: preset-record-generic-audio-aac
+    snapshots:
+      enabled: true
+    zones:
+      yard:
+        coordinates:
+          0.998,0.671,0.999,0.998,0,0.998,0.003,0.467,0.174,0.421,0.251,0.341,0.267,0.22,0.61,0.229,0.673,0.384,0.676,0.217,0.71,0.218
+    birdseye:
+      order: 2
+    genai:
+      enabled: true
+      use_snapshot: true
+    motion:
+      mask: 0.322,0.031,0.322,0.073,0.655,0.07,0.653,0.025
+  front:
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/front?video=copy&audio=aac
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://127.0.0.1:8554/front_sub?video=copy&audio=aac
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - audio
+      hwaccel_args: preset-nvidia-h264
+      output_args:
+        record: preset-record-generic-audio-aac
+    snapshots:
+      enabled: true
+      required_zones:
+        - driveway
+    zones:
+      driveway:
+        coordinates:
+          0,1,0.408,0.997,0.614,0.997,1,0.997,1,0.574,1,0.353,0.976,0.111,0.7,0.106,0.692,0.253,0.597,0.355,0.505,0.259,0.506,0.261,0.443,0.191,0.367,0.019,0.163,0.129,0,0.274,0,0.484,0,0.643,0,0.68,0,0.695,0,0.716,0,0.765,0,0.821
+    birdseye:
+      order: 1
+    genai:
+      enabled: true
+      use_snapshot: true
+    motion:
+      mask:
+        - 0.661,0.031,0.66,0.089,0.974,0.083,0.975,0.03
+        - 0.023,0.506,0.09,0.55,0.141,0.52,0.188,0.494,0.323,0.728,0.322,0.998,0,0.997,0.006,0.432
+        - 0.641,0.011,0.588,0.149,0.552,0.161,0.456,0.151,0.416,0.118,0.372,0.018,0.369,0.003,0.638,0.001
+detect:
+  enabled: true
+detectors:
+  onnx:
+    type: onnx
+# https://docs.frigate.video/configuration/object_detectors/#generate-models
+# Download models from https://github.com/Megvii-BaseDetection/YOLOX/tree/main/demo/ONNXRuntime
+model:
+  model_type: yolox
+  width: 640
+  height: 640
+  input_tensor: nchw
+  input_dtype: float_denorm
+  path: /config/models/yolox_l.onnx
+  labelmap_path: /labelmap/coco-80.txt
+record:
+  enabled: true
+  retain:
+    days: 7
+    mode: all
+  alerts:
+    retain:
+      days: 30
+      mode: active_objects
+  detections:
+    retain:
+      days: 30
+      mode: active_objects
+review:
+  alerts:
+    enabled: True
+    labels:
+      - person
+      - bear
+  detections:
+    enabled: True
+objects:
+  track:
+    - person
+    - cat
+    - dog
+    - bird
+    - bear
+    - bicycle
+    - horse
+    - sheep
+    - cow
+    - elephant
+    - shoe
+    - skis
+    - car
+    - motorcycle
+    - bus
+    - zebra
+    - giraffe
+audio:
+  enabled: true
+  listen:
+    - bark
+    - fire_alarm
+    - scream
+    - yell
+semantic_search:
+  enabled: true
+  reindex: false
+  model_size: large
+genai:
+  enabled: true
+  provider: ollama
+  base_url: http://ollama.ollama.svc.cluster.local:11434
+  model: gemma3:4b-it-qat

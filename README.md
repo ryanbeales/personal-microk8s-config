@@ -83,7 +83,6 @@ Set-NetFirewallHyperVVMSetting -Name '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -D
 New-NetFirewallHyperVRule -Name VXLAN -DisplayName "VXLAN Fix" -Direction Inbound -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol UDP -LocalPorts 8472
 ```
 
-
 ## Renovate WIP
 Currently testing renovate to keep things updated. 
 
@@ -96,3 +95,10 @@ docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-microk8s-config -e 
 ```
 
 Eventually I can move this to run within the cluster or in github actions.
+
+## Testing configs
+My notes here, download kustomize and helm, then run kustomize like this:
+```
+C:\Users\Ryan\Downloads\kustomize\kustomize build . --enable-helm --helm-command C:\Users\Ryan\Downloads\kustomize\helm.ex
+```
+(or install via chocolaty or similar. this works though)

@@ -1,0 +1,8 @@
+helmCharts:
+- name: frigate
+  repo: 'https://blakeblackshear.github.io/blakeshome-charts/'
+  version: 7.8.0 # https://github.com/blakeblackshear/blakeshome-charts/releases
+  releaseName: frigate
+  namespace: frigate
+  includeCRDs: true
+  valuesFile: values.yaml

@@ -1,0 +1,38 @@
+# see https://artifacthub.io/packages/helm/blakeblackshear/frigate for hints...
+env:
+  TZ: America/Vancouver
+
+envFromSecrets:
+  - reocam-password
+  - armcrest-front-password
+
+image:
+  # https://github.com/blakeblackshear/frigate/releases
+  tag: "0.16.1-tensorrt"
+
+ingress:
+  enabled: false
+
+gpu:
+  nvidia:
+    enabled: true
+    runtimeClassName: nvidia
+
+persistence:
+  config:
+    enabled: true
+    existingClaim: frigate-config-nfs-claim
+  media:
+    enabled: true
+    existingClaim: frigate-media-nfs-claim
+
+probes:
+  startup:
+    enabled: true
+
+proxy:
+  default_role: admin
+
+# Select node with 3060 GPU in it
+nodeSelector:
+  kubernetes.io/hostname: crobceratops
