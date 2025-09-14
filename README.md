@@ -82,3 +82,17 @@ You may need to do this, I lost bout 8 hours of my life just trying to get this 
 Set-NetFirewallHyperVVMSetting -Name '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -DefaultInboundAction Allow
 New-NetFirewallHyperVRule -Name VXLAN -DisplayName "VXLAN Fix" -Direction Inbound -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol UDP -LocalPorts 8472
 ```
+
+
+## Renovate WIP
+Currently testing renovate to keep things updated. 
+
+Prerequisite step:
+Create an access token here https://github.com/settings/personal-access-tokens With these permissions https://docs.renovatebot.com/modules/platform/github/
+
+Run with:
+```
+docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-microk8s-config -e RENOVATE_PLATFORM=github -e RENOVATE_REPORT_TYPE=logging -e RENOVATE_TOKEN={TOKEN GOES HERE} renovate/renovate --dry-run=full
+```
+
+Eventually I can move this to run within the cluster or in github actions.
