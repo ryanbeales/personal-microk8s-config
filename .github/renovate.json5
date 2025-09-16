@@ -1,7 +1,5 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  // Enable only the custom regex manager defined below
-  //enabledManagers: ["custom.regex"],
   
   // Define a custom manager that will look for a comment above the version dependnency line and contain details on how to update it
   customManagers: [
