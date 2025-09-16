@@ -25,7 +25,8 @@ spec:
 
       containers:
       - name: faster-whisper
-        image: lscr.io/linuxserver/faster-whisper:2.5.0-gpu # https://hub.docker.com/r/linuxserver/faster-whisper/tags
+        # renovate: datasource=github-tags depname=linuxserver/docker-faster-whisper versioning=semver
+        image: lscr.io/linuxserver/faster-whisper:2.5.0-gpu
         env:
         - name: PUID
           value: "1000"

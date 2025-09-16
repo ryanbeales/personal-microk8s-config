@@ -28,6 +28,7 @@ spec:
         - name: TZ
           value: America/Vancouver
         # Releases https://github.com/linuxserver/docker-qbittorrent/pkgs/container/qbittorrent
+        # renovate: datasource=github-tags depname=linuxserver/docker-qbittorrent versioning=semver
         image: ghcr.io/linuxserver/qbittorrent:5.1.2
         volumeMounts:
         - name: qtbittorrent-storage

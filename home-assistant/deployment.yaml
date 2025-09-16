@@ -29,7 +29,8 @@ spec:
             - name: TZ
               value: America/Vancouver
           # https://hub.docker.com/r/homeassistant/home-assistant/tags
-          image: 'homeassistant/home-assistant:2025.9.3'
+          # renovate: datasource=github-tags depname=home-assistant/core versioning=semver
+          image: homeassistant/home-assistant:2025.9.3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

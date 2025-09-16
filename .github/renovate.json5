@@ -1,0 +1,32 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  // Enable only the custom regex manager defined below
+  //enabledManagers: ["custom.regex"],
+  
+  // Define a custom manager that will look for a comment above the version dependnency line and contain details on how to update it
+  customManagers: [
+    {
+      // Documentation here https://docs.renovatebot.com/modules/manager/regex/
+      customType: "regex",
+      description: "Annotated dependencies in deployment, Kustomization and values files",
+      fileMatch: [
+        "(^|/)deployment\\.ya?ml$",
+        "(^|/)daemonset\\.ya?ml$",
+        "(^|/)Kustomization$",
+        "(^|/)(\\S+?-)?values(-\\S+?)?\\.ya?ml$"
+      ],
+      matchStrings: [
+        // Use in image tag lines
+        "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\\S+?:\\s\\S+?:(?<currentValue>\\S+)",
+        "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\\S+?:\\s(?<currentValue>\\S+)",
+      ],
+      versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+    }
+  ],
+
+  ignoreDeps: [
+    // Ignore all other dependencies not matched by the custom regex manager
+    "crossplane",
+    "postgresql"
+  ]
+}

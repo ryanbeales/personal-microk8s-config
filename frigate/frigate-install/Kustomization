@@ -1,7 +1,8 @@
 helmCharts:
 - name: frigate
   repo: 'https://blakeblackshear.github.io/blakeshome-charts/'
-  version: 7.8.0 # https://github.com/blakeblackshear/blakeshome-charts/releases
+  # https://github.com/blakeblackshear/blakeshome-charts/releases
+  version: 7.8.0
   releaseName: frigate
   namespace: frigate
   includeCRDs: true

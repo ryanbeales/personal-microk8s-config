@@ -26,6 +26,7 @@ spec:
       runtimeClassName: nvidia
       containers:
       # https://github.com/NVIDIA/k8s-device-plugin/releases
+      # renovate: datasource=github-tags depname=NVIDIA/k8s-device-plugin versioning=semver
       - image: nvcr.io/nvidia/k8s-device-plugin:v0.17.4
         name: nvidia-device-plugin-ctr
         env:

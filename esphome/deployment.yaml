@@ -29,6 +29,7 @@ spec:
             - name: TZ
               value: America/Vancouver
           # https://github.com/esphome/esphome/releases/
+          # renovate: datasource=github-tags depname=esphome/esphome versioning=semver
           image: 'esphome/esphome:2025.8.4'
           imagePullPolicy: Always
           livenessProbe:

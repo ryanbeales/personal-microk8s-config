@@ -8,6 +8,7 @@ envFromSecrets:
 
 image:
   # https://github.com/blakeblackshear/frigate/releases
+  # renovate: datasource=github-tags depname=blakeblackshear/frigate versioning=semver
   tag: "0.16.1-tensorrt"
 
 ingress:

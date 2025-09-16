@@ -1,5 +1,6 @@
 image:
-  tag: v1.142.0 # https://github.com/immich-app/immich/releases
+  # renovate: datasource=github-tags depname=immich-app/immich versioning=semver
+  tag: v1.142.0
 
 env:
   TZ: America/Vancouver

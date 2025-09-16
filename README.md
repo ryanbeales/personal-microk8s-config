@@ -94,6 +94,11 @@ Run with:
 docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-microk8s-config -e RENOVATE_PLATFORM=github -e RENOVATE_REPORT_TYPE=logging -e RENOVATE_TOKEN={TOKEN GOES HERE} renovate/renovate --dry-run=full
 ```
 
+To test config locally on this repo:
+```
+docker run --rm -v $(pwd):/usr/src/app:ro RENOVATE_REPORT_TYPE=logging -e RENOVATE_PLATFORM=local -e renovate/renovate --dry-run=full
+```
+
 Eventually I can move this to run within the cluster or in github actions.
 
 ## Testing configs
