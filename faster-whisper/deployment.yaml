@@ -25,7 +25,7 @@ spec:
 
       containers:
       - name: faster-whisper
-        # renovate: datasource=github-tags depname=linuxserver/docker-faster-whisper versioning=semver
+        # Disable -- renovate: datasource=github-tags depname=linuxserver/docker-faster-whisper versioning=semver
         image: lscr.io/linuxserver/faster-whisper:2.5.0-gpu
         env:
         - name: PUID
