@@ -14,9 +14,13 @@
         "(^|/)(\\S+?-)?values(-\\S+?)?\\.ya?ml$"
       ],
       matchStrings: [
-        // Use in image tag lines
-        "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\\S+?:\\s\\S+?:(?<currentValue>\\S+)",
-        "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\\S+?:\\s(?<currentValue>\\S+)",
+        // Use in image tag lines or in values files
+        // Examples:
+        //   renovate: datasource=github-tags depname=blakeblackshear/frigate versioning=docker
+        //   tag: 0.16.1-tensorrt
+        //   renovate: datasource=github-tags depname=esphome/esphome versioning=semver
+        //   image: esphome/esphome:2025.8.4
+        "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\\S+?:\\s(\\S+?:)?(?<currentValue>\\S+)",
       ],
       versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
     }
