@@ -34,8 +34,15 @@ spec:
                   mountPath: /tmp/renovate/
           restartPolicy: Never
           volumes:
-            - name: config-volume
-              configMap:
-                name: renovate-config
             - name: work-volume
-              emptyDir: {}
+              ephemeral:
+                volumeClaimTemplate:
+                  metadata:
+                    labels:
+                      owner: renovate
+                  spec:
+                    accessModes: [ "ReadWriteOnce" ]
+                    storageClassName: crobasaurusrex-nfs
+                    resources:
+                      requests:
+                        storage: 1Gi
