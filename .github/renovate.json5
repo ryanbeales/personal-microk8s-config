@@ -25,8 +25,7 @@
         "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\\S+?:\\s(\\S+?:)?(?<currentValue>\\S+)",
       ],
       versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
-    }
-
+    },
 
     // Direct github references
     {
