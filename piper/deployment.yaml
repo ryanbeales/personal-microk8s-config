@@ -25,6 +25,7 @@ spec:
 
       containers:
       - name: piper
+        # Disable - renovate: datasource=github-tags depname=linuxserver/docker-piper versioning=docker
         image: lscr.io/linuxserver/piper:1.6.3-gpu # https://hub.docker.com/r/linuxserver/piper/tags
         env:
         - name: PUID
