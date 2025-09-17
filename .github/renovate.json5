@@ -10,6 +10,7 @@
       fileMatch: [
         "(^|/)deployment\\.ya?ml$",
         "(^|/)daemonset\\.ya?ml$",
+        "(^|/)cronjob\\.ya?ml$",
         "(^|/)Kustomization$",
         "(^|/)(\\S+?-)?values(-\\S+?)?\\.ya?ml$"
       ],
