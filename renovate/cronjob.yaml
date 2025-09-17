@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: renovate-bot
+  namespace: renovate
+spec:
+  schedule: '@daily'
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: renovate/renovate:41.113.3
+              name: renovate-bot
+              env:
+                - name: RENOVATE_PLATFORM
+                  value: github
+                - name: RENOVATE_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: renovate-token
+                      key: token
+                - name: RENOVATE_BASE_DIR
+                  value: '/tmp/renovate/'
+                - name: RENOVATE_REPOSITORIES
+                  value: ryanbeales/personal-microk8s-config
+                - name: RENOVATE_REPORT_TYPE
+                  value: logging
+                - name: RENOVATE_PR_HOURLY_LIMIT
+                  value: "10"
+              volumeMounts:
+                - name: work-volume
+                  mountPath: /tmp/renovate/
+          restartPolicy: Never
+          volumes:
+            - name: config-volume
+              configMap:
+                name: renovate-config
+            - name: work-volume
+              emptyDir: {}

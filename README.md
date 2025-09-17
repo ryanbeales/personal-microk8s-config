@@ -83,24 +83,6 @@ Set-NetFirewallHyperVVMSetting -Name '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -D
 New-NetFirewallHyperVRule -Name VXLAN -DisplayName "VXLAN Fix" -Direction Inbound -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol UDP -LocalPorts 8472
 ```
 
-## Renovate WIP
-Currently testing renovate to keep things updated. 
-
-Prerequisite step:
-Create an access token here https://github.com/settings/personal-access-tokens With these permissions https://docs.renovatebot.com/modules/platform/github/
-
-Run with:
-```
-docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-microk8s-config -e RENOVATE_PLATFORM=github -e RENOVATE_REPORT_TYPE=logging -e RENOVATE_TOKEN={TOKEN GOES HERE} renovate/renovate --dry-run=full
-```
-
-To test config locally on this repo:
-```
-docker run --rm -v $(pwd):/usr/src/app:ro RENOVATE_REPORT_TYPE=logging -e RENOVATE_PLATFORM=local -e renovate/renovate --dry-run=full
-```
-
-Eventually I can move this to run within the cluster or in github actions.
-
 ## Testing configs
 My notes here, download kustomize and helm, then run kustomize like this:
 ```
