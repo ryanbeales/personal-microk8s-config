@@ -3,6 +3,7 @@
   
   // Define a custom manager that will look for a comment above the version dependnency line and contain details on how to update it
   customManagers: [
+    // Define a custom regex manager to find annotated dependencies in deployment, Kustomization and values files
     {
       // Documentation here https://docs.renovatebot.com/modules/manager/regex/
       customType: "regex",
@@ -24,6 +25,20 @@
         "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\\S+?:\\s(\\S+?:)?(?<currentValue>\\S+)",
       ],
       versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+    }
+
+
+    // Direct github references
+    {
+      customType: "regex",
+      description: "Direct GitHub references",
+      fileMatch: [
+        "(^|/)kustomization.yaml"
+      ],
+      matchStrings: [
+        // Example: https://raw.githubusercontent.com/argoproj/argo-cd/v3.1.5/manifests/install.yaml
+        "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+-\\shttps:\\/\\/raw\\\\.githubusercontent\\\\.com\\/\\S+?\\/\\S+?\\/(?<currentValue>\\S+?)\\/\\S+$"
+      ],
     }
   ],
 
