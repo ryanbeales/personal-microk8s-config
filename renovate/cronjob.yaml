@@ -35,14 +35,4 @@ spec:
           restartPolicy: Never
           volumes:
             - name: work-volume
-              ephemeral:
-                volumeClaimTemplate:
-                  metadata:
-                    labels:
-                      owner: renovate
-                  spec:
-                    accessModes: [ "ReadWriteOnce" ]
-                    storageClassName: crobasaurusrex-nfs
-                    resources:
-                      requests:
-                        storage: 1Gi
+              emptyDir: {}
