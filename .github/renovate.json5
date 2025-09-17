@@ -26,5 +26,6 @@
     // Ignore all other dependencies not matched by the custom regex manager
     "crossplane",
     "postgresql"
+    "gitea"
   ]
 }
