@@ -1,5 +1,3 @@
 resources:
 - ./providers/crossplane-contrib/crossplane-contrib-provider-aws.yaml
 - ./providers/crossplane-contrib/crossplane-contrib-provider-aws-config.yaml
-- ./providers/upbound/aws-route53.yaml
-- ./providers/upbound/upbound-aws-provider-config.yaml
