@@ -1,0 +1,2 @@
+Previously used apps that I may refer to in future.
+Most others have just been deleted and can be found in the commit history. However these can be seen as examples on how to do certain things, I just don't use them anymore.
