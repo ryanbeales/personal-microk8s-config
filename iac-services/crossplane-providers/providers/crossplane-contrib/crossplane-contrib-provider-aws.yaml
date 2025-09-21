@@ -2,5 +2,7 @@ apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-aws
-spec: # https://github.com/crossplane-contrib/provider-aws/releases
+spec: 
+  # https://github.com/crossplane-contrib/provider-aws/releases
+  # renovate: datasource=github-releases depname=crossplane-contrib/provider-aws versioning=semver
   package: xpkg.upbound.io/crossplane-contrib/provider-aws:v0.54.2
