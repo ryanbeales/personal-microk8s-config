@@ -1,2 +1,4 @@
 resources:
-- https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref=v0.17.4
+# By default renovate picked this one up - however they use tags in this repo without releasing docker images, so we override the config use to use github releases.
+# renovate: datasource=github-releases depname=kubernetes-sigs/node-feature-discovery versioning=semver
+- https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref=v0.17.3
