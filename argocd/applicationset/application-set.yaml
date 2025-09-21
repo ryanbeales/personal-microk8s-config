@@ -10,7 +10,7 @@ spec:
       repoURL: git@github.com:ryanbeales/personal-microk8s-config.git 
       revision: main
       files:
-      - path: "*/argocd.yaml"
+      - path: "**/argocd.yaml"
   template:
     metadata:
       name: '{{.argocd.name}}'
