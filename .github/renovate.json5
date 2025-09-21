@@ -59,5 +59,15 @@
     // Ignore all other dependencies not matched by the custom regex manager
     "postgresql",
     "gitea"
+  ],
+
+  packageRules: [
+    // Disable kustomization manager for node-feature-discovery, use custom regex manager instead as the repo uses tags but not every tag has a release.
+    {
+      "matchManagers": ["kustomization"],
+      "matchPackageNames": ["kubernetes-sigs/node-feature-discovery"],
+      "description": "Disable kustomiation manager for node-feature-discovery, use custom regex manager instead",
+      "enabled": false
+    }
   ]
 }
