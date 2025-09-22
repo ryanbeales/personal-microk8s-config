@@ -57,8 +57,7 @@
 
   ignoreDeps: [
     // Ignore all other dependencies not matched by the custom regex manager
-    "postgresql",
-    "gitea"
+    "postgresql"
   ],
 
   packageRules: [
