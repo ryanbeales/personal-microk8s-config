@@ -6,7 +6,7 @@ enabled: true
 # Provisioning secret -- see readme to create this
 existingSecret: gitea-actions-secret
 existingSecretKey: GITEA_ACTIONS_TOKEN
-giteaRootURL: http://gitea.gitea.svc.cluster.local:3000/
+giteaRootURL: http://gitea-http.gitea.svc.cluster.local:3000/
 
 statefulset:
   actRunner:
