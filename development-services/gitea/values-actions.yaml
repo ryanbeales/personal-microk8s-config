@@ -1,0 +1,40 @@
+namespace: gitea
+
+# Provision gitea-actions statefulset, we should end up with 2 runners.
+enabled: true
+
+# Provisioning secret -- see readme to create this
+existingSecret: gitea-actions-secret
+existingSecretKey: GITEA_ACTIONS_TOKEN
+giteaRootURL: http://gitea.gitea.svc.cluster.local:3000/
+
+statefulset:
+  actRunner:
+    # https://hub.docker.com/r/gitea/act_runner/tags
+    # renovate: datasource=gitea-releases depname=gitea/act_runner versioning=docker
+    tag: 0.2.13-dind-rootless
+    # By default, the helm chart does not populate the labels section of the runner config.
+    # This means all jobs start in a bare image without the necessary tools.
+    config: |
+      log:
+        level: debug
+      cache:
+        enabled: false
+      runner:
+        labels:
+          - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
+          - "ubuntu-22.04:docker://gitea/runner-images:ubuntu-22.04"
+          - "ubuntu-20.04:docker://gitea/runner-images:ubuntu-20.04"
+      container:
+        # Force the runner to mount the dind containers docker socket to allow for docker in docker.
+        # Set the DOCKER_HOST to use the mounted socket.
+        options: "-v /var/run/user/1000/docker.sock:/dockersock/docker.sock:ro -e DOCKER_HOST=unix:///dockersock/docker.sock"
+        # The above option will fail if the docker socket directory is not listed in valid volumes. Time lost here: 4 hours.
+        # It's wildcarded for now but should be locked down to the one path above. but It's working right now and I don't want
+        # to mess it up.
+        valid_volumes:
+          - '**'
+  dind:
+    # https://hub.docker.com/_/docker/tags?name=dind-rootless
+    # renovate: datasource=github-releases depname=moby/moby versioning=docker
+    tag: 28.4.0-dind-rootless 
