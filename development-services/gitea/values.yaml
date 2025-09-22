@@ -23,6 +23,27 @@ redis:
   enabled: true
 postgresql:
   enabled: true
+  # Auto upgrade from Postgres 16 to 17 using the pgautoupgrade image & bitnami helm chart
+  primary:
+    initContainers: 
+      - name: upgrade-postgres
+        image: pgautoupgrade/pgautoupgrade:17-bookworm
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+          - mountPath: /bitnami/postgresql
+            name: data
+        env:
+          - name: PGAUTO_ONESHOT
+            value: "yes"
+          - name: POSTGRES_DB
+            value: gitea
+          - name: PGDATA
+            value: /bitnami/postgresql/data
+          # The value for POSTGRES_PASSWORD does not really matter, as it's never used in one-shot mode.        
+          - name: POSTGRES_PASSWORD
+            value: password
+
 postgresql-ha:
   enabled: false
 
@@ -35,3 +56,6 @@ gitea:
     indexer:
       ISSUE_INDEXER_TYPE: bleve
       REPO_INDEXER_ENABLED: true
+
+
+
