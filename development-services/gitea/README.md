@@ -12,3 +12,13 @@ Then on the host create the filesystem directory as the persistant volume will n
 ```
 mkdir -p /stash/gitea
 ```
+
+After Gitea has started and you have logged in, you can now connect the runner to the instance.
+1. Go to https://gitea.crobasaurusrex.ryanbeales.com/user/settings/actions/runners and get a new registration token
+1. Update the gitea-actions-secret with the registration token (you can patch, you can edit, but this is far easier):
+```
+sudo k3s kubectl delete secret gitea-actions-secret -n gitea
+sudo k3s kubectl create secret generic -n gitea gitea-actions-secret --from-literal=GITEA_ACTIONS_TOKEN={REGISTRATION_TOKEN}
+```
+
+Restart the runner and it should be picked up by gitea.
