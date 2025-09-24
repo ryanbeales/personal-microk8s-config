@@ -39,6 +39,7 @@
         // Example: https://raw.githubusercontent.com/argoproj/argo-cd/v3.1.5/manifests/install.yaml
         "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+-\\shttps:\\/\\/raw\\.githubusercontent\\.com\\/\\S+?\\/\\S+?\\/(?<currentValue>\\S+?)\\/\\S+$"
       ],
+      versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
     },
 
     // Github ?ref= links in kustomization.yaml
@@ -52,8 +53,8 @@
         // Example: https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref=v0.17.4
         "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+-\\shttps:\\/\\/github\\.com\\/[\\S\/]+\\?ref=(?<currentValue>\\S+?)$"
       ],
+      versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
     }
-
   ],
 
   ignoreDeps: [
