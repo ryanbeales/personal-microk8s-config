@@ -1,6 +1,6 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  
+
   // Define a custom manager that will look for a comment above the version dependnency line and contain details on how to update it
   customManagers: [
     // Define a custom regex manager to find annotated dependencies in deployment, Kustomization and values files
@@ -8,12 +8,12 @@
       // Documentation here https://docs.renovatebot.com/modules/manager/regex/
       customType: "regex",
       description: "Annotated dependencies in deployment, Kustomization and values files",
-      fileMatch: [
-        "(^|/)deployment\\.ya?ml$",
-        "(^|/)daemonset\\.ya?ml$",
-        "(^|/)cronjob\\.ya?ml$",
-        "(^|/)Kustomization$",
-        "(^|/)(\\S+?-)?values(-\\S+?)?\\.ya?ml$"
+      managerFilePatterns: [
+        "**/deployment.y?ml",
+        "**/daemonset.y?ml",
+        "**/cronjob.y?ml",
+        "**/*-values.y?ml",
+        "**/values-*.y?ml",
       ],
       matchStrings: [
         // Use in image tag lines or in values files
@@ -27,34 +27,20 @@
       versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
     },
 
-    // Direct github references
+    // Matchers for kustomization files
     {
       customType: "regex",
       description: "Direct GitHub references",
-      fileMatch: [
-        "(^|/)kustomization.yaml",
-        "(^|/)Kustomization$"
+      managerFilePatterns: [
+        "**/kustomization.yaml",
+        "**/Kustomization"
       ],
       matchStrings: [
         // Example: https://raw.githubusercontent.com/argoproj/argo-cd/v3.1.5/manifests/install.yaml
-        "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+-\\shttps:\\/\\/raw\\.githubusercontent\\.com\\/\\S+?\\/\\S+?\\/(?<currentValue>\\S+?)\\/\\S+$"
+        "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+-\\s\\S+?raw\\.githubusercontent\\.com\\/\\S+?\\/\\S+?\\/(?<currentValue>\\S+?)\\/",
       ],
       versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
     },
-
-    // Github ?ref= links in kustomization.yaml
-    {
-      customType: "regex",
-      description: "Github Ref links",
-      fileMatch: [
-        "(^|/)kustomization.yaml"
-      ],
-      matchStrings: [
-        // Example: https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref=v0.17.4
-        "# renovate: datasource=(?<datasource>.*?) depname=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+-\\shttps:\\/\\/github\\.com\\/[\\S\/]+\\?ref=(?<currentValue>\\S+?)$"
-      ],
-      versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
-    }
   ],
 
   ignoreDeps: [
@@ -62,13 +48,16 @@
     "postgresql"
   ],
 
+  ignorePaths: [
+    // Ignore any files in the archived directory
+    "archived/**"
+  ],
+
+  // Use github releases for node-feature-discovery, tags do not often result in images but releases do
   packageRules: [
-    // Disable kustomization manager for node-feature-discovery, use custom regex manager instead as the repo uses tags but not every tag has a release.
     {
-      "matchManagers": ["kustomization"],
-      "matchPackageNames": ["kubernetes-sigs/node-feature-discovery"],
-      "description": "Disable kustomiation manager for node-feature-discovery, use custom regex manager instead",
-      "enabled": false
+      matchPackageNames: ["kubernetes-sigs/node-feature-discovery"],
+      overrideDatasource: "github-releases"
     }
-  ]
+  ],
 }
