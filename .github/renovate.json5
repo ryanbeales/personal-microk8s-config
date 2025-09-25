@@ -14,6 +14,7 @@
         "**/cronjob.y?ml",
         "**/*-values.y?ml",
         "**/values-*.y?ml",
+        "**/values.y?ml",
       ],
       matchStrings: [
         // Use in image tag lines or in values files
