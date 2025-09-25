@@ -25,10 +25,10 @@ docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-microk8s-config -e 
 
 To test extration config locally on this repo:
 ```
-docker run --rm -v $(pwd):/usr/src/app:ro RENOVATE_REPORT_TYPE=logging -e RENOVATE_PLATFORM=local -e LOG_LEVEL=DEBUG renovate/renovate --dry-run=extract
+docker run --rm -v $(pwd):/usr/src/app:ro -e RENOVATE_REPORT_TYPE=logging -e RENOVATE_PLATFORM=local -e LOG_LEVEL=DEBUG renovate/renovate --dry-run=extract
 ```
 
 To validate the config:
 ```
-docker run --rm -v $(pwd):/usr/src/app:ro --entrypoint /usr/local/sbin/renovate-config-validator renovate/renovate
+docker run --rm -v $(pwd):/usr/src/app:ro --entrypoint /usr/local/sbin/renovate-config-validator renovate/renovate --strict
 ```

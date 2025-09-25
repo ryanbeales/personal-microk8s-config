@@ -1,6 +1,10 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
 
+  extends: [
+    "config:recommended"
+  ],
+
   // Define a custom manager that will look for a comment above the version dependnency line and contain details on how to update it
   customManagers: [
     // Define a custom regex manager to find annotated dependencies in deployment, Kustomization and values files
@@ -52,13 +56,5 @@
   ignorePaths: [
     // Ignore any files in the archived directory
     "archived/**"
-  ],
-
-  // Use github releases for node-feature-discovery, tags do not often result in images but releases do
-  packageRules: [
-    {
-      matchPackageNames: ["kubernetes-sigs/node-feature-discovery"],
-      overrideDatasource: "github-releases"
-    }
   ],
 }
