@@ -23,7 +23,12 @@ Or to trigger PR creation and run locally:
 docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-microk8s-config -e RENOVATE_PLATFORM=github -e RENOVATE_REPORT_TYPE=logging -e RENOVATE_TOKEN={TOKEN GOES HERE} -e RENOVATE_PR_HOURLY_LIMIT=10 renovate/renovate --dry-run=full
 ```
 
-To test config locally on this repo:
+To test extration config locally on this repo:
 ```
-docker run --rm -v $(pwd):/usr/src/app:ro RENOVATE_REPORT_TYPE=logging -e RENOVATE_PLATFORM=local -e LOG_LEVEL=DEBUG -e renovate/renovate --dry-run=full
+docker run --rm -v $(pwd):/usr/src/app:ro RENOVATE_REPORT_TYPE=logging -e RENOVATE_PLATFORM=local -e LOG_LEVEL=DEBUG renovate/renovate --dry-run=extract
+```
+
+To validate the config:
+```
+docker run --rm -v $(pwd):/usr/src/app:ro --entrypoint /usr/local/sbin/renovate-config-validator renovate/renovate
 ```
