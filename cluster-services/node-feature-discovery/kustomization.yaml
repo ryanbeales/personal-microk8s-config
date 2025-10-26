@@ -1,2 +1,2 @@
 resources:
-- https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref=v0.18.1
+- https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref=v0.18.2
