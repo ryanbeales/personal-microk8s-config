@@ -1,17 +1,20 @@
-image:
-  # renovate: datasource=github-tags depname=immich-app/immich versioning=semver
-  tag: v2.1.0
-
-env:
-  TZ: America/Vancouver
-  DB_HOSTNAME: postgresql.immich.svc.cluster.local
-  DB_DATABASE_NAME: immich
-  DB_USERNAME: immich
-  DB_PASSWORD:
-    valueFrom:
-      secretKeyRef:
-        name: immich-postgres-secrets
-        key: password
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          # renovate: datasource=github-tags depname=immich-app/immich versioning=semver
+          tag: v2.1.0
+        env:
+          TZ: America/Vancouver
+          DB_HOSTNAME: postgresql.immich.svc.cluster.local
+          DB_DATABASE_NAME: immich
+          DB_USERNAME: immich
+          DB_PASSWORD:
+            valueFrom:
+              secretKeyRef:
+                name: immich-postgres-secrets
+                key: password
 
 immich:
   persistence:
@@ -22,22 +25,26 @@ server:
   ingress:
     main:
       enabled: false
-  probes:
-    startup:
-      enabled: true
-      custom: true
-      spec:
-        httpGet:
-          path: /api/server/ping
-          port: http
-        periodSeconds: 30
-        timeoutSeconds: 1
-        failureThreshold: 120 # 20 minutes to allow for database migraiton on startup
+  controllers:
+    main:
+      containers:
+        main:
+          probes:
+            startup:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /api/server/ping
+                  port: http
+                periodSeconds: 30
+                timeoutSeconds: 1
+                failureThreshold: 120 # 20 minutes to allow for database migraiton on startup
+
 machine-learning:
   persistence:
-    mlcache:
+    cache:
       existingClaim: immich-mlcache-pvc
 
-
-redis:
+valkey:
   enabled: true
