@@ -33,6 +33,8 @@ spec:
           subPath: tv
         - name: stashplex
           mountPath: /home/user/plex
+        - name: stashpiframe
+          mountPath: /home/user/piframe
         ports:
         - containerPort: 22
       volumes:
@@ -44,6 +46,12 @@ spec:
           # Copied from QNAP migration.
           path: /stash/network-storage/qnap/Plex
           type: DirectoryOrCreate
+      - name: stashpiframe
+        hostPath:
+          # Tempoary mount here
+          path: /stash/network-storage/qnap/Photos/PiFrame/Photos
+          type: DirectoryOrCreate
+
 ---
 apiVersion: v1
 kind: Service
