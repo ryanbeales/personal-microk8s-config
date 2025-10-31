@@ -31,12 +31,19 @@ spec:
         - name: no-nonsense-webdav-storage
           mountPath: /home/user/tv
           subPath: tv
+        - name: stashplex
+          mountPath: /home/user/plex
         ports:
         - containerPort: 22
       volumes:
       - name: no-nonsense-webdav-storage
         persistentVolumeClaim:
           claimName: downloader-pvc
+      - name: stashplex
+        hostPath:
+          # Copied from QNAP migration.
+          path: /stash/network-storage/qnap/Plex
+          type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: Service
