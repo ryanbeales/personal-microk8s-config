@@ -21,8 +21,6 @@ spec:
         - name: samba
           image: ghcr.io/servercontainers/samba:latest
           env:
-            - name: AVAHI_DISABLE
-              value: "yes"
             - name: TZ
               value: "America/Vancouver"              
 
@@ -40,9 +38,6 @@ spec:
             - name: GROUPS_melissa
               value: "dime"
             
-            - name: SAMBA_GLOBAL_CONFIG_netbios_SPACE_name
-              value: "crobnas"
-
             - name: SAMBA_CONF_LOG_LEVEL
               value: "3"
 
