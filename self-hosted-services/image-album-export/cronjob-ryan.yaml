@@ -22,8 +22,9 @@ spec:
             image: ghcr.io/ryanbeales/immich-album-export:latest
             imagePullPolicy: Always
             env:
+            # K8s local URL for immich service
             - name: IMMICH_SERVER
-              value: "http://immich.immich.svc.cluster.local:"
+              value: "http://immich-server.immich.svc.cluster.local:2283/"
             - name: IMMICH_ALBUM_NAME
               value: "PhotoFrame"
             - name: OUTPUT_DIR
