@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: immich-melissa-album-export
+  namespace: immich-album-export
+spec:
+  schedule: "@daily"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 86400
+      template:
+        spec:
+          restartPolicy: Never
+          nodeSelector:
+            # Only run on crobasaurusrex, which has the disk storage.
+            kubernetes.io/hostname: crobasaurusrex
+          containers:
+          - name: immich-album-export
+            image: ghcr.io/ryanbeales/immich-album-export:latest
+            imagePullPolicy: Always
+            env:
+            # K8s local URL for immich service
+            - name: IMMICH_SERVER
+              value: "http://immich-server.immich.svc.cluster.local:2283/"
+            - name: IMMICH_ALBUM_NAME
+              value: "Photo Frame"
+            - name: OUTPUT_DIR
+              value: "/app/output/immich-melissa-album-export"
+            envFrom:
+            - secretRef:
+                name: immich-melissa-apikey
+
+            volumeMounts:
+            - name: output-directory
+              mountPath: "/app/output/"
+          volumes:
+            - name: output-directory
+              hostPath:
+                path: /stash/network-storage/qnap/Photos/PiFrame/Photos
+                type: DirectoryOrCreate
