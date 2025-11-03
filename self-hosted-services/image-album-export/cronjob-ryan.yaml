@@ -13,6 +13,10 @@ spec:
       ttlSecondsAfterFinished: 86400
       template:
         spec:
+          restartPolicy: Never
+          nodeSelector:
+            # Only run on crobasaurusrex, which has the disk storage.
+            kubernetes.io/hostname: crobasaurusrex
           containers:
           - name: immich-album-export
             image: ghcr.io/ryanbeales/immich-album-export:latest
