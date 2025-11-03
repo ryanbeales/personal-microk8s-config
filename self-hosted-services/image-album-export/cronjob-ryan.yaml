@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: immich-ryan-album-export
+  namespace: immich-album-export
+spec:
+  schedule: "@daily"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 86400
+      template:
+        spec:
+          containers:
+          - name: immich-album-export
+            image: ghcr.io/ryanbeales/immich-album-export:latest
+            imagePullPolicy: Always
+            env:
+            - name: IMMICH_SERVER
+              value: "http://immich.immich.svc.cluster.local:"
+            - name: IMMICH_ALBUM_NAME
+              value: "PhotoFrame"
+            - name: OUTPUT_DIR
+              value: "/app/output/immich-ryan-album-export"
+            envFrom:
+            - secretRef:
+                name: immich-ryan-apikey
+
+            volumeMounts:
+            - name: output-directory
+              mountPath: "/app/output/"
+          volumes:
+      volumes:
+        - name: output-directory
+          hostPath:
+            path: /stash/network-storage/qnap/Photos/PiFrame/Photos
+            type: DirectoryOrCreate
