@@ -36,8 +36,7 @@ spec:
             - name: output-directory
               mountPath: "/app/output/"
           volumes:
-      volumes:
-        - name: output-directory
-          hostPath:
-            path: /stash/network-storage/qnap/Photos/PiFrame/Photos
-            type: DirectoryOrCreate
+            - name: output-directory
+              hostPath:
+                path: /stash/network-storage/qnap/Photos/PiFrame/Photos
+                type: DirectoryOrCreate
