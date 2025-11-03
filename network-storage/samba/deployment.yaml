@@ -21,8 +21,6 @@ spec:
         - name: samba
           image: ghcr.io/servercontainers/samba:latest
           env:
-            - name: AVAHI_DISABLE
-              value: "yes"
             - name: TZ
               value: "America/Vancouver"              
 
@@ -30,19 +28,15 @@ spec:
               value: "samba123412341234"
             - name: UID_ryan
               value: "1000"
-            - name: GROUPS_ryan
-              value: "dime"
 
             - name: ACCOUNT_melissa
               value: "samba123412341234"
             - name: UID_melissa
               value: "1001"
+            # Add gid=1000 to Melissa account
             - name: GROUPS_melissa
-              value: "dime"
+              value: "ryan"
             
-            - name: SAMBA_GLOBAL_CONFIG_netbios_SPACE_name
-              value: "crobnas"
-
             - name: SAMBA_CONF_LOG_LEVEL
               value: "3"
 
