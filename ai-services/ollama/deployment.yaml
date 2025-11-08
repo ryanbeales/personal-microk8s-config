@@ -26,6 +26,10 @@ spec:
       - name: ollama
         # renovate: datasource=github-tags depname=ollama/ollama versioning=semver
         image: ollama/ollama:0.12.9
+        env:
+        # Allow browser extensions and all network access (we limit it via where it's served from)
+        - name: OLLAMA_ORIGINS
+          value: "chrome-extension://*,moz-extension://*,safari-web-extension://*,http://*,https://*"
         # Ensure we run on a node with GPU available
         resources:
           limits:
