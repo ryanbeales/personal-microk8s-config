@@ -54,7 +54,7 @@ spec:
                     sleep 5
                   done
                   /bin/ollama pull qwen3:14b
-                  /bin/ollama pull qewn3:8b
+                  /bin/ollama pull qwen3:8b
       volumes:
       - name: storage
         persistentVolumeClaim:
