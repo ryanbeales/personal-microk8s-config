@@ -1,1 +1,0 @@
-Separate instance pinned to comptuer with a faster GPU available.
