@@ -5,9 +5,13 @@ metadata:
   namespace: downloader
 spec:
   parentRefs:
-    - name: crobceratops-gateway
+    - group: gateway.networking.k8s.io	
+      kind: Gateway
+      name: crobceratops-gateway
       namespace: gateways
-    - name: crobasaurusrex-gateway
+    - group: gateway.networking.k8s.io	
+      kind: Gateway
+      name: crobasaurusrex-gateway
       namespace: gateways
   hostnames:
     - qtbittorrent.crobceratops.ryanbeales.com
@@ -18,5 +22,7 @@ spec:
           type: PathPrefix
           value: /
       backendRefs:
-        - name: qtbittorrent-service
+        - group: ''	
+          kind: Service
+          name: qtbittorrent-service
           port: 80
