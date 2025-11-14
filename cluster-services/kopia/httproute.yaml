@@ -26,3 +26,4 @@ spec:
           kind: Service
           name: kopia
           port: 51515
+          weight: 1

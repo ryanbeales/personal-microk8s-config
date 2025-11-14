@@ -26,3 +26,4 @@ spec:
           kind: Service
           name: gitea-http
           port: 3000
+          weight: 1

@@ -26,3 +26,4 @@ spec:
           kind: Service
           name: vllm-gemma3
           port: 8000
+          weight: 1

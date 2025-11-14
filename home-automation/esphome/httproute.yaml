@@ -26,3 +26,4 @@ spec:
           kind: Service
           name: exphome-esphome
           port: 6052
+          weight: 1

@@ -26,3 +26,4 @@ spec:
           kind: Service
           name: wg-easy-http
           port: 51821
+          weight: 1

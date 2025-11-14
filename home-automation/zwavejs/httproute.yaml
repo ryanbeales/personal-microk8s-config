@@ -26,3 +26,4 @@ spec:
           kind: Service
           name: zwavejs-zwavejs2mqtt
           port: 8091
+          weight: 1
