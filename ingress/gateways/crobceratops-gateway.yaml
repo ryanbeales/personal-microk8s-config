@@ -23,5 +23,6 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: crobceratops-ryanbeales-com-tls
+          - group: ''
+            name: crobceratops-ryanbeales-com-tls
             kind: Secret
