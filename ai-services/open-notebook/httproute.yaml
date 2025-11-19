@@ -24,6 +24,6 @@ spec:
       backendRefs:
         - group: ''	
           kind: Service
-          name: nextjs
+          name: open-nodebook
           port: 8502
           weight: 1
