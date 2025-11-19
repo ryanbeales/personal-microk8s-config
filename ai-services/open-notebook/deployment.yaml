@@ -27,7 +27,7 @@ spec:
         - name: nextjs
           containerPort: 8502
         volumeMounts:
-        - name: noteobok-storage
+        - name: notebook-storage
           mountPath: /app/data
         - name: surrealdb-storage
           mountPath: /mydata
