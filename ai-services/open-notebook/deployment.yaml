@@ -23,6 +23,17 @@ spec:
         env:
         - name: OLLAMA_API_BASE
           value: http://ollama.ollama.svc.cluster.local:11434
+        # SurrealDB configuration
+        - name: SURREAL_URL
+          value: ws://localhost:8000/rpc
+        - name: SURREAL_USER
+          value: root
+        - name: SURREAL_PASSWORD
+          value: root
+        - name: SURREAL_NAMESPACE
+          value: open_notebook
+        - name: SURREAL_DATABASE
+          value: production
         ports:
         - name: nextjs
           containerPort: 8502
