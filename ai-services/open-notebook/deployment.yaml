@@ -27,12 +27,15 @@ spec:
         - name: nextjs
           containerPort: 8502
         volumeMounts:
-        - name: noteobok_storage
+        - name: noteobok-storage
           mountPath: /app/data
+        - name: surrealdb-storage
+          mountPath: /mydata
+
       volumes:
-      - name: notebook_storage
+      - name: notebook-storage
         persistentVolumeClaim:
           claimName: open-notebook-notebook-nfs-pvc
-      - name: surrealdb_storage
+      - name: surrealdb-storage
         persistentVolumeClaim:
           claimName: open-notebook-surrealdb-nfs-pvc
