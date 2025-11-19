@@ -24,6 +24,6 @@ spec:
       backendRefs:
         - group: ''	
           kind: Service
-          name: open-nodebook
+          name: open-notebook
           port: 8502
           weight: 1
