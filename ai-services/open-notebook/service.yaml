@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: open-notebook
+  name: open-notebook
+  namespace: open-notebook
+spec:
+  internalTrafficPolicy: Cluster
+  ports:
+    - name: nextjs
+      port: 8502
+      protocol: TCP
+      targetPort: nextjs
+  selector:
+    app.kubernetes.io/name: open-notebook
+  sessionAffinity: None
+  type: ClusterIP
