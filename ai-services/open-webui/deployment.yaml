@@ -34,7 +34,7 @@ spec:
         - name: WEB_SEARCH_ENGINE
           value: searxng
         - name: SEARXNG_QUERY_URL
-          value: http://searxng.searxng.svc.cluster.local/search?q=<query>
+          value: http://searxng.searxng.svc.cluster.local:8080/search?q=<query>
         ports:
         - name: open-webui
           containerPort: 8080
