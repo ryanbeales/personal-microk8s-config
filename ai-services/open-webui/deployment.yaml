@@ -25,6 +25,16 @@ spec:
         env:
         - name: OLLAMA_BASE_URL
           value: http://ollama.ollama.svc.cluster.local:11434
+        - name: ENABLE_WEB_SEARCH
+          value: "true"
+        - name: WEBUI_URL
+          value: https://open-webui.crobasaurusrex.ryanbeales.com
+        - name: WEB_SEARCH_RESULT_COUNT
+          value: 3
+        - name: WEB_SEARCH_ENGINE
+          value: searxng
+        - name: SEARXNG_QUERY_URL
+          value: http://searxng.searxng.svc.cluster.local/search?q=<query>
         ports:
         - name: open-webui
           containerPort: 8080
