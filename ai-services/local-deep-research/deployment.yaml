@@ -19,7 +19,7 @@ spec:
       containers:
       - name: local-deep-research
         # renovate: datasource=github-tags depname=LearningCircuit/local-deep-research versioning=semver
-        image: localdeepresearch/local-deep-research:1.2.14
+        image: localdeepresearch/local-deep-research:1.2.15
         env:
         - name: LDR_WEB_HOST
           value: 0.0.0.0
