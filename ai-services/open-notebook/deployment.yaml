@@ -21,6 +21,8 @@ spec:
         # renovate: datasource=github-releases depname=lfnovo/open-notebook versioning=docker
         image: ghcr.io/lfnovo/open-notebook:1.1.0-single
         env:
+        - name: API_URL
+          value: https://open-notebook.crobasaurusrex.ryanbeales.com
         - name: OLLAMA_API_BASE
           value: http://ollama.ollama.svc.cluster.local:11434
         # SurrealDB configuration
