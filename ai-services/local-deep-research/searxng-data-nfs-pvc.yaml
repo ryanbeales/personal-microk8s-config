@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: searxng-data-nfs-pvc
+  labels:
+    app: searxng
+  namespace: searxng
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: crobasaurusrex-nfs
+  resources:
+    requests:
+      storage: 2Gi

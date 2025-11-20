@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: local-deep-research
+  namespace: local-deep-research
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: local-deep-research
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate 
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: local-deep-research
+    spec:
+      containers:
+      - name: local-deep-research
+        image: localdeepresearch/local-deep-research:latest
+        env:
+        - name: LDR_WEB_HOST
+          value: 0.0.0.0
+        - name: LDR_WEB_PORT
+          value: 5000
+        - name: LDR_DATA_DIR
+          value: /data
+        - name: LDR_LLM_OLLAMA_URL
+          value: http://ollama.ollama.svc.cluster.local:11434
+        - name: LDR_SEARCH_ENGINE_WEB_SEARXNG_DEFAULT_PARAMS_INSTANCE_URL
+          value: http://searxng.searxng.svc.cluster.local:8080
+        envFrom:
+        - secretRef:
+            name: searxng-secret
+        ports:
+        - name: local-deep-research
+          containerPort: 5000
+        volumeMounts:
+        - name: local-deep-research-data
+          mountPath: /data
+      volumes:
+      - name: local-deep-research-data
+        persistentVolumeClaim:
+          claimName: local-deep-research-data-nfs-pvc
