@@ -1,0 +1,7 @@
+resources:
+- namespace.yaml
+- deployment.yaml
+- service.yaml
+- searxng-config-nfs-pvc.yaml
+- searxng-data-nfs-pvc.yaml
+- httproute.yaml

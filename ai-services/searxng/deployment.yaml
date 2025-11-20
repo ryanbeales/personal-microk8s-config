@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searxng
+  namespace: searxng
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: searxng
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate 
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: searxng
+    spec:
+      containers:
+      - name: searxng
+        image: docker.io/searxng/searxng:latest
+        ports:
+        - name: searxng
+          containerPort: 8080
+        volumeMounts:
+        - name: searxng-config
+          mountPath: /etc/searxng
+        - name: searxng-data
+          mountPath: /var/cache/searxng
+      volumes:
+      - name: searxng-config
+        persistentVolumeClaim:
+          claimName: searxng-config-nfs-pvc
+      - name: searxng-data
+        persistentVolumeClaim:
+          claimName: searxng-data-nfs-pvc

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: searxng
+  name: searxng
+  namespace: open-webui
+spec:
+  internalTrafficPolicy: Cluster
+  ports:
+    - name: searxng
+      port: 8080
+      protocol: TCP
+      targetPort: searxng
+  selector:
+    app.kubernetes.io/name: searxng
+  sessionAffinity: None
+  type: ClusterIP
