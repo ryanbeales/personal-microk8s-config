@@ -19,12 +19,20 @@ spec:
       containers:
       - name: open-webui
         # Get the commit tag for the image from here https://github.com/open-webui/open-webui/releases
-        # renovate: datasource=github-tags depname=blakeblackshear/frigate versioning=docker
-        image: ghcr.io/open-webui/open-webui:git-171021c
-        # Ensure we run on a node with GPU available
+        image: ghcr.io/open-webui/open-webui:git-e0d5de1
         env:
         - name: OLLAMA_BASE_URL
           value: http://ollama.ollama.svc.cluster.local:11434
+        - name: ENABLE_WEB_SEARCH
+          value: "true"
+        - name: WEBUI_URL
+          value: https://open-webui.crobasaurusrex.ryanbeales.com
+        - name: WEB_SEARCH_RESULT_COUNT
+          value: "3"
+        - name: WEB_SEARCH_ENGINE
+          value: searxng
+        - name: SEARXNG_QUERY_URL
+          value: http://searxng.searxng.svc.cluster.local:8080/search?q=<query>
         ports:
         - name: open-webui
           containerPort: 8080

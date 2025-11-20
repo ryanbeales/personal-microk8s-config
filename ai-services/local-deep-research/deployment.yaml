@@ -18,8 +18,8 @@ spec:
     spec:
       containers:
       - name: local-deep-research
-        # renovate: datasource=github-tags depname=LearningCircuit/local-deep-research versioning=semver
-        image: localdeepresearch/local-deep-research:1.2.14
+        # Releases are broken?
+        image: localdeepresearch/local-deep-research:amd64-9621af15d216a0fabd155a9ecc7d7e9cac37a250
         env:
         - name: LDR_WEB_HOST
           value: 0.0.0.0
@@ -34,7 +34,7 @@ spec:
         - name: LDR_LLM_MODEL
           value: "gemma3:4b-it-qat"
         - name: LDR_SEARCH_ENGINE_WEB_SEARXNG_DEFAULT_PARAMS_INSTANCE_URL
-          value: https://searxng.crobasaurusrex.ryanbeales.com
+          value: http://searxng.searxng.svc.cluster.local:8080
         ports:
         - name: ldr
           containerPort: 5000
