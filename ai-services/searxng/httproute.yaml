@@ -1,8 +1,8 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: open-webui-route
-  namespace: open-webui   
+  name: searxng-route
+  namespace: searxng   
 spec:
   parentRefs:
     - group: gateway.networking.k8s.io	
