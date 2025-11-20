@@ -30,7 +30,7 @@ spec:
         - name: WEBUI_URL
           value: https://open-webui.crobasaurusrex.ryanbeales.com
         - name: WEB_SEARCH_RESULT_COUNT
-          value: 3
+          value: "3"
         - name: WEB_SEARCH_ENGINE
           value: searxng
         - name: SEARXNG_QUERY_URL
