@@ -29,8 +29,12 @@ spec:
           value: /data
         - name: LDR_LLM_OLLAMA_URL
           value: http://ollama.ollama.svc.cluster.local:11434
+        - name: LDR_LLM_PROVIDER
+          value: ollama
+        - name: LDR_LLM_MODEL
+          value: "gemma3:4b-it-qat"
         - name: LDR_SEARCH_ENGINE_WEB_SEARXNG_DEFAULT_PARAMS_INSTANCE_URL
-          value: http://searxng.searxng.svc.cluster.local:8080
+          value: https://searxng.crobasaurusrex.ryanbeales.com
         ports:
         - name: ldr
           containerPort: 5000
