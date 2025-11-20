@@ -8,10 +8,10 @@ metadata:
 spec:
   internalTrafficPolicy: Cluster
   ports:
-    - name: local-deep-research
+    - name: ldr
       port: 5000
       protocol: TCP
-      targetPort: local-deep-research
+      targetPort: ldr
   selector:
     app.kubernetes.io/name: local-deep-research
   sessionAffinity: None

@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
       - name: local-deep-research
-        image: localdeepresearch/local-deep-research:latest
+        # renovate: datasource=github-tags depname=LearningCircuit/local-deep-research versioning=semver
+        image: localdeepresearch/local-deep-research:1.2.14
         env:
         - name: LDR_WEB_HOST
           value: 0.0.0.0
@@ -34,7 +35,7 @@ spec:
         - secretRef:
             name: searxng-secret
         ports:
-        - name: local-deep-research
+        - name: ldr
           containerPort: 5000
         volumeMounts:
         - name: local-deep-research-data
