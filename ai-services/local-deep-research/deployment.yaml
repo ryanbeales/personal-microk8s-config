@@ -23,10 +23,6 @@ spec:
         env:
         - name: LDR_APP_DEBUG
           value: "true"
-        - name: LDR_WEB_HOST
-          value: 0.0.0.0
-        - name: LDR_WEB_PORT
-          value: "5000"
         - name: LDR_DATA_DIR
           value: /data
         - name: LDR_LLM_OLLAMA_URL
