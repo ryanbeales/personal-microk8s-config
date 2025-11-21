@@ -21,6 +21,8 @@ spec:
         # Releases are broken?
         image: localdeepresearch/local-deep-research:amd64-9621af15d216a0fabd155a9ecc7d7e9cac37a250
         env:
+        - name: LDR_APP_DEBUG
+          value: "true"
         - name: LDR_WEB_HOST
           value: 0.0.0.0
         - name: LDR_WEB_PORT
