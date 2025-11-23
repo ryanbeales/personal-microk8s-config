@@ -1,7 +1,0 @@
-resources:
-- namespace.yaml
-- deployment.yaml
-- service.yaml
-- open-notebook-notebook-nfs-pvc.yaml
-- open-notebook-surrealdb-nfs-pvc.yaml
-- httproute.yaml
