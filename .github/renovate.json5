@@ -48,6 +48,20 @@
     },
   ],
 
+  // Allow automatic merging for some "safe" dependencies. Argocd is in there, I think that's fine...
+  packageRules: [
+    {
+      matchDepNames: [
+        "renovatebot/renovate", 
+        "esphome/esphome",
+        "argoproj/argo-cd",
+        "ollama/ollama",
+        "Octoprint/octoprint"
+      ],
+      automerge: true
+    }
+  ],
+
   ignoreDeps: [
     // Ignore all other dependencies not matched by the custom regex manager
     "postgresql"
