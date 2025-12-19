@@ -5,6 +5,9 @@
     "config:recommended"
   ],
 
+  platformAutomerge: true,
+  automergeType: "pr",
+
   // Define a custom manager that will look for a comment above the version dependnency line and contain details on how to update it
   customManagers: [
     // Define a custom regex manager to find annotated dependencies in deployment, Kustomization and values files
