@@ -8,7 +8,7 @@ envFromSecrets:
 
 image:
   # https://github.com/blakeblackshear/frigate/releases
-  # renovate: datasource=docker depname=ghcr.io/blakeblackshear/frigate
+  # renovate: datasource=docker depname=ghcr.io/blakeblackshear/frigate versioning=docker
   tag: 0.16.1-tensorrt
 
 ingress:
