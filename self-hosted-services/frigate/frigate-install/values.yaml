@@ -8,9 +8,7 @@ envFromSecrets:
 
 image:
   # https://github.com/blakeblackshear/frigate/releases
-  # TODO: Renovate is not picking this one up, docker versioning might need the versionPrefix setting because
-  # the tags are prefixed with 'v', but the images are not.
-  # renovate: datasource=github-tags depname=blakeblackshear/frigate versioning=docker
+  # renovate: datasource=docker depname=ghcr.io/blakeblackshear/frigate
   tag: 0.16.1-tensorrt
 
 ingress:

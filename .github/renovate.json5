@@ -7,6 +7,7 @@
 
   platformAutomerge: true,
   automergeType: "pr",
+  prConcurrentLimit: 10,
 
   // Define a custom manager that will look for a comment above the version dependnency line and contain details on how to update it
   customManagers: [
