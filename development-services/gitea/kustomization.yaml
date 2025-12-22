@@ -24,3 +24,29 @@ resources:
 - gitea-pvc.yaml
 - gitea-pv.yaml
 - httproute.yaml
+
+patches:
+  # The gitea-act-actions runner and gitea-valkey-cluster helm charts produce StatefulSets
+  # where the volumeClaimTemplates are missing apiVersion and kind.
+  # This causes ArgoCD to flag the application as out of sync because it expects
+  # these fields to be present in the live cluster state.
+  - target:
+      kind: StatefulSet
+      name: actions-act-runner
+    patch: |-
+      - op: add
+        path: /spec/volumeClaimTemplates/0/apiVersion
+        value: v1
+      - op: add
+        path: /spec/volumeClaimTemplates/0/kind
+        value: PersistentVolumeClaim
+  - target:
+      kind: StatefulSet
+      name: gitea-valkey-cluster
+    patch: |-
+      - op: add
+        path: /spec/volumeClaimTemplates/0/apiVersion
+        value: v1
+      - op: add
+        path: /spec/volumeClaimTemplates/0/kind
+        value: PersistentVolumeClaim
