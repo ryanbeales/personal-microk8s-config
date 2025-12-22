@@ -86,6 +86,6 @@ New-NetFirewallHyperVRule -Name VXLAN -DisplayName "VXLAN Fix" -Direction Inboun
 ## Testing configs
 My notes here, download kustomize and helm, then run kustomize like this:
 ```
-C:\Users\Ryan\Downloads\kustomize\kustomize build . --enable-helm --helm-command C:\Users\Ryan\Downloads\kustomize\helm.exe
+kustomize build . --enable-helm --helm-command helm
 ```
 (or install via chocolaty or similar. this works though)
