@@ -1,1 +1,0 @@
-Every time qtbittorent starts it will create a new password. Until I fix that just grab it from the startup log. You don't use it often enough to fix it because they put Taskmaster on YouTube now.
