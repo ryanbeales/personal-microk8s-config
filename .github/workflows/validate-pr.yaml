@@ -42,7 +42,7 @@ jobs:
         run: bash .github/workflows/scripts/validate_manifests.sh "${{ steps.changed-dirs.outputs.all_changed_files }}"
 
       - name: Post Comment
-        uses: peter-evans/create-or-update-comment@v4
+        uses: peter-evans/create-or-update-comment@v5
         if: always()
         with:
           issue-number: ${{ github.event.pull_request.number }}
