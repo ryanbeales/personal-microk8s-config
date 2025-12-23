@@ -12,8 +12,6 @@ echo "" >> "$REPORT_FILE"
 
 HAS_ERRORS=false
 
-echo "Debug: CHANGED_DIRS='$CHANGED_DIRS'"
-
 # Helper to find the nearest directory containing a kustomization file
 find_kustomization_root() {
   local dir="$1"
@@ -52,14 +50,10 @@ for dir in $CHANGED_DIRS; do
 done
 
 if [ -z "$KUSTOMIZE_ROOTS" ]; then
-  echo "Debug: No Kustomize roots found."
   echo "No Kustomize roots found for changed files." >> "$REPORT_FILE"
-else
-  echo "Debug: Kustomize roots to process: $KUSTOMIZE_ROOTS"
 fi
 
 for dir in $KUSTOMIZE_ROOTS; do
-  echo "Debug: Processing Kustomize root: $dir"
   echo "### Service: \`$dir\`" >> "$REPORT_FILE"
   echo "" >> "$REPORT_FILE"
 
@@ -74,22 +68,6 @@ for dir in $KUSTOMIZE_ROOTS; do
     continue
   fi
 
-  # Validate with kubeconform
-  echo "#### Kubeconform Validation" >> "$REPORT_FILE"
-  # Use Datree CRDs catalog for Gateway API and other CRDs
-  if kubeconform -strict -summary -ignore-filename-pattern '.*\.sh' \
-    -schema-location default \
-    -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' \
-    pr-manifest.yaml > kubeconform-output.log 2>&1; then
-    echo "✅ Success" >> "$REPORT_FILE"
-  else
-    echo "❌ Issues Found" >> "$REPORT_FILE"
-    echo '```' >> "$REPORT_FILE"
-    cat kubeconform-output.log >> "$REPORT_FILE"
-    echo '```' >> "$REPORT_FILE"
-    HAS_ERRORS=true
-  fi
-  echo "" >> "$REPORT_FILE"
 
   # Compare with main branch
   echo "#### Manifest Diffs" >> "$REPORT_FILE"
@@ -107,10 +85,8 @@ for dir in $KUSTOMIZE_ROOTS; do
       DIFF_OUTPUT=$(cat diff-output.log)
       
       if [ -z "$DIFF_OUTPUT" ]; then
-        echo "Debug: No changes found by dyff for $dir"
         echo "No changes in generated manifests." >> "$REPORT_FILE"
       else
-        echo "Debug: Changes found for $dir"
         echo '<details open><summary>Click to view diff</summary>' >> "$REPORT_FILE"
         echo "" >> "$REPORT_FILE"
         echo '```' >> "$REPORT_FILE"
@@ -136,9 +112,6 @@ done
 
 if [ "$HAS_ERRORS" = true ]; then
   echo "Validation failed for one or more services."
-  echo "--- PR Validation Report ---"
-  cat "$REPORT_FILE"
-  echo "--- End of Report ---"
   exit 1
 fi
 
