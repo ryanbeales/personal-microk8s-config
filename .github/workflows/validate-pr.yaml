@@ -20,11 +20,6 @@ jobs:
           mkdir -p $HOME/bin
           echo "$HOME/bin" >> $GITHUB_PATH
           
-          # Install kubeconform
-          KUBECONFORM_VERSION=$(curl -s https://api.github.com/repos/yannh/kubeconform/releases/latest | jq -r .tag_name)
-          curl -L "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" | tar xz kubeconform
-          mv kubeconform $HOME/bin/
-          
           # Install dyff
           DYFF_VERSION=$(curl -s https://api.github.com/repos/homeport/dyff/releases/latest | jq -r .tag_name)
           curl -L "https://github.com/homeport/dyff/releases/download/${DYFF_VERSION}/dyff_${DYFF_VERSION#v}_linux_amd64.tar.gz" | tar xz dyff
