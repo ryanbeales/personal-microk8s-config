@@ -12,6 +12,8 @@ echo "" >> "$REPORT_FILE"
 
 HAS_ERRORS=false
 
+echo "Debug: CHANGED_DIRS='$CHANGED_DIRS'"
+
 # Helper to find the nearest directory containing a kustomization file
 find_kustomization_root() {
   local dir="$1"
@@ -50,10 +52,14 @@ for dir in $CHANGED_DIRS; do
 done
 
 if [ -z "$KUSTOMIZE_ROOTS" ]; then
+  echo "Debug: No Kustomize roots found."
   echo "No Kustomize roots found for changed files." >> "$REPORT_FILE"
+else
+  echo "Debug: Kustomize roots to process: $KUSTOMIZE_ROOTS"
 fi
 
 for dir in $KUSTOMIZE_ROOTS; do
+  echo "Debug: Processing Kustomize root: $dir"
   echo "### Service: \`$dir\`" >> "$REPORT_FILE"
   echo "" >> "$REPORT_FILE"
 
@@ -96,10 +102,15 @@ for dir in $KUSTOMIZE_ROOTS; do
       # Restore PR state immediately
       git checkout HEAD -- "$dir" 2>/dev/null
       
-      DIFF_OUTPUT=$(dyff between --color off base-manifest.yaml pr-manifest.yaml)
+      # Use a temporary file for diff to avoid subshell issues with set -e
+      dyff between --color off base-manifest.yaml pr-manifest.yaml > diff-output.log 2>&1 || true
+      DIFF_OUTPUT=$(cat diff-output.log)
+      
       if [ -z "$DIFF_OUTPUT" ]; then
+        echo "Debug: No changes found by dyff for $dir"
         echo "No changes in generated manifests." >> "$REPORT_FILE"
       else
+        echo "Debug: Changes found for $dir"
         echo '<details open><summary>Click to view diff</summary>' >> "$REPORT_FILE"
         echo "" >> "$REPORT_FILE"
         echo '```' >> "$REPORT_FILE"
@@ -125,6 +136,9 @@ done
 
 if [ "$HAS_ERRORS" = true ]; then
   echo "Validation failed for one or more services."
+  echo "--- PR Validation Report ---"
+  cat "$REPORT_FILE"
+  echo "--- End of Report ---"
   exit 1
 fi
 
