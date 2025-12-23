@@ -12,77 +12,119 @@ echo "" >> "$REPORT_FILE"
 
 HAS_ERRORS=false
 
+# Helper to find the nearest directory containing a kustomization file
+find_kustomization_root() {
+  local dir="$1"
+  # Trim trailing slashes
+  dir="${dir%/}"
+  while [[ "$dir" != "." && "$dir" != "/" && -n "$dir" ]]; do
+    if [ -f "$dir/kustomization.yaml" ] || [ -f "$dir/Kustomization" ]; then
+      echo "$dir"
+      return 0
+    fi
+    dir=$(dirname "$dir")
+  done
+  # Special case for root
+  if [ -f "kustomization.yaml" ] || [ -f "Kustomization" ]; then
+    echo "."
+    return 0
+  fi
+  return 1
+}
+
+# Identify all unique kustomization roots for changed files
+KUSTOMIZE_ROOTS=""
 for dir in $CHANGED_DIRS; do
   # Skip hidden directories like .github, .github/workflows, etc.
   if [[ "$dir" == .* ]]; then
     continue
   fi
 
-  if [ -f "$dir/kustomization.yaml" ] || [ -f "$dir/Kustomization" ]; then
-    echo "### Service: \`$dir\`" >> "$REPORT_FILE"
-    echo "" >> "$REPORT_FILE"
-
-    # Build PR manifest
-    if ! kustomize build "$dir" --enable-helm > pr-manifest.yaml 2> build-error.log; then
-      echo "❌ **Build Failed**" >> "$REPORT_FILE"
-      echo '```' >> "$REPORT_FILE"
-      cat build-error.log >> "$REPORT_FILE"
-      echo '```' >> "$REPORT_FILE"
-      echo "" >> "$REPORT_FILE"
-      HAS_ERRORS=true
-      continue
+  ROOT=$(find_kustomization_root "$dir") || true
+  if [ -n "$ROOT" ]; then
+    # Add to list if not already there (simple de-duplication)
+    if [[ ! " $KUSTOMIZE_ROOTS " =~ " $ROOT " ]]; then
+      KUSTOMIZE_ROOTS="$KUSTOMIZE_ROOTS $ROOT"
     fi
+  fi
+done
 
-    # Validate with kubeconform
-    echo "#### Kubeconform Validation" >> "$REPORT_FILE"
-    if kubeconform -strict -summary -ignore-filename-pattern '.*\.sh' pr-manifest.yaml > kubeconform-output.log 2>&1; then
-      echo "✅ Success" >> "$REPORT_FILE"
-    else
-      echo "❌ Issues Found" >> "$REPORT_FILE"
-      echo '```' >> "$REPORT_FILE"
-      cat kubeconform-output.log >> "$REPORT_FILE"
-      echo '```' >> "$REPORT_FILE"
-      HAS_ERRORS=true
-    fi
+if [ -z "$KUSTOMIZE_ROOTS" ]; then
+  echo "No Kustomize roots found for changed files." >> "$REPORT_FILE"
+fi
+
+for dir in $KUSTOMIZE_ROOTS; do
+  echo "### Service: \`$dir\`" >> "$REPORT_FILE"
+  echo "" >> "$REPORT_FILE"
+
+  # Build PR manifest
+  if ! kustomize build "$dir" --enable-helm > pr-manifest.yaml 2> build-error.log; then
+    echo "❌ **Build Failed**" >> "$REPORT_FILE"
+    echo '```' >> "$REPORT_FILE"
+    cat build-error.log >> "$REPORT_FILE"
+    echo '```' >> "$REPORT_FILE"
     echo "" >> "$REPORT_FILE"
+    HAS_ERRORS=true
+    continue
+  fi
 
-    # Compare with main branch
-    echo "#### Manifest Diffs" >> "$REPORT_FILE"
-    # We use a temporary branch to check out the base files to avoid local conflicts
-    git checkout main -- "$dir" 2>/dev/null || true
-    if [ -f "$dir/kustomization.yaml" ] || [ -f "$dir/Kustomization" ]; then
-      if kustomize build "$dir" --enable-helm > base-manifest.yaml 2>/dev/null; then
-        DIFF_OUTPUT=$(dyff between --color off base-manifest.yaml pr-manifest.yaml)
-        if [ -z "$DIFF_OUTPUT" ]; then
-          echo "No changes in generated manifests." >> "$REPORT_FILE"
-        else
-          echo '<details><summary>Click to view diff</summary>' >> "$REPORT_FILE"
-          echo "" >> "$REPORT_FILE"
-          echo '```' >> "$REPORT_FILE"
-          echo "$DIFF_OUTPUT" >> "$REPORT_FILE"
-          echo '```' >> "$REPORT_FILE"
-          echo '</details>' >> "$REPORT_FILE"
-        fi
+  # Validate with kubeconform
+  echo "#### Kubeconform Validation" >> "$REPORT_FILE"
+  # Use Datree CRDs catalog for Gateway API and other CRDs
+  if kubeconform -strict -summary -ignore-filename-pattern '.*\.sh' \
+    -schema-location default \
+    -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' \
+    pr-manifest.yaml > kubeconform-output.log 2>&1; then
+    echo "✅ Success" >> "$REPORT_FILE"
+  else
+    echo "❌ Issues Found" >> "$REPORT_FILE"
+    echo '```' >> "$REPORT_FILE"
+    cat kubeconform-output.log >> "$REPORT_FILE"
+    echo '```' >> "$REPORT_FILE"
+    HAS_ERRORS=true
+  fi
+  echo "" >> "$REPORT_FILE"
+
+  # Compare with main branch
+  echo "#### Manifest Diffs" >> "$REPORT_FILE"
+  
+  # Ensure we have the latest origin/main
+  git fetch origin main --quiet || true
+  
+  if git checkout origin/main -- "$dir" 2>/dev/null; then
+    if kustomize build "$dir" --enable-helm > base-manifest.yaml 2>/dev/null; then
+      # Restore PR state immediately
+      git checkout HEAD -- "$dir" 2>/dev/null
+      
+      DIFF_OUTPUT=$(dyff between --color off base-manifest.yaml pr-manifest.yaml)
+      if [ -z "$DIFF_OUTPUT" ]; then
+        echo "No changes in generated manifests." >> "$REPORT_FILE"
       else
-        echo "Unable to build base manifest for comparison." >> "$REPORT_FILE"
+        echo '<details open><summary>Click to view diff</summary>' >> "$REPORT_FILE"
+        echo "" >> "$REPORT_FILE"
+        echo '```' >> "$REPORT_FILE"
+        echo "$DIFF_OUTPUT" >> "$REPORT_FILE"
+        echo '```' >> "$REPORT_FILE"
+        echo '</details>' >> "$REPORT_FILE"
       fi
     else
-      echo "New service detected. Full manifest in diff." >> "$REPORT_FILE"
-      echo '<details><summary>Click to view full manifest</summary>' >> "$REPORT_FILE"
-      echo "" >> "$REPORT_FILE"
-      echo '```yaml' >> "$REPORT_FILE"
-      cat pr-manifest.yaml >> "$REPORT_FILE"
-      echo '```' >> "$REPORT_FILE"
-      echo '</details>' >> "$REPORT_FILE"
+      git checkout HEAD -- "$dir" 2>/dev/null
+      echo "Unable to build base manifest (likely new service or build error in main)." >> "$REPORT_FILE"
     fi
+  else
+    echo "New service detected. Full manifest in diff." >> "$REPORT_FILE"
+    echo '<details><summary>Click to view full manifest</summary>' >> "$REPORT_FILE"
     echo "" >> "$REPORT_FILE"
-
-    # Revert changes to workspace to avoid polluting next iterations
-    git checkout HEAD -- "$dir" 2>/dev/null || true
+    echo '```yaml' >> "$REPORT_FILE"
+    cat pr-manifest.yaml >> "$REPORT_FILE"
+    echo '```' >> "$REPORT_FILE"
+    echo '</details>' >> "$REPORT_FILE"
   fi
+  echo "" >> "$REPORT_FILE"
 done
 
 if [ "$HAS_ERRORS" = true ]; then
   echo "Validation failed for one or more services."
   exit 1
 fi
+
