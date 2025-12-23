@@ -1,0 +1,49 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Validate Manifests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR Branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Tools
+        run: |
+          mkdir -p $HOME/bin
+          echo "$HOME/bin" >> $GITHUB_PATH
+          
+          # Install kubeconform
+          KUBECONFORM_VERSION=$(curl -s https://api.github.com/repos/yannh/kubeconform/releases/latest | jq -r .tag_name)
+          curl -L "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" | tar xz kubeconform
+          mv kubeconform $HOME/bin/
+          
+          # Install dyff
+          DYFF_VERSION=$(curl -s https://api.github.com/repos/homeport/dyff/releases/latest | jq -r .tag_name)
+          curl -L "https://github.com/homeport/dyff/releases/download/${DYFF_VERSION}/dyff_${DYFF_VERSION#v}_linux_amd64.tar.gz" | tar xz dyff
+          mv dyff $HOME/bin/
+
+      - name: Get Changed Directories
+        id: changed-dirs
+        uses: tj-actions/changed-files@v44
+        with:
+          dir_names: true
+          dir_names_exclude_current_dir: true
+
+      - name: Build and Validate
+        id: build-validate
+        run: bash .github/workflows/scripts/validate_manifests.sh "${{ steps.changed-dirs.outputs.all_changed_files }}"
+
+      - name: Post Comment
+        uses: peter-evans/create-or-update-comment@v4
+        if: always()
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: pr-validation-report.md
