@@ -54,7 +54,7 @@ spec:
                     sleep 5
                   done
                   /bin/ollama pull llama3.1
-                  /bin/ollama pull gemma3:4b-it-qat
+                  /bin/ollama pull qwen2.5vl:7b
       volumes:
       - name: storage
         persistentVolumeClaim:
