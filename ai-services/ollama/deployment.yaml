@@ -30,6 +30,9 @@ spec:
         # Allow from everywhere (we limit it via where it's served from)
         - name: OLLAMA_ORIGINS
           value: "*"
+        # Keep the model loaded for 60m
+        - name: OLLAMA_KEEP_ALIVE
+          value: "60m"
         # Ensure we run on a node with GPU available
         resources:
           limits:
