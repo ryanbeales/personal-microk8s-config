@@ -24,3 +24,7 @@ description: create a new branch and PR for changes
    ```powershell
    gh pr create --fill
    ```
+6. Switch back to the default branch:
+   ```powershell
+   git checkout main
+   ```
