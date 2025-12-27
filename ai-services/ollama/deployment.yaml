@@ -30,6 +30,8 @@ spec:
         # Allow from everywhere (we limit it via where it's served from)
         - name: OLLAMA_ORIGINS
           value: "*"
+        - name: OLLAMA_KV_CACHE_TYPE
+          value: "q8_0"
         # Keep the model loaded for 60m
         - name: OLLAMA_KEEP_ALIVE
           value: "60m"
@@ -56,8 +58,8 @@ spec:
                   while ! /bin/ollama ps > /dev/null 2>&1; do
                     sleep 5
                   done
+                  /bin/ollama pull qwen3:8b
                   /bin/ollama pull llama3.1
-                  /bin/ollama pull qwen2.5vl:7b
       volumes:
       - name: storage
         persistentVolumeClaim:
