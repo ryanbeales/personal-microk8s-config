@@ -150,4 +150,4 @@ genai:
   enabled: true
   provider: ollama
   base_url: http://ollama.ollama.svc.cluster.local:11434
-  model: gemma3:4b-it-qat
+  model: qwen3:8b

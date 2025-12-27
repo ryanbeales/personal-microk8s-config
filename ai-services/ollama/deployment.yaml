@@ -30,6 +30,8 @@ spec:
         # Allow from everywhere (we limit it via where it's served from)
         - name: OLLAMA_ORIGINS
           value: "*"
+        - name: OLLAMA_KV_CACHE_TYPE
+          value: "q8_0"
         # Ensure we run on a node with GPU available
         resources:
           limits:
@@ -53,8 +55,7 @@ spec:
                   while ! /bin/ollama ps > /dev/null 2>&1; do
                     sleep 5
                   done
-                  /bin/ollama pull llama3.1
-                  /bin/ollama pull gemma3:4b-it-qat
+                  /bin/ollama pull qwen3:8b
       volumes:
       - name: storage
         persistentVolumeClaim:
