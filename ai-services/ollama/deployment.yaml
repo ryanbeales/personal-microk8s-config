@@ -32,6 +32,9 @@ spec:
           value: "*"
         - name: OLLAMA_KV_CACHE_TYPE
           value: "q8_0"
+        # Keep the model loaded for 60m
+        - name: OLLAMA_KEEP_ALIVE
+          value: "60m"
         # Ensure we run on a node with GPU available
         resources:
           limits:
@@ -56,6 +59,7 @@ spec:
                     sleep 5
                   done
                   /bin/ollama pull qwen3:8b
+                  /bin/ollama pull llama3.1
       volumes:
       - name: storage
         persistentVolumeClaim:

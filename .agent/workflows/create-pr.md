@@ -24,3 +24,12 @@ description: create a new branch and PR for changes
    ```powershell
    gh pr create --fill
    ```
+6. Switch back to the default branch:
+   ```powershell
+   git checkout main
+   ```
+7. **Wait for PR Merge**: Ensure the Pull Request is merged before pulling `main` again. You can verify the status with:
+   ```powershell
+   gh pr view --json state -q .state
+   ```
+   Once confirmed as `MERGED`, you may safely return to step 1 for new work.

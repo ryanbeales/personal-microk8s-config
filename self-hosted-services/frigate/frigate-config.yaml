@@ -151,3 +151,5 @@ genai:
   provider: ollama
   base_url: http://ollama.ollama.svc.cluster.local:11434
   model: qwen3:8b
+  prompt: >-
+    Describe the image in a concise sentence, focusing on the main object (person, car, animal) and its activity.
