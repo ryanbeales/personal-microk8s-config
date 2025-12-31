@@ -23,6 +23,7 @@
         "**/*-values.y?ml",
         "**/values-*.y?ml",
         "**/values.y?ml",
+        "iac-services/crossplane-providers/providers/**/*.yaml",
       ],
       matchStrings: [
         // Use in image tag lines or in values files

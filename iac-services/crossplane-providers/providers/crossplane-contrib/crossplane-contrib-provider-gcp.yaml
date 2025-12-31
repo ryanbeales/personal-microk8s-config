@@ -1,0 +1,8 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-upjet-gcp
+spec:
+  # https://github.com/crossplane-contrib/provider-upjet-gcp/releases
+  # renovate: datasource=github-releases depname=crossplane-contrib/provider-upjet-gcp versioning=semver
+  package: xpkg.upbound.io/crossplane-contrib/provider-upjet-gcp:v2.4.0
