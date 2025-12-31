@@ -1,3 +1,0 @@
-argocd:
-  name: gemini
-  namespace: gemini
