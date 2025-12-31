@@ -1,0 +1,20 @@
+apiVersion: apikeys.gcp.upbound.io/v1beta1
+kind: Key
+metadata:
+  name: gemini-api-key
+spec:
+  forProvider:
+    displayName: "Gemini Studio Access Key"
+    project: k8sgemini
+    
+    restrictions:
+      - apiTargets:
+          - service: generativelanguage.googleapis.com
+
+  providerConfigRef:
+    name: gcp-k8sgemini
+
+  # Provision a secret in the gemini namespace
+  writeConnectionSecretToRef:
+    namespace: gemini
+    name: gemini-secret
