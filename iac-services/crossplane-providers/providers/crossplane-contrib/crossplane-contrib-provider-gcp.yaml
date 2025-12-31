@@ -6,3 +6,13 @@ spec:
   # https://github.com/crossplane-contrib/provider-upjet-gcp/releases
   # renovate: datasource=github-releases depname=crossplane-contrib/provider-upjet-gcp versioning=semver
   package: xpkg.upbound.io/upbound/provider-family-gcp:v2.4.0
+  packagePullPolicy: IfNotPresent
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-gcp-cloudplatform
+spec:
+  # renovate: datasource=github-releases depname=crossplane-contrib/provider-upjet-gcp versioning=semver
+  package: xpkg.upbound.io/upbound/provider-gcp-cloudplatform:v2.4.0
+  packagePullPolicy: IfNotPresent
