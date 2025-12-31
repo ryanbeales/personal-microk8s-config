@@ -1,0 +1,3 @@
+resources:
+- gcp-service.yaml
+- api-key.yaml

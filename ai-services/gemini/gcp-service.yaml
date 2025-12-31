@@ -1,0 +1,10 @@
+apiVersion: serviceusage.gcp.upbound.io/v1beta1
+kind: Service
+metadata:
+  name: enable-generative-language
+spec:
+  forProvider:
+    project: k8sgemini
+    service: generativelanguage.googleapis.com
+  providerConfigRef:
+    name: gcp-k8sgemini
