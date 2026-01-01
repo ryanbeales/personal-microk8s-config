@@ -20,6 +20,8 @@ https://docs.crossplane.io/latest/getting-started/provider-aws/#generate-an-aws-
 
 ## GCP Provider Setup
 
+Note: This is not currently used, but is included for reference.
+
 1. Create a Service Account `crossplane-sa` in the `k8sgemini` project with `Editor` permissions [here](https://console.cloud.google.com/iam-admin/serviceaccounts?project=k8sgemini)
 2. Create and download a JSON key for the Service Account.
 3. Create the secret in Kubernetes:
