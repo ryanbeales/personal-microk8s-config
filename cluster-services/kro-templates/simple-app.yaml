@@ -16,35 +16,35 @@ spec:
         apiVersion: apps/v1
         kind: Deployment
         metadata:
-          name: ${metadata.name}
-          namespace: ${metadata.namespace}
+          name: ${schema.metadata.name}
+          namespace: ${schema.metadata.namespace}
         spec:
           selector:
             matchLabels:
-              app: ${metadata.name}
+              app: ${schema.metadata.name}
           template:
             metadata:
               labels:
-                app: ${metadata.name}
+                app: ${schema.metadata.name}
             spec:
               containers:
                 - name: app
-                  image: ${spec.image}
+                  image: ${schema.spec.image}
                   ports:
-                    - containerPort: ${spec.port}
+                    - containerPort: ${schema.spec.port}
                       name: http
     - id: service
       template:
         apiVersion: v1
         kind: Service
         metadata:
-          name: ${metadata.name}
-          namespace: ${metadata.namespace}
+          name: ${schema.metadata.name}
+          namespace: ${schema.metadata.namespace}
         spec:
           selector:
-            app: ${metadata.name}
+            app: ${schema.metadata.name}
           ports:
-            - port: ${spec.port}
+            - port: ${schema.spec.port}
               targetPort: http
               protocol: TCP
               name: http
@@ -53,8 +53,8 @@ spec:
         apiVersion: gateway.networking.k8s.io/v1
         kind: HTTPRoute
         metadata:
-          name: ${metadata.name}
-          namespace: ${metadata.namespace}
+          name: ${schema.metadata.name}
+          namespace: ${schema.metadata.namespace}
         spec:
           parentRefs:
             - group: gateway.networking.k8s.io
@@ -65,7 +65,7 @@ spec:
               kind: Gateway
               name: crobasaurusrex-gateway
               namespace: gateways
-          hostnames: ${spec.hostnames}
+          hostnames: ${schema.spec.hostnames}
           rules:
             - matches:
                 - path:
@@ -74,5 +74,5 @@ spec:
               backendRefs:
                 - group: ""
                   kind: Service
-                  name: ${metadata.name}
-                  port: ${spec.port}
+                  name: ${schema.metadata.name}
+                  port: ${schema.spec.port}
