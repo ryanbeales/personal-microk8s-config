@@ -1,28 +1,98 @@
+# personal-k8s-config
+
 Welcome to my home kubernetes configuration!
+
+## Features
+
+Highlights of what is running here.
+
+## Cluster Hardware
+
+This cluster is composed of a mix of custom-built machines and repurposed hardware, providing a balance of compute, storage, and GPU acceleration.
+
+```mermaid
+graph TD
+    subgraph Cluster
+        M["crobasaurusrex<br/>(Master Node)"]
+        W1["crobceratops<br/>(Worker Node)"]
+        W2["croblodocus<br/>(Worker Node)"]
+    end
+
+    M --- Storage[("20TB NFS Storage<br/>(Mirrored Spinning Disk)")]
+    M --- G1["Nvidia Geforce 1060 6GB"]
+    W1 --- G2["Nvidia GeForce 3060 12GB"]
+    W2 --- G3["Nvidia GeForce 1050Ti 4GB"]
+
+    style M fill:#f9f,stroke:#333,stroke-width:2px
+    style Storage fill:#bbf,stroke:#333,stroke-width:1px
+```
+
+### Hosts
+
+| Hostname | Role | CPU | RAM | Storage | GPU |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **crobasaurusrex** | Master | AMD Ryzen 7 3700X (8C/16T) | 32GB | 20TB Mirrored (NFS) | Nvidia GTX 1060 6GB |
+| **crobceratops** | Worker | AMD Ryzen 5 5600X (6C/12T) | 32GB | 1TB Local | Nvidia RTX 3060 12GB |
+| **croblodocus** | Worker | Intel Core i9-8950HK | 32GB | 2TB Local | Nvidia GTX 1050Ti 4GB |
+
+---
+
+### Renovatebot
+
+Renovatebot is used to keep dependancies up to date. It will create a PR for each update and will auto merge if the PR is approved. It makes a majority of the work keeping everything up to date very hands off. When I haven't allowed auto merge on dependancies Renovate will (most of the time) show the changelog for the app so I can scan through for any breaking changes (eg: frigate, home-assistant). Auto merge is enabled for renovate itself, ollama octoprint and argocd, things that are stable release to release with the features I make use of.
+
+To make all this work there is:
+- Renovatebot cronjob in iac-services/renovatebot which runs daily within the cluster
+- Renovate config for this repo in .github/renovate.json5 for specifying how to update dependencies in locations not natively supported by renovate (such as Deployment manifests).
+- A github actions workflow to run dyff and show changes between commits, which is configured as a required check for PRs.
+- Repository set to allow auto merge on PRs, and renovate configured to use platform commits and platform merge.
+
+I'm pretty active in this repo day to day, but at a minimum the work to keep things up to date is a couple of PRs to scan over once a week.
+
+### Envoy Gateway
+
+[Envoy Gateway](https://gateway.envoyproxy.io/) is used to manage ingress, with the ingress-nginx deprecation I've switched to GatewayAPI which was very painless.
+
+The Envoy Gateway contoller is configured in [ingress/envoy-gateway](./ingress/envoy-gateway), with a GatewayClass. The Gateways themselves are in [ingress/gateways](./ingress/gateways/), TLS termination happens at the gateway with their own wildcard certificates (configured with the gateways). Each app has it's own HTTPRoute.
+
+The Gateways are using a LoadBalancer service to expose ports to the outside world. Within K3s that is done with ServiceLB which will open the ports on all nodes in the cluster.
+
+### Certificates / Let's Encrypt
+
+[Let's Encrypt](https://letsencrypt.org/) is used to manage certificates in the cluster. It is configured as a ClusterIssuer in [cluster-services/letsencrypt](./cluster-services/letsencrypt) for [cert-manager](https://cert-manager.io/) in [cluster-services/cert-manager](./cluster-services/cert-manager). The DNS challenge is used to manage certificates so that there are no exposed ports to the outside world.
+
+### ArgoCD
+
+[ArgoCD](https://argo-cd.readthedocs.io/en/stable/) is used to manage applications in the cluster, configured in [argocd](./argocd). I've enabled the terminal plugin to allow me to execute commands within pods from the argocd interface. Since TLS termination happens at the gateway, argocd is configured to be 'insecure', but it is not.
+
+Argocd uses an ApplicationSet to find applications in this repo, it is configured in [argocd/applicationset](./argocd/applicationset). This allows me to drop a small argocd.yaml file in each application directory I want managed by argocd and it is then picked up by argocd on it's next background repo sync (minutes):
+```yaml
+argocd:
+  name: application-name
+  namespace: application-namespace
+```
+
+### Crossplane
+
+Crossplane is used to manage infrastructure (some DNS entries mostly), configured in [crossplane](./crossplane). I've tried alternatives (Pulumi, tofu-operator), but crossplane is working and I'm not super invested in trying to make it better. There is a _huge_ barrier of entry to get started with crossplane which does put me off the project, but don't fix what ain't broke.
+
+### Antigravity
+
+I've been using the Antigravity IDE to manage this repo recently. There are some basic workflows in [.agent/workflows](.agent/workflows). This is a work in progress but right now it's functioning as an assistant that can complete a majority of the tasks in this repo I ask of it while I do something else.
 
 ## FAQs which are not asked frequently or otherwise, and also one isn't even a question
 
-### What is this?
-This is my home kubernetes configuration!
-
 ### Why would you make it public?
+
 It's a demo showing I can run kubernetes and use it everyday. Am I in danger? I think this is all OK. We'll find out I guess.
 
 ### Is it any good?
-Not really. It's always a work in progress and lots of things aren't commented to a standard I would leave in the workplace since this is just my home. Some not great stuff in here but it works and working is better than not working. It's been _much_ easier to maintain than stand alone systems. It use to have a lot of k8s-at-home helm charts but they shut that down so I just went back to plain manifests. I find it easier to have the plain manifests than trying to find out what a helm chart does anwyay. NixOS seems to be flavour of the month now but given I work every day with Kubernetes this just comes easier.
 
-### Why does it say microk8s when you refer to k3s elsewhere?
-Because it was! But one day the "distributed sqllite" that's built in to microk8s suddenly died. I didn't mind microk8s until this point, it kept itself up to date worked reasonably well. But one day it died and I was sad. So instead I removed microk8s and switched over to k3s which turned out to be incredibly easy and allowed me to add my rasperry pi's in to the cluster as well. 
-
-### But why would the distributed sqlite in microk8s break?
-I think the culprit was actually Tekton and the many many leases it tries to keep which were killing the database performance. Anyway, this is a home server, it didn't matter that much but when I switched to k3s it was surprisingly easy.
-
-### My eyes! I looked at the commit history!
-Ah this is the one that's not the question. Correct it's pretty horrible. It's just me, I push direct to main and I often don't know what I'm doing so I push it up in to the environment and see what works. But now that the nightmare of configuring Frigate is over we can move on to some other batch of commits then. It's my day job to fix this kind of workflow but sometimes I don't want to bring my work home either (even though it's just a slight head turn since it's the same desk). [Edit: Well not this looks out of place since I cleaned up the history to remove any secret references that have crept in over time...]
+Not really. It's always a work in progress and lots of things aren't commented to a standard I would leave in the workplace since this is just my home. It's been _much_ easier to maintain than stand alone systems, and if there is a new application I want to try out that's in a docker container I can have it running in about 15 minutes to test it out. It use to have a lot of k8s-at-home helm charts but they shut that down so I just went back to plain manifests. I find it easier to have the plain manifests than trying to find out what a helm chart does anyway, which needs a heavy reliance on the Dyff action so I can see what changes are actually being made. NixOS seems to be flavour of the month now but given I work every day with Kubernetes this just comes easier.
 
 ### Why run Kubernetes at home?
-1. Work.
-1. I took inspiration from here https://github.com/billimek/k8s-gitops/tree/master/default, however I've not referred to that in a long time now.
+1. Work, 90% of my day job is this so it's just an easy extension to do this at home too, but it is incredibly easy too.
+1. I took inspiration from [billimek/k8s-gitops](https://github.com/billimek/k8s-gitops/tree/master/default), however I've not referred to that in a long time now.
 1. Seemed like an easy way to manage home assistant and other software.
 
 ## Bootstrap
@@ -40,7 +110,7 @@ All the rest of these steps are on the on master node
 1. Install helm `curl https://get.helm.sh/helm-v3.14.2-linux-amd64.tar.gz --output - | tar xzf - linux-amd64/helm | sudo mv linux-amd64/helm /usr/local/bin/helm`
 1. Install github client `sudo apt-get install gh`
 1. Authenticate gh client `/usr/bin/gh auth login` and follow instructions. Use SSH not http.
-1. Checkout this repo to the master node `/usr/bin/gh repo clone ryanbeales/personal-microk8s-config`
+1. Checkout this repo to the master node `/usr/bin/gh repo clone ryanbeales/personal-k8s-config`
 1. Install cert-manager with `/usr/local/bin/kustomize build cert-manager | sudo k3s kubectl apply -f -`
 1. Create route53 secret access, see `./letsencrypt/README.md`
 1. Add letsencrypt certificate issuer `/usr/local/bin/kustomize build letsencrypt | sudo k3s kubectl apply -f -`
