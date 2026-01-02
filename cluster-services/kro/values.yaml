@@ -1,0 +1,3 @@
+# Default values for kro.
+# Currently no specific overrides required but file is needed for kustomization template consistency.
+{}
