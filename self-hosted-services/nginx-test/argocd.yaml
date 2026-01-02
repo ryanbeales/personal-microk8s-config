@@ -1,3 +1,0 @@
-argocd:
-  name: nginx-test
-  namespace: nginx-test

@@ -22,7 +22,7 @@ Previously I relied heavily on helm charts, particularlly the k8s-at-home  chart
 
 I find it easier to have the plain manifests than trying to find out what a helm chart does anyway, which needs a heavy reliance on the Dyff github action so I can see what changes are actually being made.
 
-Eventually I'll switch to a custom operator or [KRO](https://kro.run/).
+Eventually I'll switch to a custom operator, [KRO](https://kro.run/) or [YokeCD](https://yokecd.github.io/docs/). I have examples of KRO in [cluster-services/kro](./cluster-services/kro) and [cluster-services/kro-templates](./cluster-services/kro-templates). 
 
 # Features
 
