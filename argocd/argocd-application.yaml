@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:ryanbeales/personal-microk8s-config.git 
+    repoURL: git@github.com:ryanbeales/personal-k8s-config.git
     path: argocd
     targetRevision: main
   destination:

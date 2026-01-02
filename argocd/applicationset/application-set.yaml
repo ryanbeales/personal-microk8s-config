@@ -6,27 +6,27 @@ metadata:
 spec:
   goTemplate: true
   generators:
-  - git:
-      repoURL: git@github.com:ryanbeales/personal-microk8s-config.git 
-      revision: main
-      files:
-      - path: "**/argocd.yaml"
+    - git:
+        repoURL: git@github.com:ryanbeales/personal-k8s-config.git
+        revision: main
+        files:
+          - path: "**/argocd.yaml"
   template:
     metadata:
-      name: '{{.argocd.name}}'
+      name: "{{.argocd.name}}"
       namespace: argocd
     spec:
       project: default
       source:
-        repoURL: git@github.com:ryanbeales/personal-microk8s-config.git 
+        repoURL: git@github.com:ryanbeales/personal-k8s-config.git
         targetRevision: main
-        path: '{{ .path.path }}'
+        path: "{{ .path.path }}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ or .argocd.namespace .argocd.name }}'
+        namespace: "{{ or .argocd.namespace .argocd.name }}"
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-        - ServerSideApply=true
+          - ServerSideApply=true

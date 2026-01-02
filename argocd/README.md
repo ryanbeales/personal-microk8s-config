@@ -16,7 +16,7 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   type: git
-  url: git@github.com:ryanbeales/personal-microk8s-config.git
+  url: git@github.com:ryanbeales/personal-k8s-config.git
   sshPrivateKey: |-
     $(cat deploykey)
 EOF
