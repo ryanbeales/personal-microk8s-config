@@ -4,18 +4,12 @@ metadata:
   name: simpleapps.kro.run
 spec:
   schema:
+    apiVersion: kro.run/v1alpha1
+    kind: SimpleApp
     spec:
-      - id: image
-        type: string
-        required: true
-      - id: port
-        type: integer
-        default: 80
-      - id: hostnames
-        type: list
-        items:
-          type: string
-        required: true
+      image: string
+      port: integer | default=80
+      hostnames: "[]string"
   resources:
     - id: deployment
       template:
