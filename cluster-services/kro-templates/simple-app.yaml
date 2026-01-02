@@ -29,9 +29,9 @@ spec:
             spec:
               containers:
                 - name: app
-                  image: ${spec.image}
+                  image: ${schema.spec.image}
                   ports:
-                    - containerPort: ${spec.port}
+                    - containerPort: ${schema.spec.port}
                       name: http
     - id: service
       template:
@@ -44,7 +44,7 @@ spec:
           selector:
             app: ${schema.metadata.name}
           ports:
-            - port: ${spec.port}
+            - port: ${schema.spec.port}
               targetPort: http
               protocol: TCP
               name: http
@@ -65,7 +65,7 @@ spec:
               kind: Gateway
               name: crobasaurusrex-gateway
               namespace: gateways
-          hostnames: ${spec.hostnames}
+          hostnames: ${schema.spec.hostnames}
           rules:
             - matches:
                 - path:
@@ -75,4 +75,4 @@ spec:
                 - group: ""
                   kind: Service
                   name: ${schema.metadata.name}
-                  port: ${spec.port}
+                  port: ${schema.spec.port}
