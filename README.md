@@ -1,3 +1,7 @@
+<p align="center">
+<img src="./image.png" alt="A stylized logo for a technical software repository. A friendly, cybernetic T-Rex dinosaur, wearing tech goggles, is sitting on top of a small, mismatched home server rack cluster. The dinosaur is holding a glowing blue Kubernetes wheel icon. Behind it is a subtle outline of a house with a WiFi signal. The style is clean, modern vector art with a blue, purple, and orange color palette.">
+</p>
+
 # personal-k8s-config
 
 Welcome to my home kubernetes configuration!
