@@ -1,0 +1,84 @@
+apiVersion: kro.run/v1alpha1
+kind: ResourceGraphDefinition
+metadata:
+  name: simpleapps.kro.run
+spec:
+  schema:
+    spec:
+      - id: image
+        type: string
+        required: true
+      - id: port
+        type: integer
+        default: 80
+      - id: hostnames
+        type: list
+        items:
+          type: string
+        required: true
+  resources:
+    - id: deployment
+      template:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: ${metadata.name}
+          namespace: ${metadata.namespace}
+        spec:
+          selector:
+            matchLabels:
+              app: ${metadata.name}
+          template:
+            metadata:
+              labels:
+                app: ${metadata.name}
+            spec:
+              containers:
+                - name: app
+                  image: ${spec.image}
+                  ports:
+                    - containerPort: ${spec.port}
+                      name: http
+    - id: service
+      template:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: ${metadata.name}
+          namespace: ${metadata.namespace}
+        spec:
+          selector:
+            app: ${metadata.name}
+          ports:
+            - port: ${spec.port}
+              targetPort: http
+              protocol: TCP
+              name: http
+    - id: httproute
+      template:
+        apiVersion: gateway.networking.k8s.io/v1
+        kind: HTTPRoute
+        metadata:
+          name: ${metadata.name}
+          namespace: ${metadata.namespace}
+        spec:
+          parentRefs:
+            - group: gateway.networking.k8s.io
+              kind: Gateway
+              name: crobceratops-gateway
+              namespace: gateways
+            - group: gateway.networking.k8s.io
+              kind: Gateway
+              name: crobasaurusrex-gateway
+              namespace: gateways
+          hostnames: ${spec.hostnames}
+          rules:
+            - matches:
+                - path:
+                    type: PathPrefix
+                    value: /
+              backendRefs:
+                - group: ""
+                  kind: Service
+                  name: ${metadata.name}
+                  port: ${spec.port}
