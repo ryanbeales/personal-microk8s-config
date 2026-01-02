@@ -4,7 +4,7 @@ metadata:
   name: simpleapps.kro.run
 spec:
   schema:
-    apiVersion: kro.run/v1alpha1
+    apiVersion: v1alpha1
     kind: SimpleApp
     spec:
       image: string
