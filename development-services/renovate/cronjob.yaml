@@ -4,7 +4,7 @@ metadata:
   name: renovate-bot
   namespace: renovate
 spec:
-  schedule: '@daily'
+  schedule: "@daily"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
@@ -23,9 +23,9 @@ spec:
                       name: renovate-token
                       key: token
                 - name: RENOVATE_BASE_DIR
-                  value: '/tmp/renovate/'
+                  value: "/tmp/renovate/"
                 - name: RENOVATE_REPOSITORIES
-                  value: ryanbeales/personal-microk8s-config,ryanbeales/immich-album-export
+                  value: ryanbeales/personal-k8s-config,ryanbeales/immich-album-export
                 - name: RENOVATE_REPORT_TYPE
                   value: logging
                 - name: RENOVATE_PR_HOURLY_LIMIT

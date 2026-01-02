@@ -15,12 +15,12 @@ sudo k3s kubectl create secret generic renovate-token --from-literal=token={secr
 ## Testing
 Dry run with:
 ```
-docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-microk8s-config -e RENOVATE_PLATFORM=github -e RENOVATE_REPORT_TYPE=logging -e LOG_LEVEL=DEBUG -e RENOVATE_TOKEN={TOKEN GOES HERE} renovate/renovate --dry-run=full
+docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-k8s-config -e RENOVATE_PLATFORM=github -e RENOVATE_REPORT_TYPE=logging -e LOG_LEVEL=DEBUG -e RENOVATE_TOKEN={TOKEN GOES HERE} renovate/renovate --dry-run=full
 ```
 
 Or to trigger PR creation and run locally:
 ```
-docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-microk8s-config -e RENOVATE_PLATFORM=github -e RENOVATE_REPORT_TYPE=logging -e RENOVATE_TOKEN={TOKEN GOES HERE} -e RENOVATE_PR_HOURLY_LIMIT=10 renovate/renovate --dry-run=full
+docker run --rm -e RENOVATE_REPOSITORIES=ryanbeales/personal-k8s-config -e RENOVATE_PLATFORM=github -e RENOVATE_REPORT_TYPE=logging -e RENOVATE_TOKEN={TOKEN GOES HERE} -e RENOVATE_PR_HOURLY_LIMIT=10 renovate/renovate --dry-run=full
 ```
 
 To test extration config locally on this repo:
