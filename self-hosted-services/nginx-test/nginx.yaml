@@ -1,0 +1,11 @@
+apiVersion: kro.run/v1alpha1
+kind: SimpleApp
+metadata:
+  name: nginx
+  namespace: nginx-test
+spec:
+  image: nginx:latest
+  port: 80
+  hostnames:
+    - nginx.crobasaurusrex.ryanbeales.com
+    - nginx.crobceratops.ryanbeales.com
