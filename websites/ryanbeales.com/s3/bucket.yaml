@@ -6,6 +6,6 @@ metadata:
     crossplane.io/external-name: www.ryanbeales.com
 spec:
   forProvider:
-    region: us-east-1
+    region: eu-west-2
   providerConfigRef:
     name: upbound-aws-default
