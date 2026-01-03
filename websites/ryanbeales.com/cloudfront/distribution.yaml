@@ -32,7 +32,7 @@ spec:
     viewerCertificate:
       - acmCertificateArn: arn:aws:acm:us-east-1:645775182778:certificate/25b26381-c16d-4ab9-81c9-6150b96fc7d3
         sslSupportMethod: sni-only
-        minimumProtocolVersion: TLSv1.1_2016
+        minimumProtocolVersion: TLSv1.2_2021
     restrictions:
       - geoRestriction:
           - restrictionType: none
