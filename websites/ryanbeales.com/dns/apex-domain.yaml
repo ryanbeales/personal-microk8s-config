@@ -6,7 +6,7 @@ spec:
   forProvider:
     type: A
     aliasTarget:
-      - dnsName: PLACEHOLDER_UPDATE_AFTER_CLOUDFRONT_DEPLOY.cloudfront.net
-        evaluateTargetHealth: false
-        hostedZoneId: Z2FDTNDATAQYW2 # CloudFront hosted zone ID (constant for all CloudFront distributions)
+      dnsName: dtt70w9zreon4.cloudfront.net
+      evaluateTargetHealth: false
+      hostedZoneId: Z2FDTNDATAQYW2 # CloudFront hosted zone ID (constant for all CloudFront distributions)
     zoneId: Z2AOZQ8V4DDJEY
