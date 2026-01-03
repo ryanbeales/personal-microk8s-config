@@ -8,6 +8,9 @@ spec:
   forProvider:
     region: us-east-1
     domainName: www.ryanbeales.com
+    subjectAlternativeNames:
+      - www.ryanbeales.com
+      - ryanbeales.com
     validationMethod: DNS
   providerConfigRef:
     name: upbound-aws-default

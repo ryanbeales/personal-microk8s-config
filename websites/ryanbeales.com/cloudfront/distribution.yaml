@@ -11,6 +11,7 @@ spec:
     defaultRootObject: index.html
     aliases:
       - www.ryanbeales.com
+      - ryanbeales.com
     defaultCacheBehavior:
       - targetOriginId: S3-www.ryanbeales.com
         viewerProtocolPolicy: redirect-to-https
