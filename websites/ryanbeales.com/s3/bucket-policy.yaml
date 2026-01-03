@@ -1,0 +1,26 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketPolicy
+metadata:
+  name: www.ryanbeales.com
+spec:
+  forProvider:
+    region: us-east-1
+    bucketRef:
+      name: www.ryanbeales.com
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "AllowCloudFrontOAI",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E1KRWOIW9XN96T"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::www.ryanbeales.com/*"
+          }
+        ]
+      }
+  providerConfigRef:
+    name: upbound-aws-default
