@@ -8,6 +8,7 @@ resources:
   - dns/crobceretops-direct.yaml
   - dns/crobceretops-wildcard.yaml
   - dns/aws-acm-validation.yaml
+  - dns/aws-acm-validation-apex.yaml
   - dns/blog.ryanbeales.com.yaml
   - dns/blog.ryanbeales.com-validation.yaml
   - dns/www.ryanbeales.com.yaml
