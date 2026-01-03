@@ -4,10 +4,3 @@ metadata:
   name: provider-aws-cloudfront
 spec:
   package: xpkg.upbound.io/upbound/provider-aws-cloudfront:v1.14.0
----
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
-metadata:
-  name: provider-aws-acm
-spec:
-  package: xpkg.upbound.io/upbound/provider-aws-acm:v1.14.0
