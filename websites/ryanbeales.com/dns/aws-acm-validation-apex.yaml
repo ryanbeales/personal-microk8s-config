@@ -1,0 +1,13 @@
+apiVersion: route53.aws.crossplane.io/v1alpha1
+kind: ResourceRecordSet
+metadata:
+  name: aws-acm-validation-apex
+  annotations:
+    crossplane.io/external-name: "_99292f3fea4d60021c71a1ae80d4265e.ryanbeales.com"
+spec:
+  forProvider:
+    resourceRecords:
+      - value: _9af6d23bd985b070c59a5ed9935eed17.vhzmpjdqfx.acm-validations.aws.
+    type: CNAME
+    ttl: 3600
+    zoneId: Z2AOZQ8V4DDJEY
