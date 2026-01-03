@@ -8,6 +8,7 @@ spec:
   forProvider:
     region: us-east-1
     enabled: true
+    httpVersion: http2and3
     defaultRootObject: index.html
     aliases:
       - www.ryanbeales.com
@@ -31,7 +32,7 @@ spec:
         s3OriginConfig:
           - originAccessIdentity: origin-access-identity/cloudfront/E1KRWOIW9XN96T
     viewerCertificate:
-      - acmCertificateArn: arn:aws:acm:us-east-1:645775182778:certificate/54d9e66a-6b3b-4135-ad7d-135ff8d17756a
+      - acmCertificateArn: arn:aws:acm:us-east-1:645775182778:certificate/610c57f4-2e4b-4e0e-8f27-870193446a91
         sslSupportMethod: sni-only
         minimumProtocolVersion: TLSv1.2_2021
     restrictions:
