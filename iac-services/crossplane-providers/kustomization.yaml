@@ -1,3 +1,5 @@
 resources:
   - ./providers/crossplane-contrib/crossplane-contrib-provider-aws.yaml
   - ./providers/crossplane-contrib/crossplane-contrib-provider-aws-config.yaml
+  - ./providers/upbound/upbound-provider-aws.yaml
+  - ./providers/upbound/upbound-provider-aws-config.yaml

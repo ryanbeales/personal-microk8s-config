@@ -1,0 +1,40 @@
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: Distribution
+metadata:
+  name: www.ryanbeales.com
+  annotations:
+    crossplane.io/external-name: E14YREW8AXYHTR
+spec:
+  forProvider:
+    region: us-east-1
+    enabled: true
+    defaultRootObject: index.html
+    aliases:
+      - www.ryanbeales.com
+    defaultCacheBehavior:
+      - targetOriginId: S3-www.ryanbeales.com
+        viewerProtocolPolicy: redirect-to-https
+        allowedMethods:
+          - GET
+          - HEAD
+        cachedMethods:
+          - GET
+          - HEAD
+        forwardedValues:
+          - queryString: false
+            cookies:
+              - forward: none
+    origin:
+      - domainName: www.ryanbeales.com.s3.amazonaws.com
+        originId: S3-www.ryanbeales.com
+        s3OriginConfig:
+          - originAccessIdentity: origin-access-identity/cloudfront/E1KRWOIW9XN96T
+    viewerCertificate:
+      - acmCertificateArn: arn:aws:acm:us-east-1:645775182778:certificate/25b26381-c16d-4ab9-81c9-6150b96fc7d3
+        sslSupportMethod: sni-only
+        minimumProtocolVersion: TLSv1.1_2016
+    restrictions:
+      - geoRestriction:
+          - restrictionType: none
+  providerConfigRef:
+    name: upbound-aws-default
