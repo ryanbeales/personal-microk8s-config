@@ -11,5 +11,10 @@ resources:
   - dns/blog.ryanbeales.com.yaml
   - dns/blog.ryanbeales.com-validation.yaml
   - dns/www.ryanbeales.com.yaml
+  - dns/apex-domain.yaml
+  - cloudfront/redirect-function.yaml
+  - cloudfront/apex-distribution.yaml
   - cloudfront/distribution.yaml
   - acm/certificate.yaml
+  - s3/bucket.yaml
+  - s3/bucket-policy.yaml
