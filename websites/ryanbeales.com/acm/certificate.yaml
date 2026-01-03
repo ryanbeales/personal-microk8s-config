@@ -1,13 +1,11 @@
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: Certificate
 metadata:
-  name: www.ryanbeales.com
-  annotations:
-    crossplane.io/external-name: arn:aws:acm:us-east-1:645775182778:certificate/25b26381-c16d-4ab9-81c9-6150b96fc7d3
+  name: ryanbeales.com
 spec:
   forProvider:
     region: us-east-1
-    domainName: www.ryanbeales.com
+    domainName: ryanbeales.com
     subjectAlternativeNames:
       - www.ryanbeales.com
       - ryanbeales.com

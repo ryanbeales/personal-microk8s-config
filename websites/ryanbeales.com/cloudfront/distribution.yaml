@@ -31,6 +31,8 @@ spec:
         s3OriginConfig:
           - originAccessIdentity: origin-access-identity/cloudfront/E1KRWOIW9XN96T
     viewerCertificate:
+      # TODO: Update this ARN after the new certificate is created
+      # Get the new ARN with: kubectl get certificate ryanbeales.com -o jsonpath='{.status.atProvider.arn}'
       - acmCertificateArn: arn:aws:acm:us-east-1:645775182778:certificate/25b26381-c16d-4ab9-81c9-6150b96fc7d3
         sslSupportMethod: sni-only
         minimumProtocolVersion: TLSv1.2_2021
