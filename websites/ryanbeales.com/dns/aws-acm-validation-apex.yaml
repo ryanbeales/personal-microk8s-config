@@ -7,7 +7,7 @@ metadata:
 spec:
   forProvider:
     resourceRecords:
-      - value: _9af6d23bd985b070c59a5ed9935eed17.vhzmpjdqfx.acm-validations.aws.
+      - value: _bdebf682fb66a4ef85e5c2fbb23ab237.jkddzztszm.acm-validations.aws.
     type: CNAME
     ttl: 3600
     zoneId: Z2AOZQ8V4DDJEY
