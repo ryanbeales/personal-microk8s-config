@@ -2,7 +2,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
   name: s3-syncer-policy-ryanbeales-com
-  namespace: websites
+  namespace: ryanbeales.com
 spec:
   forProvider:
     description: "Policy for S3 syncing of ryanbeales.com"

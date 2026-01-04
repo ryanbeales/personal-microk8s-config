@@ -2,7 +2,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: User
 metadata:
   name: s3-syncer-ryanbeales-com
-  namespace: websites
+  namespace: ryanbeales.com
 spec:
   forProvider:
     path: /

@@ -2,7 +2,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: AccessKey
 metadata:
   name: s3-syncer-ryanbeales-com-key
-  namespace: websites
+  namespace: ryanbeales.com
 spec:
   forProvider:
     userSelector:
