@@ -13,6 +13,6 @@ spec:
       name: s3-syncer-ryanbeales-com
   writeConnectionSecretToRef:
     name: s3-sync-creds
-    namespace: websites
+    namespace: ryanbeales.com
   providerConfigRef:
     name: upbound-aws-default
