@@ -37,12 +37,12 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       name: s3-sync-creds
-                      key: attribute.access_key_id
+                      key: username
                 - name: AWS_SECRET_ACCESS_KEY
                   valueFrom:
                     secretKeyRef:
                       name: s3-sync-creds
-                      key: attribute.secret_access_key
+                      key: password
                 - name: AWS_DEFAULT_REGION
                   value: eu-west-2
               volumeMounts:
