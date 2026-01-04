@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: s3-sync-ryanbeales-com
-  namespace: ryanbeales.com
+  namespace: ryanbeales-com
 spec:
   schedule: "0 0 * * *"
   successfulJobsHistoryLimit: 1
