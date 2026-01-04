@@ -2,7 +2,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: UserPolicyAttachment
 metadata:
   name: s3-syncer-attachment-ryanbeales-com
-  namespace: ryanbeales.com
+  namespace: ryanbeales-com
 spec:
   forProvider:
     userRef:

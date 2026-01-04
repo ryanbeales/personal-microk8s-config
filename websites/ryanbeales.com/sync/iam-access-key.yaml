@@ -2,7 +2,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: AccessKey
 metadata:
   name: s3-syncer-ryanbeales-com-key
-  namespace: ryanbeales.com
+  namespace: ryanbeales-com
 spec:
   forProvider:
     userSelector:
@@ -13,6 +13,6 @@ spec:
       name: s3-syncer-ryanbeales-com
   writeConnectionSecretToRef:
     name: s3-sync-creds
-    namespace: ryanbeales.com
+    namespace: ryanbeales-com
   providerConfigRef:
     name: upbound-aws-default

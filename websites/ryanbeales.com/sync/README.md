@@ -21,11 +21,11 @@ Since the repository is private, you need to provide an SSH key for authenticati
     - **Allow write access**: No (Read-only is sufficient).
 
 3.  **Create the Kubernetes Secret:**
-    Ensure you are targeting the `ryanbeales.com` namespace.
+    Ensure you are targeting the `ryanbeales-com` namespace.
     Run the following command using the *private* key file:
 
     ```bash
-    kubectl create secret generic github-deploy-key --from-file=ssh-privatekey=./github_deploy_key -n ryanbeales.com
+    kubectl create secret generic github-deploy-key --from-file=ssh-privatekey=./github_deploy_key -n ryanbeales-com
     ```
     
     > **Important**: The key in the secret data must be named `ssh-privatekey` because the CronJob expects this specific filename when mounting the secret.
