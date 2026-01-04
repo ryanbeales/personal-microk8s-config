@@ -17,3 +17,8 @@ resources:
   - acm/certificate.yaml
   - s3/bucket.yaml
   - s3/bucket-policy.yaml
+  - sync/iam-user.yaml
+  - sync/iam-access-key.yaml
+  - sync/iam-policy.yaml
+  - sync/iam-policy-attachment.yaml
+  - sync/cronjob.yaml
