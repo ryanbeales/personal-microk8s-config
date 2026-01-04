@@ -1,4 +1,5 @@
 resources:
+  - namespace.yaml
   - dns/croblodocus-direct.yaml
   - dns/croblodocus-wildcard.yaml
   - dns/croblociraptor-direct.yaml
