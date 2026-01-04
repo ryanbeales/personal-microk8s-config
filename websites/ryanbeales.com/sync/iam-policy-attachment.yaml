@@ -1,0 +1,13 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: UserPolicyAttachment
+metadata:
+  name: s3-syncer-attachment-ryanbeales-com
+  namespace: websites
+spec:
+  forProvider:
+    userRef:
+      name: s3-syncer-ryanbeales-com
+    policyArnRef:
+      name: s3-syncer-policy-ryanbeales-com
+  providerConfigRef:
+    name: upbound-aws-default
