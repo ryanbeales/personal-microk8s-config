@@ -7,16 +7,13 @@ metadata:
     app.kubernetes.io/name: filebrowser
 data:
   config.yaml: |
-    http:
+    server:
       port: 80
       baseURL: "/"
-    server:
-      database:
-        path: "/home/filebrowser/data/database.sqlite"
-      cacheDir: "/home/filebrowser/data/tmp"
+      logging:
+        - levels: "info|warning|error"
       sources:
         - path: "/srv"
-          name: "Storage"
     auth:
       methods:
         password:
