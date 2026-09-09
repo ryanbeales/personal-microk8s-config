@@ -1,5 +1,6 @@
 resources:
   - namespace.yaml
+  - configmap.yaml
   - filebrowser-nfs-pvc.yaml
   - deployment.yaml
   - service.yaml

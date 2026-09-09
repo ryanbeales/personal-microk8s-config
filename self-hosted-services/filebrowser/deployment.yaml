@@ -26,6 +26,9 @@ spec:
           # renovate: datasource=docker depname=gtstef/filebrowser versioning=semver
           image: gtstef/filebrowser:1.5.6-stable
           imagePullPolicy: IfNotPresent
+          env:
+            - name: FILEBROWSER_CONFIG
+              value: /etc/filebrowser/config.yaml
           ports:
             - name: http
               containerPort: 80
@@ -53,6 +56,8 @@ spec:
             timeoutSeconds: 3
             failureThreshold: 2
           volumeMounts:
+            - name: filebrowser-config
+              mountPath: /etc/filebrowser
             - name: filebrowser-storage
               mountPath: /home/filebrowser/data
               subPath: data
@@ -60,6 +65,9 @@ spec:
               mountPath: /srv
               subPath: srv
       volumes:
+        - name: filebrowser-config
+          configMap:
+            name: filebrowser-config
         - name: filebrowser-storage
           persistentVolumeClaim:
             claimName: filebrowser-nfs-pvc
