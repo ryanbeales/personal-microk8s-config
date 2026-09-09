@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebrowser-config
+  namespace: filebrowser
+  labels:
+    app.kubernetes.io/name: filebrowser
+data:
+  config.yaml: |
+    http:
+      port: 80
+      baseURL: "/"
+    server:
+      database:
+        path: "/home/filebrowser/data/database.sqlite"
+      cacheDir: "/home/filebrowser/data/tmp"
+      sources:
+        - path: "/srv"
+          name: "Storage"
+    auth:
+      methods:
+        password:
+          enabled: true
+          minLength: 5
+          signup: false
+        passkey:
+          enabled: false
