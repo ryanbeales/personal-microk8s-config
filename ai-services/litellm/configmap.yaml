@@ -12,7 +12,9 @@ data:
           model: openai/Qwen3.8-27B-UD-Q4_K_M.gguf
           api_base: http://llama-qwen3-8-27b.llama.svc.cluster.local:8000/v1
           api_key: "sk-no-key"
-          max_parallel_requests: 2
+          max_parallel_requests: 1
+          extra_body:
+            thinking: "low"
       - model_name: gemma-4-12B
         litellm_params:
           model: openai/gemma-4-12b-it-qat-q4_0.gguf
@@ -77,6 +79,8 @@ data:
           model: openai/Qwen3.8-27B-UD-Q4_K_M.gguf
           api_base: http://llama-qwen3-8-27b.llama.svc.cluster.local:8000/v1
           api_key: "sk-no-key"
+          extra_body:
+            thinking: "low"
 
       # "vision" group: Latency-based routing between E4B and 12B
       - model_name: vision
@@ -108,6 +112,8 @@ data:
           model: openai/Qwen3.8-27B-UD-Q4_K_M.gguf
           api_base: http://llama-qwen3-8-27b.llama.svc.cluster.local:8000/v1
           api_key: "sk-no-key"
+          extra_body:
+            thinking: "low"
 
       # "stt" group
       - model_name: stt
