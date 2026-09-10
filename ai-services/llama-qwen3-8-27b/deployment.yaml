@@ -61,7 +61,8 @@ spec:
               /app/llama-server \
                 -m /models/Qwen3.8-27B-UD-Q4_K_M.gguf \
                 --mmproj /models/mmproj-F16.gguf \
-                -c 131072 \
+                -c 65536 \
+                -np 1 \
                 -ctk q4_0 \
                 -ctv q4_0 \
                 --flash-attn on \
