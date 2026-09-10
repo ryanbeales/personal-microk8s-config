@@ -24,7 +24,7 @@ spec:
       containers:
         - name: filebrowser
           # renovate: datasource=docker depname=gtstef/filebrowser versioning=semver
-          image: gtstef/filebrowser:1.5.6-stable
+          image: gtstef/filebrowser:1.5.6-stable-slim
           imagePullPolicy: IfNotPresent
           env:
             - name: FILEBROWSER_CONFIG
