@@ -129,3 +129,4 @@ See [BOOTSTRAP.md](./BOOTSTRAP.md) for notes on how to build the cluster from sc
 ## Upgrading the cluster
 
 Follow the instructions [here](https://docs.k3s.io/upgrades/manual#upgrade-k3s-using-the-binary) on each node in the cluster.
+<!-- hermes diag self-merge test 2026-09-10T16:21:34Z (safe to revert) -->
